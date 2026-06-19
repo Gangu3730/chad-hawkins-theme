@@ -1427,3 +1427,25 @@
     opacity: 1 !important;
   }
 }
+
+/* Shopify Customizer (Design Mode) overrides */
+.shopify-design-mode .chp-reveal,
+.shopify-design-mode .chp-stagger-item,
+.shopify-design-mode .chp-mask,
+.shopify-design-mode .chp-mask-center,
+.shopify-design-mode .chp-mask-up,
+.shopify-design-mode .chp-word-inner,
+.shopify-design-mode .chp-scrolly-card,
+.shopify-design-mode .chp-word-outer {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+  transition: none !important;
+  display: inline !important;
+}
+
+.shopify-design-mode .chp-word-inner {
+  transform: none !important;
+  display: inline !important;
+}
+

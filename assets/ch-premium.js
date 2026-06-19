@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function initAll() {
     splitKineticText();
     createObservers();
     initParallax();
@@ -15,11 +15,19 @@
     initSmoothScroll();
     initScrollytelling();
     initGalleryFilter();
+  }
+
+  document.addEventListener('DOMContentLoaded', initAll);
+
+  // Re-initialize when sections load in Shopify Theme Customizer
+  document.addEventListener('shopify:section:load', (event) => {
+    initAll();
   });
 
   /* 1. Kinetic split-text */
   function splitKineticText() {
     document.querySelectorAll('.chp-text-reveal').forEach(el => {
+      if (el.dataset.splitDone) return;
       const raw = el.textContent.trim();
       if (!raw) return;
       el.textContent = '';
@@ -32,6 +40,7 @@
         outer.appendChild(inner);
         el.appendChild(outer);
       });
+      el.dataset.splitDone = 'true';
     });
   }
 
@@ -49,7 +58,7 @@
               w.classList.add('is-visible');
             });
           }
-          if (el.classList.contains('chp-stagger')) {
+          if (el.classList.contains('chp-stagger') || el.classList.contains('chp-reveal-group')) {
             el.querySelectorAll('.chp-stagger-item').forEach((item, i) => {
               item.style.transitionDelay = `${i * 0.1}s`;
               requestAnimationFrame(() => item.classList.add('is-visible'));
@@ -61,10 +70,10 @@
           obs.unobserve(el);
         });
       },
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
     );
     document.querySelectorAll(
-      '.chp-reveal, .chp-stagger, .chp-mask, .chp-mask-up, .chp-mask-center, .chp-text-reveal, .chp-counter'
+      '.chp-reveal, .chp-stagger, .chp-reveal-group, .chp-mask, .chp-mask-up, .chp-mask-center, .chp-text-reveal, .chp-counter'
     ).forEach(el => obs.observe(el));
   }
 
@@ -76,7 +85,9 @@
     function tick() {
       const vh = window.innerHeight;
       imgs.forEach(img => {
-        const r = (img.closest('.chp-parallax-wrap') || img.parentElement).getBoundingClientRect();
+        const wrap = img.closest('.chp-parallax-wrap') || img.parentElement;
+        if (!wrap) return;
+        const r = wrap.getBoundingClientRect();
         if (r.bottom < 0 || r.top > vh) return;
         const pct = ((r.top + r.height / 2) - vh / 2) / (vh / 2);
         img.style.transform = `translate3d(0,${pct * 28}px,0) scale(1.1)`;
@@ -94,14 +105,26 @@
     const nav = document.querySelector('.chp-sticky-nav');
     if (!nav) return;
     const anchors = [...nav.querySelectorAll('a[href^="#"]')];
-    const sections = anchors.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+    const sections = anchors.map(a => {
+      const href = a.getAttribute('href');
+      if (href === '#' || !href) return null;
+      try {
+        return document.getElementById(href.slice(1));
+      } catch (e) {
+        return null;
+      }
+    }).filter(Boolean);
+
     window.addEventListener('scroll', () => {
       nav.classList.toggle('is-sticky', window.scrollY > 120);
       let activeId = '';
       for (let i = sections.length - 1; i >= 0; i--) {
         if (sections[i].getBoundingClientRect().top <= 200) { activeId = sections[i].id; break; }
       }
-      anchors.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + activeId));
+      anchors.forEach(a => {
+        const href = a.getAttribute('href');
+        a.classList.toggle('is-active', href === '#' + activeId);
+      });
     }, { passive: true });
   }
 
@@ -132,10 +155,16 @@
     document.addEventListener('click', e => {
       const a = e.target.closest('a[href^="#"]');
       if (!a) return;
-      const t = document.querySelector(a.getAttribute('href'));
-      if (!t) return;
-      e.preventDefault();
-      window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+      const href = a.getAttribute('href');
+      if (href === '#' || !href) return;
+      try {
+        const t = document.querySelector(href);
+        if (!t) return;
+        e.preventDefault();
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+      } catch (err) {
+        // Ignore invalid queries
+      }
     });
   }
 
@@ -161,7 +190,7 @@
           entry.target.classList.remove('is-active');
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.15, rootMargin: '-10% 0px -10% 0px' });
 
     cards.forEach(c => cardObs.observe(c));
   }
