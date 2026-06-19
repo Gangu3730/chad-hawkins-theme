@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "ch-book-tribute-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

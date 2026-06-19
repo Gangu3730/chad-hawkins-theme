@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "ch-portfolio-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

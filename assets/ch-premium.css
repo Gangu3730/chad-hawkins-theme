@@ -2277,3 +2277,98 @@ main[data-template="cart"] button[name="checkout"]:hover {
 .chp-faq-item.is-open {
   border-bottom-color: var(--ch-navy, #062b55) !important;
 }
+
+/* -----------------------------------------------------------------
+   TIMELINE STEPS
+   ----------------------------------------------------------------- */
+.chp-timeline-card {
+  transition: all 0.3s ease;
+}
+.chp-timeline-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--ch-navy, #062b55) !important;
+  box-shadow: 0 10px 30px rgba(6, 43, 85, 0.04) !important;
+}
+
+/* -----------------------------------------------------------------
+   PORTFOLIO FILTER TABS & CARDS
+   ----------------------------------------------------------------- */
+.chp-portfolio-tab-btn {
+  background: transparent;
+  border: 1px solid var(--ch-border, #d8dee8);
+  color: var(--ch-muted, #667085);
+  font-family: var(--ch-font-sans, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.chp-portfolio-tab-btn:hover,
+.chp-portfolio-tab-btn.is-active {
+  border-color: var(--ch-navy, #062b55) !important;
+  color: var(--ch-navy, #062b55) !important;
+  background-color: var(--ch-cream, #fbfaf7) !important;
+}
+.chp-portfolio-card {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.chp-portfolio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(6, 43, 85, 0.05);
+  border-color: var(--ch-navy, #062b55) !important;
+}
+.chp-portfolio-card:hover .chp-portfolio-img {
+  transform: scale(1.04);
+}
+
+/* -----------------------------------------------------------------
+   VIDEO PLAYER CARDS
+   ----------------------------------------------------------------- */
+.chp-video-card {
+  transition: all 0.3s ease;
+}
+.chp-video-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--ch-navy, #062b55) !important;
+  box-shadow: 0 10px 30px rgba(6, 43, 85, 0.05);
+}
+
+/* -----------------------------------------------------------------
+   BOOKING PROGRESS WIZARD
+   ----------------------------------------------------------------- */
+.chp-step-circle {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background-color: var(--ch-white, #ffffff) !important;
+  border: 2px solid var(--ch-border, #d8dee8) !important;
+  color: var(--ch-muted, #667085) !important;
+  font-family: var(--ch-font-sans, sans-serif) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+}
+.chp-progress-step.is-active .chp-step-circle {
+  background-color: var(--ch-navy, #062b55) !important;
+  border-color: var(--ch-navy, #062b55) !important;
+  color: var(--ch-white, #ffffff) !important;
+}
+.chp-progress-step.is-complete .chp-step-circle {
+  background-color: var(--ch-blue, #0b3d73) !important;
+  border-color: var(--ch-blue, #0b3d73) !important;
+  color: var(--ch-white, #ffffff) !important;
+}
+.chp-booking-card {
+  transition: all 0.3s ease;
+}
+.chp-booking-card-label input[type="radio"]:checked + .chp-booking-card {
+  border-color: var(--ch-navy, #062b55) !important;
+  background-color: var(--ch-cream, #fbfaf7) !important;
+}
+

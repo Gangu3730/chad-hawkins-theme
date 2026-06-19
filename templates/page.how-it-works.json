@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "ch-how-it-works-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

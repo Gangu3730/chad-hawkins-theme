@@ -1,0 +1,243 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper chp-section-spacing" style="background-color: var(--ch-white);">
+  <div class="chp-container">
+    <!-- Page Header -->
+    <div class="chp-section-header" style="margin-bottom: 50px;">
+      <span class="chp-section-subtitle">{{ section.settings.subtitle | escape }}</span>
+      <h1 class="chp-section-title chp-serif">{{ section.settings.title | escape }}</h1>
+      <div class="chp-flourish">
+        <div class="chp-flourish-line"></div>
+        <div class="chp-flourish-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div class="chp-flourish-line"></div>
+      </div>
+      <p class="chp-section-desc" style="max-width: 600px; margin: 0 auto;">
+        {{ section.settings.description | escape }}
+      </p>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="chp-portfolio-tabs" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 50px; border-bottom: 1px solid var(--ch-border); padding-bottom: 20px;">
+      <button class="chp-portfolio-tab-btn is-active" data-filter="all">All Portfolios</button>
+      <button class="chp-portfolio-tab-btn" data-filter="memorial">Memorial</button>
+      <button class="chp-portfolio-tab-btn" data-filter="anniversary">Anniversary</button>
+      <button class="chp-portfolio-tab-btn" data-filter="wedding">Wedding</button>
+      <button class="chp-portfolio-tab-btn" data-filter="retirement">Retirement</button>
+      <button class="chp-portfolio-tab-btn" data-filter="family">Family & Pets</button>
+      <button class="chp-portfolio-tab-btn" data-filter="achievement">Achievement</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="chp-portfolio-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'artwork' -%}
+          <div class="chp-portfolio-card" data-category="{{ block.settings.category | escape }}" style="border: 1px solid var(--ch-border); padding: 15px; background: var(--ch-cream); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+            <div class="chp-portfolio-img-wrap" style="position: relative; overflow: hidden; aspect-ratio: 4/5; border: 1px solid rgba(0,0,0,0.05);">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.title | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(10%) contrast(105%); transition: transform 0.6s ease;" class="chp-portfolio-img" loading="lazy" />
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            
+            <div class="chp-portfolio-details" style="padding-top: 15px; text-align: left;">
+              <span class="chp-sans" style="font-size: 0.6875rem; text-transform: uppercase; color: var(--ch-blue); font-weight: 600; letter-spacing: 0.1em; display: block; margin-bottom: 5px;">
+                {{ block.settings.category | replace: '-', ' ' | capitalize }}
+              </span>
+              <h3 class="chp-serif" style="font-size: 1.125rem; color: var(--ch-navy); margin: 0 0 5px 0; font-weight: 600;">
+                {{ block.settings.title | escape }}
+              </h3>
+              {%- if block.settings.medium != blank -%}
+                <p class="chp-sans" style="font-size: 0.8125rem; color: var(--ch-muted); margin: 0;">
+                  {{ block.settings.medium | escape }}
+                </p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .chp-portfolio-tab-btn {
+    background: transparent;
+    border: 1px solid var(--ch-border);
+    color: var(--ch-muted);
+    font-family: var(--ch-font-sans), sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .chp-portfolio-tab-btn:hover,
+  .chp-portfolio-tab-btn.is-active {
+    border-color: var(--ch-navy);
+    color: var(--ch-navy);
+    background-color: var(--ch-cream);
+  }
+
+  .chp-portfolio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-color: var(--ch-navy);
+  }
+
+  .chp-portfolio-card:hover .chp-portfolio-img {
+    transform: scale(1.04);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.chp-portfolio-tab-btn');
+    const cards = document.querySelectorAll('.chp-portfolio-card');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        // Toggle tab active class
+        tabs.forEach(t => t.classList.remove('is-open', 'is-active'));
+        tab.classList.add('is-active');
+
+        const filterValue = tab.getAttribute('data-filter');
+
+        cards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+          if (filterValue === 'all' || cardCategory === filterValue) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            }, 50);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Portfolio Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "SELECTED COMMISSIONS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Portrait Portfolio Gallery"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Browse completed hand-drawn tribute artwork across our primary portrait disciplines."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "artwork",
+      "name": "Artwork Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Artwork Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Artwork Title"
+        },
+        {
+          "type": "text",
+          "id": "medium",
+          "label": "Medium & Detail",
+          "default": "Charcoal and ink on cotton paper"
+        },
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Portfolio Category",
+          "options": [
+            { "value": "memorial", "label": "Memorial" },
+            { "value": "anniversary", "label": "Anniversary" },
+            { "value": "wedding", "label": "Wedding" },
+            { "value": "retirement", "label": "Retirement" },
+            { "value": "family", "label": "Family & Pets" },
+            { "value": "achievement", "label": "Achievement" }
+          ],
+          "default": "memorial"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Portfolio Gallery",
+      "blocks": [
+        {
+          "type": "artwork",
+          "settings": {
+            "title": "Grandfather Legacy Tribute",
+            "medium": "Detailed charcoal & ink",
+            "category": "memorial"
+          }
+        },
+        {
+          "type": "artwork",
+          "settings": {
+            "title": "50th Golden Anniversary",
+            "medium": "Pencil & sepia sketch",
+            "category": "anniversary"
+          }
+        },
+        {
+          "type": "artwork",
+          "settings": {
+            "title": "Retiring Police Chief",
+            "medium": "Pen & ink line work",
+            "category": "retirement"
+          }
+        },
+        {
+          "type": "artwork",
+          "settings": {
+            "title": "Family Homestead Legacy",
+            "medium": "Ink drawing on canvas",
+            "category": "family"
+          }
+        },
+        {
+          "type": "artwork",
+          "settings": {
+            "title": "Championship Achievement",
+            "medium": "Graphite pencil portrait",
+            "category": "achievement"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

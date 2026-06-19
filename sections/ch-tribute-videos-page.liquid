@@ -1,0 +1,160 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper chp-section-spacing" style="background-color: var(--ch-cream);">
+  <div class="chp-container">
+    <!-- Page Header -->
+    <div class="chp-section-header" style="margin-bottom: 50px;">
+      <span class="chp-section-subtitle">{{ section.settings.subtitle | escape }}</span>
+      <h1 class="chp-section-title chp-serif">{{ section.settings.title | escape }}</h1>
+      <div class="chp-flourish">
+        <div class="chp-flourish-line"></div>
+        <div class="chp-flourish-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M15 10l5-3.076v10.152L15 14v-4zM2 6h11a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
+          </svg>
+        </div>
+        <div class="chp-flourish-line"></div>
+      </div>
+      <p class="chp-section-desc" style="max-width: 600px; margin: 0 auto;">
+        {{ section.settings.description | escape }}
+      </p>
+    </div>
+
+    <!-- Video Grid -->
+    <div class="chp-video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 40px; margin-bottom: 60px;">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'video_item' -%}
+          <div class="chp-video-card" style="background: var(--ch-white); border: 1px solid var(--ch-border); padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); display: flex; flex-direction: column;" {{ block.shopify_attributes }}>
+            <!-- Responsive Video Embed (16:9) -->
+            <div class="chp-video-iframe-wrap" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 20px; border: 1px solid rgba(0,0,0,0.05); background-color: #000;">
+              {%- if block.settings.video_url != blank -%}
+                {%- if block.settings.video_url contains 'youtube.com' or block.settings.video_url contains 'youtu.be' -%}
+                  {%- assign video_id = block.settings.video_url | split: 'v=' | last | split: '&' | first -%}
+                  {%- if block.settings.video_url contains 'youtu.be/' -%}
+                    {%- assign video_id = block.settings.video_url | split: 'youtu.be/' | last | split: '?' | first -%}
+                  {%- endif -%}
+                  <iframe src="https://www.youtube.com/embed/{{ video_id }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+                {%- elsif block.settings.video_url contains 'vimeo.com' -%}
+                  {%- assign video_id = block.settings.video_url | split: 'vimeo.com/' | last | split: '?' | first -%}
+                  <iframe src="https://player.vimeo.com/video/{{ video_id }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" allowfullscreen></iframe>
+                {%- else -%}
+                  <video src="{{ block.settings.video_url }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" controls></video>
+                {%- endif -%}
+              {%- else -%}
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--ch-muted); font-family: var(--ch-font-sans);">
+                  No video URL specified
+                </div>
+              {%- endif -%}
+            </div>
+
+            <!-- Content -->
+            <div style="text-align: left; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <span class="chp-sans" style="font-size: 0.6875rem; text-transform: uppercase; color: var(--ch-blue); font-weight: 600; letter-spacing: 0.1em; display: block; margin-bottom: 5px;">
+                  {{ block.settings.category | escape }}
+                </span>
+                <h3 class="chp-serif" style="font-size: 1.25rem; color: var(--ch-navy); margin: 0 0 10px 0; font-weight: 600; line-height: 1.3;">
+                  {{ block.settings.title | escape }}
+                </h3>
+                <p class="chp-sans" style="font-size: 0.875rem; color: var(--ch-muted); line-height: 1.6; margin: 0 0 20px 0;">
+                  {{ block.settings.description | escape }}
+                </p>
+              </div>
+
+              <div>
+                <a href="{{ section.settings.cta_link | default: '/pages/book-a-tribute' }}" class="chp-btn chp-btn-outline-navy" style="width: 100%; text-align: center;">
+                  Order Package + Video
+                </a>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Tribute Video Library",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "VIDEO PRODUCTIONS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Tribute Video Library"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Our custom tribute videos combine the creation of the drawing, voiceovers, historical reference photos, and background orchestration into a powerful legacy story."
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Booking Page Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_item",
+      "name": "Video Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Video Title"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Video Category/Type",
+          "default": "Memorial Tribute"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "YouTube, Vimeo, or MP4 URL"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Video Narrative/Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tribute Video Library",
+      "blocks": [
+        {
+          "type": "video_item",
+          "settings": {
+            "title": "A Life of Leadership - Officer Retirement Montage",
+            "category": "Retirement Tribute",
+            "description": "Chronological history of 35 years in fire services. Shows progress of the sketch with narrator explaining key badges, medals, and fire stations represented.",
+            "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          }
+        },
+        {
+          "type": "video_item",
+          "settings": {
+            "title": "Loving Remembrance - Memorial Tribute Art Video",
+            "category": "Memorial Tribute",
+            "description": "Created for a celebration of life ceremony. Weaves childhood sketches, family trips, and voiceovers from kids, culminating in the unveiling of the hand-drawn portrait.",
+            "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

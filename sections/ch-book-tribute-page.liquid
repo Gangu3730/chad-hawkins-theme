@@ -1,0 +1,380 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper chp-section-spacing" style="background-color: var(--ch-cream); min-height: 70vh;">
+  <div class="chp-container" style="max-width: 700px;">
+    <!-- Page Header -->
+    <div class="chp-section-header" style="margin-bottom: 40px;">
+      <span class="chp-section-subtitle">{{ section.settings.subtitle | escape }}</span>
+      <h1 class="chp-section-title chp-serif">{{ section.settings.title | escape }}</h1>
+      <div class="chp-flourish">
+        <div class="chp-flourish-line"></div>
+        <div class="chp-flourish-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z"/>
+          </svg>
+        </div>
+        <div class="chp-flourish-line"></div>
+      </div>
+    </div>
+
+    <!-- Booking Form Container -->
+    <div class="chp-booking-container" style="background: var(--ch-white); border: 1px solid var(--ch-border); padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.02);">
+      
+      <!-- Wizard Progress Bar -->
+      <div class="chp-booking-progress" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; position: relative;">
+        <div style="position: absolute; left: 0; right: 0; top: 18px; height: 1px; background-color: var(--ch-border); z-index: 1;"></div>
+        
+        <div class="chp-progress-step is-active" data-step="1" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="chp-step-circle">1</div>
+          <span class="chp-sans" style="font-size: 0.6875rem; font-weight: 700; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ch-navy);">Package</span>
+        </div>
+        
+        <div class="chp-progress-step" data-step="2" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="chp-step-circle">2</div>
+          <span class="chp-sans" style="font-size: 0.6875rem; font-weight: 700; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ch-muted);">Date</span>
+        </div>
+        
+        <div class="chp-progress-step" data-step="3" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="chp-step-circle">3</div>
+          <span class="chp-sans" style="font-size: 0.6875rem; font-weight: 700; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ch-muted);">Uploads</span>
+        </div>
+        
+        <div class="chp-progress-step" data-step="4" style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="chp-step-circle">4</div>
+          <span class="chp-sans" style="font-size: 0.6875rem; font-weight: 700; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ch-muted);">Narrative</span>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <form id="chp-booking-wizard-form" action="/cart/add" method="post" enctype="multipart/form-data" style="text-align: left;">
+        
+        <!-- Hidden input for selected variant ID -->
+        <input type="hidden" name="id" id="ch-selected-variant-id" value="">
+
+        <!-- Step 1: Package Selection -->
+        <div class="chp-booking-step-panel is-active" data-step-panel="1">
+          <h2 class="chp-serif" style="font-size: 1.5rem; color: var(--ch-navy); margin-bottom: 25px;">Select Your Tribute Package</h2>
+          
+          <div class="chp-booking-options-grid" style="display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 30px;">
+            <!-- Option 1: Portrait Only -->
+            <label class="chp-booking-card-label" style="display: block; cursor: pointer;">
+              <input type="radio" name="tribute_package_select" value="portrait-only" data-handle="{{ section.settings.portrait_only_handle | default: 'classic-portrait' }}" checked style="display: none;">
+              <div class="chp-booking-card" style="border: 1px solid var(--ch-navy); padding: 25px; background: var(--ch-cream); transition: all 0.3s ease;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h3 class="chp-serif" style="font-size: 1.25rem; color: var(--ch-navy); margin: 0; font-weight: 600;">{{ section.settings.portrait_only_title | default: 'Portrait Only' | escape }}</h3>
+                  <span class="chp-booking-radio-indicator" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--ch-navy); display: flex; align-items: center; justify-content: center; background-color: var(--ch-navy); color: white;">&#10003;</span>
+                </div>
+                <p class="chp-sans" style="font-size: 0.875rem; color: var(--ch-muted); margin: 10px 0 0 0; line-height: 1.5;">
+                  Original custom hand-drawn legacy portrait. Includes standard shipping and initial sketch proof review.
+                </p>
+              </div>
+            </label>
+
+            <!-- Option 2: Portrait + Tribute Video -->
+            <label class="chp-booking-card-label" style="display: block; cursor: pointer;">
+              <input type="radio" name="tribute_package_select" value="portrait-video" data-handle="{{ section.settings.portrait_video_handle | default: 'grand-tribute-suite' }}" style="display: none;">
+              <div class="chp-booking-card" style="border: 1px solid var(--ch-border); padding: 25px; background: var(--ch-white); transition: all 0.3s ease;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h3 class="chp-serif" style="font-size: 1.25rem; color: var(--ch-navy); margin: 0; font-weight: 600;">{{ section.settings.portrait_video_title | default: 'Portrait + Tribute Video' | escape }}</h3>
+                  <span class="chp-booking-radio-indicator" style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--ch-border); display: flex; align-items: center; justify-content: center;"></span>
+                </div>
+                <p class="chp-sans" style="font-size: 0.875rem; color: var(--ch-muted); margin: 10px 0 0 0; line-height: 1.5;">
+                  Original custom hand-drawn portrait plus a high-definition timeline video montage showing progress of sketch with orchestration.
+                </p>
+              </div>
+            </label>
+          </div>
+
+          <div style="text-align: right;">
+            <button type="button" class="chp-btn chp-btn-navy chp-booking-next">Next Step</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Date Picker Selection -->
+        <div class="chp-booking-step-panel" data-step-panel="2" style="display: none;">
+          <h2 class="chp-serif" style="font-size: 1.5rem; color: var(--ch-navy); margin-bottom: 20px;">Choose a Sketching/Target Delivery Date</h2>
+          <p class="chp-sans" style="font-size: 0.875rem; color: var(--ch-muted); line-height: 1.5; margin-bottom: 25px;">
+            Reserve your production slot on Chad's drawing calendar. Custom portraits typically take 3 to 4 weeks to complete from date of booking.
+          </p>
+
+          <div style="margin-bottom: 30px;">
+            <label class="chp-sans" style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; color: var(--ch-navy);">Reserved Target Date:</label>
+            <input type="date" name="properties[Reserved Sketch Date]" id="ch-booking-date" required style="width: 100%; padding: 15px; border: 1px solid var(--ch-border); background-color: var(--ch-cream); font-family: var(--ch-font-sans); outline: none;">
+          </div>
+
+          <div style="display: flex; justify-content: space-between;">
+            <button type="button" class="chp-btn chp-btn-outline-navy chp-booking-prev">Back</button>
+            <button type="button" class="chp-btn chp-btn-navy chp-booking-next">Next Step</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Reference Material Uploads -->
+        <div class="chp-booking-step-panel" data-step-panel="3" style="display: none;">
+          <h2 class="chp-serif" style="font-size: 1.5rem; color: var(--ch-navy); margin-bottom: 20px;">Upload Reference Files</h2>
+          
+          <!-- Photo File Upload -->
+          <div style="margin-bottom: 25px;">
+            <label class="chp-sans" style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; color: var(--ch-navy);">Main Reference Portrait Photo (Required):</label>
+            <input type="file" name="properties[Reference Photo]" accept="image/*" required style="width: 100%; padding: 15px; border: 1px solid var(--ch-border); background-color: var(--ch-cream); font-family: var(--ch-font-sans); outline: none;">
+            <span class="chp-sans" style="font-size: 0.75rem; color: var(--ch-muted); display: block; margin-top: 5px;">Clear portrait/photo of subject.</span>
+          </div>
+
+          <!-- Video Audio File Upload (Optional) -->
+          <div id="ch-audio-upload-wrapper" style="margin-bottom: 30px; display: none;">
+            <label class="chp-sans" style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; color: var(--ch-navy);">Voiceover or Narration File (Optional):</label>
+            <input type="file" name="properties[Voiceover Audio]" accept="audio/*,video/*" style="width: 100%; padding: 15px; border: 1px solid var(--ch-border); background-color: var(--ch-cream); font-family: var(--ch-font-sans); outline: none;">
+            <span class="chp-sans" style="font-size: 0.75rem; color: var(--ch-muted); display: block; margin-top: 5px;">Upload audio notes or voiceovers explaining the story.</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between;">
+            <button type="button" class="chp-btn chp-btn-outline-navy chp-booking-prev">Back</button>
+            <button type="button" class="chp-btn chp-btn-navy chp-booking-next">Next Step</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Details & Legacy Notes -->
+        <div class="chp-booking-step-panel" data-step-panel="4" style="display: none;">
+          <h2 class="chp-serif" style="font-size: 1.5rem; color: var(--ch-navy); margin-bottom: 20px;">Tribute Notes & Narrative</h2>
+          
+          <div style="margin-bottom: 25px;">
+            <label class="chp-sans" style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; color: var(--ch-navy);">Narrative details / Special instructions:</label>
+            <textarea name="properties[Legacy Narrative / Milestones]" placeholder="Describe achievements, badges, symbols, or elements to weave into the portrait..." style="width: 100%; height: 120px; padding: 15px; border: 1px solid var(--ch-border); background-color: var(--ch-cream); font-family: var(--ch-font-sans); outline: none; resize: none;"></textarea>
+          </div>
+
+          <div style="margin-bottom: 30px;">
+            <label class="chp-sans" style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; color: var(--ch-navy);">Customer Note / Shipping Instructions:</label>
+            <input type="text" name="properties[Booking Instructions]" placeholder="Any additional notes..." style="width: 100%; padding: 15px; border: 1px solid var(--ch-border); background-color: var(--ch-cream); font-family: var(--ch-font-sans); outline: none;">
+          </div>
+
+          <div style="display: flex; justify-content: space-between;">
+            <button type="button" class="chp-btn chp-btn-outline-navy chp-booking-prev">Back</button>
+            <button type="submit" class="chp-btn chp-btn-navy" id="ch-submit-booking-btn">Confirm & Book Tribute</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .chp-step-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--ch-white);
+    border: 2px solid var(--ch-border);
+    color: var(--ch-muted);
+    font-family: var(--ch-font-sans);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .chp-progress-step.is-active .chp-step-circle {
+    background-color: var(--ch-navy);
+    border-color: var(--ch-navy);
+    color: var(--ch-white);
+  }
+
+  .chp-progress-step.is-complete .chp-step-circle {
+    background-color: var(--ch-blue);
+    border-color: var(--ch-blue);
+    color: var(--ch-white);
+  }
+
+  .chp-booking-card {
+    cursor: pointer;
+  }
+
+  .chp-booking-card-label input[type="radio"]:checked + .chp-booking-card {
+    border-color: var(--ch-navy) !important;
+    background-color: var(--ch-cream) !important;
+  }
+
+  .chp-booking-card-label input[type="radio"]:checked + .chp-booking-card .chp-booking-radio-indicator {
+    background-color: var(--ch-navy);
+    border-color: var(--ch-navy);
+    color: white;
+    content: "\2713";
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const wizardForm = document.getElementById('chp-booking-wizard-form');
+    const stepPanels = document.querySelectorAll('.chp-booking-step-panel');
+    const progressSteps = document.querySelectorAll('.chp-progress-step');
+    const audioWrapper = document.getElementById('ch-audio-upload-wrapper');
+
+    let currentStep = 1;
+
+    // Load dynamic variant ID for product on load
+    updateSelectedVariant();
+
+    // Listen to package option change
+    document.querySelectorAll('input[name="tribute_package_select"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        // Toggle card borders visually
+        document.querySelectorAll('.chp-booking-card').forEach(card => {
+          card.style.borderColor = 'var(--ch-border)';
+          card.style.background = 'var(--ch-white)';
+          card.querySelector('.chp-booking-radio-indicator').innerHTML = '';
+          card.querySelector('.chp-booking-radio-indicator').style.backgroundColor = 'transparent';
+        });
+
+        const activeLabel = this.closest('label');
+        if (activeLabel) {
+          const card = activeLabel.querySelector('.chp-booking-card');
+          card.style.borderColor = 'var(--ch-navy)';
+          card.style.background = 'var(--ch-cream)';
+          card.querySelector('.chp-booking-radio-indicator').innerHTML = '&#10003;';
+          card.querySelector('.chp-booking-radio-indicator').style.backgroundColor = 'var(--ch-navy)';
+        }
+
+        // Toggle Audio Upload display based on selection
+        if (this.value === 'portrait-video') {
+          audioWrapper.style.display = 'block';
+        } else {
+          audioWrapper.style.display = 'none';
+        }
+
+        // Fetch new product variant ID
+        updateSelectedVariant();
+      });
+    });
+
+    function updateSelectedVariant() {
+      const selectedRadio = document.querySelector('input[name="tribute_package_select"]:checked');
+      if (!selectedRadio) return;
+
+      const productHandle = selectedRadio.getAttribute('data-handle');
+      const variantInput = document.getElementById('ch-selected-variant-id');
+
+      fetch(`/products/${productHandle}.js`)
+        .then(res => res.json())
+        .then(product => {
+          if (product && product.variants && product.variants.length > 0) {
+            variantInput.value = product.variants[0].id;
+          }
+        })
+        .catch(err => {
+          console.error('Error fetching product details for handle: ' + productHandle, err);
+        });
+    }
+
+    // Wizard navigation click events
+    document.querySelectorAll('.chp-booking-next').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Validation check for inputs in current step
+        const currentPanel = document.querySelector(`.chp-booking-step-panel[data-step-panel="${currentStep}"]`);
+        const requiredInputs = currentPanel.querySelectorAll('[required]');
+        let valid = true;
+        requiredInputs.forEach(input => {
+          if (!input.value) {
+            input.style.borderColor = 'red';
+            valid = false;
+          } else {
+            input.style.borderColor = 'var(--ch-border)';
+          }
+        });
+
+        if (!valid) return;
+
+        if (currentStep < 4) {
+          goToStep(currentStep + 1);
+        }
+      });
+    });
+
+    document.querySelectorAll('.chp-booking-prev').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (currentStep > 1) {
+          goToStep(currentStep - 1);
+        }
+      });
+    });
+
+    function goToStep(step) {
+      // Hide current panel, show new panel
+      stepPanels.forEach(panel => panel.style.display = 'none');
+      document.querySelector(`.chp-booking-step-panel[data-step-panel="${step}"]`).style.display = 'block';
+
+      // Update progress indicators
+      progressSteps.forEach(pStep => {
+        const pStepNum = parseInt(pStep.getAttribute('data-step'));
+        pStep.classList.remove('is-active', 'is-complete');
+        if (pStepNum === step) {
+          pStep.classList.add('is-active');
+          pStep.querySelector('span').style.color = 'var(--ch-navy)';
+        } else if (pStepNum < step) {
+          pStep.classList.add('is-complete');
+          pStep.querySelector('span').style.color = 'var(--ch-blue)';
+        } else {
+          pStep.querySelector('span').style.color = 'var(--ch-muted)';
+        }
+      });
+
+      currentStep = step;
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Booking Wizard Details",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "BOOK YOUR COMMEMORATION"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Commission Booking Wizard"
+    },
+    {
+      "type": "header",
+      "content": "Product Integration Handles"
+    },
+    {
+      "type": "text",
+      "id": "portrait_only_handle",
+      "label": "Portrait Only Product Handle",
+      "default": "classic-portrait"
+    },
+    {
+      "type": "text",
+      "id": "portrait_only_title",
+      "label": "Portrait Only Display Name",
+      "default": "Tribute Portrait Only"
+    },
+    {
+      "type": "text",
+      "id": "portrait_video_handle",
+      "label": "Portrait + Video Product Handle",
+      "default": "grand-tribute-suite"
+    },
+    {
+      "type": "text",
+      "id": "portrait_video_title",
+      "label": "Portrait + Video Display Name",
+      "default": "Tribute Portrait + Progress Video"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Booking Wizard Details"
+    }
+  ]
+}
+{% endschema %}

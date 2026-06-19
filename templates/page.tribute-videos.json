@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "ch-tribute-videos-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
