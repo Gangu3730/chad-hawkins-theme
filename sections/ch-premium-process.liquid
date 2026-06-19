@@ -1,12 +1,12 @@
 {{ 'ch-premium.css' | asset_url | stylesheet_tag }}
 
-<div class="chp chp-wrapper">
+<div class="chp chp-wrapper chp-process-section" id="chp-process">
   <section class="chp-section-spacing" style="background-color: var(--ch-soft);">
     <div class="chp-container">
-      <div class="chp-section-header">
-        <span class="chp-section-subtitle">{{ section.settings.steps_subtitle | escape }}</span>
-        <h2 class="chp-section-title">{{ section.settings.steps_title | escape }}</h2>
-        <div class="chp-flourish">
+      <div class="chp-section-header ch-reveal-group">
+        <span class="chp-section-subtitle ch-reveal-item" style="display: inline-block;">{{ section.settings.steps_subtitle | escape }}</span>
+        <h2 class="chp-section-title ch-text-reveal-kinetic">{{ section.settings.steps_title | escape }}</h2>
+        <div class="chp-flourish ch-reveal-item" style="margin: 15px auto;">
           <div class="chp-flourish-line"></div>
           <div class="chp-flourish-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -17,11 +17,16 @@
         </div>
       </div>
 
-      <div class="chp-steps-grid">
+      <div class="chp-steps-grid ch-reveal-group" style="position: relative;">
+        <!-- Scrollytelling drawing progress line behind steps -->
+        <div class="ch-process-progress-line-container">
+          <div class="ch-process-progress-line-fill"></div>
+        </div>
+
         {%- assign step_index = 1 -%}
         {%- for block in section.blocks -%}
           {%- if block.type == 'step' -%}
-            <div class="chp-step-card" {{ block.shopify_attributes }}>
+            <div class="chp-step-card ch-reveal-item" {{ block.shopify_attributes }} style="position: relative; z-index: 2;">
               <div class="chp-step-num">0{{ step_index }}</div>
               <h3 class="chp-step-title">{{ block.settings.title | escape }}</h3>
               <p class="chp-step-desc">{{ block.settings.description | escape }}</p>

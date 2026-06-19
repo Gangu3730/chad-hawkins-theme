@@ -1,22 +1,22 @@
 {{ 'ch-premium.css' | asset_url | stylesheet_tag }}
 
-<div class="chp chp-wrapper">
+<div class="chp chp-wrapper" id="chp-hero">
   <header class="chp-hero" style="background-image: url({% if section.settings.hero_bg_image != blank %}{{ section.settings.hero_bg_image | image_url: width: 1800 }}{% else %}''{% endif %});">
     <div class="chp-hero-overlay"></div>
     <div class="chp-container" style="position: relative; z-index: 2; width: 100%;">
       <div style="display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;" class="chp-hero-grid-wrapper">
-        <div class="chp-hero-content">
+        <div class="chp-hero-content ch-reveal-group">
           {%- if section.settings.hero_subheading != blank -%}
-            <span class="chp-hero-sub">{{ section.settings.hero_subheading | escape }}</span>
+            <span class="chp-hero-sub ch-reveal ch-reveal-item" style="display: inline-block;">{{ section.settings.hero_subheading | escape }}</span>
           {%- endif -%}
           {%- if section.settings.hero_heading != blank -%}
-            <h1 class="chp-hero-title">{{ section.settings.hero_heading | escape }}</h1>
+            <h1 class="chp-hero-title ch-text-reveal-kinetic">{{ section.settings.hero_heading | escape }}</h1>
           {%- endif -%}
           {%- if section.settings.hero_text != blank -%}
-            <p class="chp-hero-text">{{ section.settings.hero_text | escape }}</p>
+            <p class="chp-hero-text ch-reveal ch-reveal-item">{{ section.settings.hero_text | escape }}</p>
           {%- endif -%}
           
-          <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+          <div style="display: flex; flex-wrap: wrap; gap: 16px;" class="ch-reveal ch-reveal-item">
             {%- if section.settings.hero_btn_1_text != blank -%}
               <a href="{{ section.settings.hero_btn_1_link | default: '#' }}" class="chp-btn chp-btn-solid-white">
                 {{ section.settings.hero_btn_1_text | escape }}
@@ -32,7 +32,7 @@
 
         <!-- Overlap Image Area -->
         <div class="chp-hero-media-wrapper" style="position: relative; display: flex; justify-content: flex-end;">
-          <div class="chp-hero-image-frame" style="position: relative; border: 1px solid rgba(255,255,255,0.2); padding: 12px; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); max-width: 500px; width: 100%;">
+          <div class="chp-hero-image-frame ch-mask-reveal" style="position: relative; border: 1px solid rgba(255,255,255,0.2); padding: 12px; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); max-width: 500px; width: 100%;">
             {%- if section.settings.hero_art_image != blank -%}
               <img src="{{ section.settings.hero_art_image | image_url: width: 800 }}" alt="{{ section.settings.hero_art_image.alt | escape }}" width="{{ section.settings.hero_art_image.width }}" height="{{ section.settings.hero_art_image.height }}" style="width: 100%; height: auto; display: block;" loading="eager" />
             {%- else -%}
@@ -41,7 +41,7 @@
 
             <!-- Navy Overlapping Badge -->
             {%- if section.settings.badge_title != blank or section.settings.badge_text != blank -%}
-              <div class="chp-hero-badge" style="position: absolute; bottom: -20px; left: -20px; background-color: var(--ch-navy); color: var(--ch-white); padding: 24px; border: 1px solid var(--ch-border); max-width: 240px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+              <div class="chp-hero-badge ch-reveal" style="position: absolute; bottom: -20px; left: -20px; background-color: var(--ch-navy); color: var(--ch-white); padding: 24px; border: 1px solid var(--ch-border); max-width: 240px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition-delay: 0.4s;">
                 <h4 class="chp-serif" style="font-size: 1.1rem; text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.05em; color: var(--ch-white);">
                   {{ section.settings.badge_title | escape }}
                 </h4>

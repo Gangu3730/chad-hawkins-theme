@@ -1,12 +1,12 @@
 {{ 'ch-premium.css' | asset_url | stylesheet_tag }}
 
-<div class="chp chp-wrapper">
+<div class="chp chp-wrapper" id="chp-gallery">
   <section class="chp-section-spacing">
     <div class="chp-container">
-      <div class="chp-section-header">
-        <span class="chp-section-subtitle">{{ section.settings.gallery_subtitle | escape }}</span>
-        <h2 class="chp-section-title">{{ section.settings.gallery_title | escape }}</h2>
-        <div class="chp-flourish">
+      <div class="chp-section-header ch-reveal-group">
+        <span class="chp-section-subtitle ch-reveal-item" style="display: inline-block;">{{ section.settings.gallery_subtitle | escape }}</span>
+        <h2 class="chp-section-title ch-text-reveal-kinetic">{{ section.settings.gallery_title | escape }}</h2>
+        <div class="chp-flourish ch-reveal-item" style="margin: 15px auto;">
           <div class="chp-flourish-line"></div>
           <div class="chp-flourish-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -17,10 +17,10 @@
         </div>
       </div>
 
-      <div class="chp-gallery-grid">
+      <div class="chp-gallery-grid ch-reveal-group">
         {%- for block in section.blocks -%}
           {%- if block.type == 'gallery' -%}
-            <div class="chp-gallery-item" {{ block.shopify_attributes }}>
+            <div class="chp-gallery-item ch-reveal-item ch-mask-reveal" {{ block.shopify_attributes }}>
               <div class="chp-gallery-img-wrap">
                 {%- if block.settings.image != blank -%}
                   <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" class="chp-gallery-img" loading="lazy" />

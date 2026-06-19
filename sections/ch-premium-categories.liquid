@@ -1,12 +1,12 @@
 {{ 'ch-premium.css' | asset_url | stylesheet_tag }}
 
-<div class="chp chp-wrapper">
+<div class="chp chp-wrapper" id="chp-categories">
   <section class="chp-section-spacing">
     <div class="chp-container">
-      <div class="chp-section-header">
-        <span class="chp-section-subtitle">{{ section.settings.categories_subtitle | escape }}</span>
-        <h2 class="chp-section-title">{{ section.settings.categories_title | escape }}</h2>
-        <div class="chp-flourish">
+      <div class="chp-section-header ch-reveal-group">
+        <span class="chp-section-subtitle ch-reveal-item" style="display: inline-block;">{{ section.settings.categories_subtitle | escape }}</span>
+        <h2 class="chp-section-title ch-text-reveal-kinetic">{{ section.settings.categories_title | escape }}</h2>
+        <div class="chp-flourish ch-reveal-item" style="margin: 15px auto;">
           <div class="chp-flourish-line"></div>
           <div class="chp-flourish-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -15,13 +15,13 @@
           </div>
           <div class="chp-flourish-line"></div>
         </div>
-        <p class="chp-section-desc">{{ section.settings.categories_desc | escape }}</p>
+        <p class="chp-section-desc ch-reveal-item">{{ section.settings.categories_desc | escape }}</p>
       </div>
 
-      <div class="chp-category-grid">
+      <div class="chp-category-grid ch-reveal-group">
         {%- for block in section.blocks -%}
           {%- if block.type == 'category' -%}
-            <a href="{{ block.settings.link | default: '#' }}" class="chp-category-card" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: '#' }}" class="chp-category-card ch-reveal-item" {{ block.shopify_attributes }}>
               <div class="chp-category-image-wrap">
                 {%- if block.settings.image != blank -%}
                   <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" class="chp-category-image" loading="lazy" />

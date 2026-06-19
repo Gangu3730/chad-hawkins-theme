@@ -1,12 +1,12 @@
 {{ 'ch-premium.css' | asset_url | stylesheet_tag }}
 
-<div class="chp chp-wrapper">
+<div class="chp chp-wrapper" id="chp-faq">
   <section class="chp-section-spacing" style="background-color: var(--ch-white);">
     <div class="chp-container" style="max-width: 800px;">
-      <div class="chp-section-header">
-        <span class="chp-section-subtitle">{{ section.settings.subtitle | escape }}</span>
-        <h2 class="chp-section-title">{{ section.settings.title | escape }}</h2>
-        <div class="chp-flourish">
+      <div class="chp-section-header ch-reveal-group">
+        <span class="chp-section-subtitle ch-reveal-item" style="display: inline-block;">{{ section.settings.subtitle | escape }}</span>
+        <h2 class="chp-section-title ch-text-reveal-kinetic">{{ section.settings.title | escape }}</h2>
+        <div class="chp-flourish ch-reveal-item" style="margin: 15px auto;">
           <div class="chp-flourish-line"></div>
           <div class="chp-flourish-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -18,10 +18,10 @@
       </div>
 
       <!-- Accordion Grid -->
-      <div class="chp-faq-accordion-wrapper" style="margin-top: 40px;">
+      <div class="chp-faq-accordion-wrapper ch-reveal-group" style="margin-top: 40px;">
         {%- for block in section.blocks -%}
           {%- if block.type == 'faq' -%}
-            <div class="chp-faq-item" style="border-bottom: 1px solid var(--ch-border); padding: 20px 0;" {{ block.shopify_attributes }}>
+            <div class="chp-faq-item ch-reveal-item" style="border-bottom: 1px solid var(--ch-border); padding: 20px 0;" {{ block.shopify_attributes }}>
               
               <button type="button" class="chp-faq-trigger" style="width: 100%; display: flex; justify-content: space-between; align-items: center; background: none; border: none; padding: 0; cursor: pointer; text-align: left; outline: none;">
                 <h3 class="chp-serif" style="font-size: 1.125rem; color: var(--ch-navy); margin: 0; font-weight: 600; line-height: 1.4;">

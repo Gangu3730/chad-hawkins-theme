@@ -1,12 +1,12 @@
 {{ 'ch-premium.css' | asset_url | stylesheet_tag }}
 
-<div class="chp chp-wrapper">
+<div class="chp chp-wrapper" id="chp-pricing">
   <section class="chp-section-spacing" style="background-color: var(--ch-cream);">
     <div class="chp-container">
-      <div class="chp-section-header">
-        <span class="chp-section-subtitle">{{ section.settings.pricing_subtitle | escape }}</span>
-        <h2 class="chp-section-title">{{ section.settings.pricing_title | escape }}</h2>
-        <div class="chp-flourish">
+      <div class="chp-section-header ch-reveal-group">
+        <span class="chp-section-subtitle ch-reveal-item" style="display: inline-block;">{{ section.settings.pricing_subtitle | escape }}</span>
+        <h2 class="chp-section-title ch-text-reveal-kinetic">{{ section.settings.pricing_title | escape }}</h2>
+        <div class="chp-flourish ch-reveal-item" style="margin: 15px auto;">
           <div class="chp-flourish-line"></div>
           <div class="chp-flourish-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -17,10 +17,10 @@
         </div>
       </div>
 
-      <div class="chp-pricing-grid">
+      <div class="chp-pricing-grid ch-reveal-group">
         {%- for block in section.blocks -%}
           {%- if block.type == 'package' -%}
-            <div class="chp-pricing-card {% if block.settings.featured %}chp-pricing-featured{% endif %}" {{ block.shopify_attributes }}>
+            <div class="chp-pricing-card ch-reveal-item {% if block.settings.featured %}chp-pricing-featured{% endif %}" {{ block.shopify_attributes }}>
               {%- if block.settings.featured -%}
                 <div class="chp-pricing-badge">{{ block.settings.badge_text | default: 'Most Popular' | escape }}</div>
               {%- endif -%}

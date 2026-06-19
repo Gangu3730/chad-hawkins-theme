@@ -1,5 +1,9 @@
 {
   "sections": {
+    "sticky_nav": {
+      "type": "ch-premium-sticky-nav",
+      "settings": {}
+    },
     "hero": {
       "type": "ch-premium-hero",
       "settings": {
@@ -292,6 +296,7 @@
   },
   "order": [
     "hero",
+    "sticky_nav",
     "about_preview",
     "categories",
     "process",
