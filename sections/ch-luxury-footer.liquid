@@ -1,12 +1,10 @@
-{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
-
-<footer class="chp-footer">
+<footer class="chp-footer-wrapper">
   <div class="chp-container">
     <div class="chp-footer-grid">
       
-      <!-- Brand & signature -->
-      <div>
-        <h2 class="chp-footer-brand-title">
+      <!-- Column 1: Brand Logo / Title -->
+      <div class="chp-footer-col">
+        <h2 class="chp-footer-brand chp-serif">
           {%- if section.settings.logo_svg != blank -%}
             {{ section.settings.logo_svg }}
           {%- elsif section.settings.logo_image != blank -%}
@@ -16,79 +14,68 @@
               width="150"
               height="40"
               loading="lazy"
-              style="max-width: 100%; height: auto;"
             >
           {%- else -%}
-            {{ section.settings.brand_title | default: shop.name | escape }}
+            {{ section.settings.brand_title | default: shop.name }}
           {%- endif -%}
         </h2>
+      </div>
+
+      <!-- Column 2: Narrative Description & Signature -->
+      <div class="chp-footer-col">
         {%- if section.settings.description != blank -%}
-          <p class="chp-footer-desc">{{ section.settings.description | escape }}</p>
+          <p class="chp-footer-desc chp-sans">{{ section.settings.description }}</p>
         {%- endif -%}
+        
         {%- if section.settings.signature_image != blank -%}
           <img 
             src="{{ section.settings.signature_image | image_url: width: 280 }}" 
             alt="Chad Hawkins Signature"
+            class="chp-footer-sig-img"
             width="140"
             height="50"
             loading="lazy"
-            style="display: block; opacity: 0.85;"
           >
         {%- else -%}
-          <div class="chp-footer-signature">{{ section.settings.signature_text | escape }}</div>
+          <div class="chp-footer-sig-text">{{ section.settings.signature_text }}</div>
         {%- endif -%}
       </div>
 
-      <!-- Links menu -->
-      <div>
-        <h3 class="chp-footer-col-title">{{ section.settings.links_title | escape }}</h3>
-        <ul class="chp-footer-links">
+      <!-- Column 3: Double-Column Links -->
+      <div class="chp-footer-col">
+        <h3 class="chp-footer-title chp-sans">{{ section.settings.links_title }}</h3>
+        <div class="chp-footer-links-grid">
           {%- for link in linklists[section.settings.menu].links -%}
-            <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+            <a href="{{ link.url }}" class="chp-footer-link chp-sans">{{ link.title }}</a>
           {%- else -%}
-            <li><a href="{{ routes.root_url }}">Home</a></li>
-            <li><a href="/pages/about-chad">About</a></li>
-            <li><a href="/pages/gallery-chad">Gallery</a></li>
-            <li><a href="/pages/how-it-works-chad">How It Works</a></li>
-            <li><a href="/pages/pricing-chad">Pricing</a></li>
-            <li><a href="/pages/contact-chad">Contact</a></li>
+            <!-- Placeholder links if none selected -->
+            <a href="{{ routes.root_url }}" class="chp-footer-link chp-sans">HOME</a>
+            <a href="/pages/about" class="chp-footer-link chp-sans">ABOUT</a>
+            <a href="/pages/contact" class="chp-footer-link chp-sans">CONTACT</a>
+            <a href="{{ routes.all_products_collection_url }}" class="chp-footer-link chp-sans">PORTRAITS</a>
+            <a href="/pages/wishlist" class="chp-footer-link chp-sans">WISHLIST</a>
+            <a href="/account" class="chp-footer-link chp-sans">ACCOUNT</a>
+            <a href="{{ routes.cart_url }}" class="chp-footer-link chp-sans">CART</a>
           {%- endfor -%}
-        </ul>
+        </div>
       </div>
 
-      <!-- Secondary Links -->
-      <div>
-        <h3 class="chp-footer-col-title">SUPPORT</h3>
-        <ul class="chp-footer-links">
-          <li><a href="/pages/wishlist">My Wishlist</a></li>
-          <li><a href="/account">My Account</a></li>
-          <li><a href="{{ routes.cart_url }}">View Cart</a></li>
-        </ul>
-      </div>
-
-      <!-- Action Button / CTA -->
-      <div style="display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
-        <h3 class="chp-footer-col-title">COMMISSIONS</h3>
-        <p class="chp-footer-desc" style="margin-bottom: 20px;">Interested in discussing a custom drawing layout?</p>
+      <!-- Column 4: Action Button -->
+      <div class="chp-footer-col">
         {%- if section.settings.btn_label != blank and section.settings.btn_link != blank -%}
-          <a href="{{ section.settings.btn_link }}" class="chp-btn chp-btn-solid-white" style="font-size: 0.75rem; padding: 12px 24px;">
-            {{ section.settings.btn_label | escape }}
+          <a href="{{ section.settings.btn_link }}" class="chp-footer-btn-box chp-sans">
+            {{ section.settings.btn_label }}
           </a>
         {%- endif -%}
       </div>
 
     </div>
 
-    <!-- Copyright -->
-    <div class="chp-footer-bottom">
-      <span class="chp-footer-copy">
-        {{ section.settings.copyright_text | replace: '[year]', 'now' | date: '%Y' | escape }}
-      </span>
-      <span class="chp-footer-copy" style="opacity: 0.4;">
-        Premium editions style tribute layout
-      </span>
+    <!-- Bottom Copyright -->
+    <div class="chp-footer-divider-line"></div>
+    <div class="chp-footer-copyright-row chp-sans">
+      <span>{{ section.settings.copyright_text | replace: '[year]', 'now' | date: '%Y' }}</span>
     </div>
-
   </div>
 </footer>
 

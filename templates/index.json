@@ -1,19 +1,310 @@
 {
   "sections": {
-    "main": {
-      "type": "ch-home-editions",
+    "sticky_nav": {
+      "type": "ch-premium-sticky-nav",
+      "settings": {}
+    },
+    "hero": {
+      "type": "ch-premium-hero",
       "settings": {
         "hero_subheading": "COMMISSION A HAND-DRAWN PORTRAIT",
-        "hero_heading": "Hand Drawn Tributes That Preserve Life's Most Meaningful Moments",
+        "hero_heading": "Hand Drawn Tributes That Preserve Life’s Most Meaningful Moments",
         "hero_text": "Custom hand-drawn portraits and tribute videos created with care, emotion, and timeless attention to detail.",
         "hero_btn_1_text": "Book Your Tribute",
         "hero_btn_2_text": "View Portfolio",
         "badge_title": "Hand-Drawn Tributes",
         "badge_text": "Timeless pencil & ink commissions by Chad Hawkins."
       }
+    },
+    "about_preview": {
+      "type": "ch-premium-about-preview",
+      "settings": {
+        "about_subtitle": "THE ARTIST & VISION",
+        "about_title": "Crafting Memories that Live Forever",
+        "about_text": "For over 30 years, Chad Hawkins has captured the stories of individuals, families, and organizations through his hand-drawn tribute art. Every portrait tells a profound story of legacy, achievement, and love.",
+        "about_btn_text": "Read Full Story"
+      }
+    },
+    "categories": {
+      "type": "ch-premium-categories",
+      "blocks": {
+        "cat_1": {
+          "type": "category",
+          "settings": {
+            "title": "Memorial Tributes",
+            "subtitle": "HONORING LOVED ONES"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "title": "Anniversary Tributes",
+            "subtitle": "CELEBRATING MILESTONES"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "title": "Retirement Tributes",
+            "subtitle": "MARKING CAREERS"
+          }
+        },
+        "cat_4": {
+          "type": "category",
+          "settings": {
+            "title": "Achievement Tributes",
+            "subtitle": "RECOGNIZING SUCCESS"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4"
+      ],
+      "settings": {
+        "categories_subtitle": "HONORING MEMORIES",
+        "categories_title": "Tribute Art Portfolios",
+        "categories_desc": "Explore custom commissions crafted to commemorate life's most defining occasions."
+      }
+    },
+    "process": {
+      "type": "ch-premium-process",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Your Tribute",
+            "description": "Select the theme, dimensions, and medium that best fit your custom tribute vision."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Upload Your Photos",
+            "description": "Provide reference photographs and documents of your subject, scene, or details."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Share the Story",
+            "description": "Tell us about the details, milestones, and emotions you want woven into the artwork."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Receive Your Artwork",
+            "description": "Unveil a hand-drawn legacy portrait carefully shipped, ready for framing."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "steps_subtitle": "THE COMMISSION PROCESS",
+        "steps_title": "How It Works"
+      }
+    },
+    "showcase": {
+      "type": "ch-premium-featured-showcase",
+      "settings": {
+        "badge_text": "Signature Tribute Suite",
+        "subtitle": "LIMITED AVAILABILITY",
+        "title": "The Hand-Drawn Memorial Tribute Montage",
+        "description": "Our signature tribute montage weaves multiple photographs, landscapes, and emotional highlights into a single, cohesive hand-drawn work of art. Designed to tell a rich, multi-layered story of a loved one's legacy, careers, and milestones.",
+        "features": "Up to 5 photo references combined seamlessly\nPremium 16x20 acid-free archive paper\nHandcrafted pencil & ink detail style\nCustom wooden framing included\nSecure archive digital files",
+        "price": "From $850",
+        "button_text": "Commission This Tribute"
+      }
+    },
+    "gallery": {
+      "type": "ch-premium-gallery",
+      "blocks": {
+        "gal_1": {
+          "type": "gallery",
+          "settings": {
+            "title": "Family Legacy Portrait",
+            "subtitle": "CHARCOAL & INK ON COTTON PAPER"
+          }
+        },
+        "gal_2": {
+          "type": "gallery",
+          "settings": {
+            "title": "Officer Retirement Tribute",
+            "subtitle": "PEN & INK DETAILED DRAWING"
+          }
+        },
+        "gal_3": {
+          "type": "gallery",
+          "settings": {
+            "title": "Memorial Landscape",
+            "subtitle": "PENCIL SKETCH TRIBUTE"
+          }
+        }
+      },
+      "block_order": [
+        "gal_1",
+        "gal_2",
+        "gal_3"
+      ],
+      "settings": {
+        "gallery_subtitle": "COMMISSION HIGHLIGHTS",
+        "gallery_title": "Featured Tribute Art"
+      }
+    },
+    "pricing": {
+      "type": "ch-premium-pricing",
+      "blocks": {
+        "pkg_1": {
+          "type": "package",
+          "settings": {
+            "title": "Classic Portrait",
+            "price": "$450",
+            "price_sub": "11x14 single subject",
+            "features": "Hand-drawn in pencil or ink\nPremium cotton archive paper\nDigital scan included\n1 revision round",
+            "featured": false
+          }
+        },
+        "pkg_2": {
+          "type": "package",
+          "settings": {
+            "title": "Detailed Legacy",
+            "price": "$750",
+            "price_sub": "16x20 multiple subjects",
+            "features": "Detailed pencil and charcoal\nStory elements woven in\nHigh-resolution archive files\n2 revision rounds\nPremium shipping",
+            "featured": true,
+            "badge_text": "Most Requested"
+          }
+        },
+        "pkg_3": {
+          "type": "package",
+          "settings": {
+            "title": "Grand Tribute Suite",
+            "price": "$1,200",
+            "price_sub": "18x24 custom scene",
+            "features": "Full detail ink and charcoal scene\nCustom tribute montage video\nSignature certificate of authenticity\nPriority execution",
+            "featured": false
+          }
+        }
+      },
+      "block_order": [
+        "pkg_1",
+        "pkg_2",
+        "pkg_3"
+      ],
+      "settings": {
+        "pricing_subtitle": "INVESTMENT & SIZES",
+        "pricing_title": "Tribute Packages"
+      }
+    },
+    "testimonials": {
+      "type": "ch-premium-testimonials",
+      "blocks": {
+        "test_1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "When we opened the memorial portrait of my husband, there wasn't a dry eye in the room. Chad combined three separate photos into a beautiful, seamless ink drawing that truly captures his spirit. It will be passed down for generations.",
+            "author": "Eleanor Vance",
+            "location": "Boston, MA"
+          }
+        },
+        "test_2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The tribute video and drawing Chad created for my father's retirement from the fire service was spectacular. It highlighted every station, badge, and major achievement of his 35-year career. Absolutely stunning craftsmanship.",
+            "author": "Captain David Miller",
+            "location": "Chicago, IL"
+          }
+        },
+        "test_3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I commissioned an anniversary portrait of our family estate. The attention to detail in the foliage and stonework was breathtaking. Chad communicated with us throughout the sketching phase and the delivery was flawless.",
+            "author": "Sarah & Thomas Sterling",
+            "location": "Richmond, VA"
+          }
+        }
+      },
+      "block_order": [
+        "test_1",
+        "test_2",
+        "test_3"
+      ],
+      "settings": {
+        "subtitle": "HEARTFELT STORIES",
+        "title": "What Families Say"
+      }
+    },
+    "faq": {
+      "type": "ch-premium-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "What reference photos do I need to provide?",
+            "answer": "You can upload separate, individual photos of your subjects. Chad will combine them into a single, cohesive composition. High-resolution, clear lighting photos are preferred, but Chad has 30 years of experience working with old family archives."
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does a custom tribute commission take?",
+            "answer": "Typically, a hand-drawn commission takes 3 to 4 weeks from photo approval to shipping. If you need priority delivery for a memorial service or deadline, please select the Priority package or contact us directly."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "What is included in the Tribute Montage Video?",
+            "answer": "The tribute video is a high-definition montage showing the step-by-step progress of the hand-drawn portrait, accompanied by background music and storytelling titles about the subject's career, accomplishments, or legacy. It is perfect to play at retirement parties or celebration of life services."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship framed artwork safely?",
+            "answer": "Yes, we ship custom framed prints and original art worldwide using double-fortified boxes and shatterproof acrylic glass. Every package is fully insured and tracked."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4"
+      ],
+      "settings": {
+        "subtitle": "COMMON QUESTIONS",
+        "title": "Tribute Art FAQs"
+      }
+    },
+    "cta": {
+      "type": "ch-premium-cta",
+      "settings": {
+        "cta_heading": "Create a tribute that feels personal, timeless, and unforgettable.",
+        "cta_text": "Get in touch today to discuss your custom project.",
+        "cta_btn_text": "Get Started"
+      }
     }
   },
   "order": [
-    "main"
+    "hero",
+    "sticky_nav",
+    "about_preview",
+    "categories",
+    "process",
+    "showcase",
+    "gallery",
+    "pricing",
+    "testimonials",
+    "faq",
+    "cta"
   ]
 }

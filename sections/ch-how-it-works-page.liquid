@@ -1,95 +1,139 @@
 {{ 'ch-premium.css' | asset_url | stylesheet_tag }}
 
-<div class="chp chp-wrapper">
-  
-  <div class="chp-container chp-section-spacing chp-timeline-section">
-    <!-- Header -->
-    <div class="chp-section-header chp-reveal">
-      <span class="chp-section-sub">{{ section.settings.subtitle | escape }}</span>
+<div class="chp chp-wrapper chp-section-spacing" style="background-color: var(--ch-cream);">
+  <div class="chp-container" style="max-width: 900px;">
+    <!-- Page Header -->
+    <div class="chp-section-header" style="margin-bottom: 60px;">
+      <span class="chp-section-subtitle">{{ section.settings.subtitle | escape }}</span>
       <h1 class="chp-section-title chp-serif">{{ section.settings.title | escape }}</h1>
-      
-      <div class="chp-divider">
-        <div class="chp-divider-line"></div>
-        <div class="chp-divider-flourish">
+      <div class="chp-flourish">
+        <div class="chp-flourish-line"></div>
+        <div class="chp-flourish-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 3v18M3 12h18" stroke-linecap="round"/>
-            <circle cx="12" cy="12" r="3" fill="none"/>
+            <path d="M12 3v18M3 12h18M5 5l14 14M19 5L5 19"/>
           </svg>
         </div>
-        <div class="chp-divider-line"></div>
+        <div class="chp-flourish-line"></div>
       </div>
-      
-      {%- if section.settings.description != blank -%}
-        <p class="chp-section-desc">{{ section.settings.description | escape }}</p>
-      {%- endif -%}
+      <p class="chp-section-desc" style="max-width: 600px; margin: 0 auto;">
+        {{ section.settings.description | escape }}
+      </p>
     </div>
 
-    <!-- Timeline Wrapper -->
-    <div class="chp-timeline-wrap">
-      <div class="chp-timeline-line">
-        <div class="chp-timeline-fill"></div>
-      </div>
+    <!-- Timeline Steps -->
+    <div class="chp-how-timeline" style="position: relative; margin: 40px 0;">
+      <!-- Center line (Desktop only) -->
+      <div class="chp-timeline-line" style="position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background-color: var(--ch-border); transform: translateX(-50%); z-index: 1;"></div>
 
       {%- assign step_index = 1 -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'timeline_step' -%}
-          <div class="chp-timeline-item chp-reveal" {{ block.shopify_attributes }}>
-            <div class="chp-timeline-node"></div>
-            <div class="chp-timeline-content">
-              <span class="chp-timeline-step">Step 0{{ step_index }}</span>
-              <h3 class="chp-serif" style="color: var(--ch-navy); margin: 0 0 10px 0; font-size: 1.35rem; font-weight: 500;">
-                {{ block.settings.title | escape }}
-              </h3>
-              <p class="chp-sans" style="font-size: 0.9375rem; color: var(--ch-muted); line-height: 1.6; margin: 0;">
-                {{ block.settings.description | escape }}
-              </p>
+          {%- assign is_even = step_index | modulo: 2 -%}
+          
+          <div class="chp-timeline-item" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 60px; position: relative; z-index: 2; width: 100%;">
+            <!-- Left Side / Right Side Layout -->
+            <div class="chp-timeline-content-wrapper chp-timeline-left" style="width: 44%; text-align: {% if is_even == 0 %}left{% else %}right{% endif %}; {% if is_even == 0 %}order: 3;{% else %}order: 1;{% endif %}">
+              <div class="chp-timeline-card" style="background: var(--ch-white); border: 1px solid var(--ch-border); padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); transition: all 0.3s ease;">
+                <h3 class="chp-serif" style="font-size: 1.25rem; color: var(--ch-navy); margin: 0 0 10px 0; font-weight: 600;">
+                  {{ block.settings.title | escape }}
+                </h3>
+                <p class="chp-sans" style="font-size: 0.875rem; color: var(--ch-muted); line-height: 1.6; margin: 0;">
+                  {{ block.settings.description | escape }}
+                </p>
+              </div>
             </div>
+
+            <!-- Central Number Indicator -->
+            <div class="chp-timeline-badge-wrapper" style="width: 12%; display: flex; justify-content: center; order: 2;">
+              <div class="chp-timeline-badge" style="width: 50px; height: 50px; border-radius: 50%; background-color: var(--ch-navy); color: var(--ch-white); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-serif); font-size: 1.25rem; font-weight: 600; border: 4px solid var(--ch-cream); box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                0{{ step_index }}
+              </div>
+            </div>
+
+            <!-- Dummy element to balance flex columns -->
+            <div style="width: 44%; order: {% if is_even == 0 %}1{% else %}3{% endif %};" class="chp-timeline-empty-col"></div>
           </div>
           {%- assign step_index = step_index | plus: 1 -%}
         {%- endif -%}
       {%- endfor -%}
     </div>
 
-    <!-- Booking CTA Block -->
+    <!-- Booking CTA Strip -->
     {%- if section.settings.show_cta -%}
-      <div class="chp-timeline-cta chp-reveal" style="background-color: var(--ch-navy); color: var(--ch-white); padding: 50px 40px; text-align: center; border: 1px solid var(--ch-border); margin-top: 80px; box-shadow: 0 10px 30px rgba(6, 43, 85, 0.05); position: relative; overflow: hidden;">
+      <div class="chp-timeline-cta" style="background-color: var(--ch-navy); color: var(--ch-white); padding: 50px 40px; text-align: center; border: 1px solid var(--ch-border); margin-top: 80px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
         <h2 class="chp-serif" style="font-size: 1.75rem; color: var(--ch-white); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 0.05em;">
           {{ section.settings.cta_title | escape }}
         </h2>
         <p class="chp-sans" style="font-size: 0.9375rem; opacity: 0.8; max-width: 600px; margin: 0 auto 30px auto; line-height: 1.6;">
           {{ section.settings.cta_text | escape }}
         </p>
-        <a href="{{ section.settings.cta_link | default: '#' }}" class="chp-btn chp-btn-solid-white">
+        <a href="{{ section.settings.cta_link | default: '/pages/book-a-tribute' }}" class="chp-btn chp-btn-solid-white">
           {{ section.settings.cta_btn_label | default: 'Book Your Tribute Now' | escape }}
         </a>
       </div>
     {%- endif -%}
-
   </div>
-
 </div>
+
+<style>
+  @media (max-width: 768px) {
+    .chp-timeline-line {
+      left: 20px !important;
+      transform: none !important;
+    }
+    .chp-timeline-item {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      padding-left: 50px;
+    }
+    .chp-timeline-content-wrapper {
+      width: 100% !important;
+      text-align: left !important;
+      order: 2 !important;
+    }
+    .chp-timeline-badge-wrapper {
+      width: auto !important;
+      position: absolute;
+      left: -5px;
+      top: 0;
+      order: 1 !important;
+    }
+    .chp-timeline-badge {
+      width: 40px !important;
+      height: 40px !important;
+      font-size: 1rem !important;
+    }
+    .chp-timeline-empty-col {
+      display: none !important;
+    }
+  }
+  .chp-timeline-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--ch-navy);
+  }
+</style>
 
 {% schema %}
 {
-  "name": "How It Works Page",
+  "name": "How It Works Details",
   "settings": [
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Subheading",
-      "default": "THE COMMISSION SYSTEM"
+      "label": "Section Subtitle",
+      "default": "THE TRIBUTE JOURNEY"
     },
     {
       "type": "text",
       "id": "title",
-      "label": "Heading",
-      "default": "A Simple, Thoughtful Experience"
+      "label": "Section Title",
+      "default": "How the Commission Process Works"
     },
     {
       "type": "textarea",
       "id": "description",
-      "label": "Description",
-      "default": "We make the process of commissioning a custom hand-drawn portrait simple, transparent, and meaningful."
+      "label": "Description Text",
+      "default": "Commissioning a custom hand-drawn legacy portrait is a simple, collaborative process designed to honor life's milestones and capture key family narratives."
     },
     {
       "type": "header",
@@ -98,31 +142,31 @@
     {
       "type": "checkbox",
       "id": "show_cta",
-      "label": "Show CTA Strip",
+      "label": "Show Booking CTA Banner",
       "default": true
     },
     {
       "type": "text",
       "id": "cta_title",
       "label": "CTA Heading",
-      "default": "LET'S CREATE A TRIBUTE PORTRAIT TOGETHER."
+      "default": "Ready to Commemorate Your Loved One?"
     },
     {
       "type": "textarea",
       "id": "cta_text",
-      "label": "CTA Text",
-      "default": "Begin your legacy piece today by choosing a package and sharing your story."
+      "label": "CTA description",
+      "default": "Choose from our Classic Portrait or Signature Portrait + Video Tribute packages to secure your booking date slot."
     },
     {
       "type": "text",
       "id": "cta_btn_label",
-      "label": "CTA Button Label",
-      "default": "START YOUR COMMISSION"
+      "label": "CTA Button label",
+      "default": "Book Your Tribute"
     },
     {
       "type": "url",
       "id": "cta_link",
-      "label": "CTA Button Link"
+      "label": "CTA Link"
     }
   ],
   "blocks": [
@@ -133,21 +177,49 @@
         {
           "type": "text",
           "id": "title",
-          "label": "Step Title",
-          "default": "Choose Your Tribute"
+          "label": "Step Title"
         },
         {
           "type": "textarea",
           "id": "description",
-          "label": "Step Description",
-          "default": "Select the style, format, and size that fits the tribute you want to create."
+          "label": "Step Description"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "How It Works Timeline"
+      "name": "How It Works Details",
+      "blocks": [
+        {
+          "type": "timeline_step",
+          "settings": {
+            "title": "Choose Your Tribute Package",
+            "description": "Select either a standalone hand-drawn portrait or a combined Portrait + Tribute Video pack based on the scale of your commemoration."
+          }
+        },
+        {
+          "type": "timeline_step",
+          "settings": {
+            "title": "Reserve a Sketching Date & Upload Photos",
+            "description": "Pick an available booking slot on our calendar to reserve your drafting timeframe, then upload reference photos and share details of their achievements."
+          }
+        },
+        {
+          "type": "timeline_step",
+          "settings": {
+            "title": "Review Concept Sketch & Narrative",
+            "description": "Collaborate closely with Chad. You will review a conceptual sketch of the layout and provide feedback before ink or final charcoal is applied."
+          }
+        },
+        {
+          "type": "timeline_step",
+          "settings": {
+            "title": "Receive Completed Artwork & Video",
+            "description": "Your custom legacy drawing is safely packaged and shipped flat. If ordered, your progress video montage is delivered digitally in high-definition."
+          }
+        }
+      ]
     }
   ]
 }
