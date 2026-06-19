@@ -572,6 +572,33 @@
           {% endif %}
         </ul>
       </nav>
+      <!-- Mobile Icons (Wishlist, Account, Cart) -->
+      <div class="chp-mobile-drawer-icons menu-drawer__animated-element" style="--menu-drawer-animation-index: {{ linklist.links.size }}; display: flex; justify-content: center; gap: 30px; padding: 20px 30px 10px 30px;">
+        <a href="/pages/wishlist" class="chp-header-icon-link" aria-label="Wishlist">
+          <svg class="chp-header-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </a>
+        <a href="/account" class="chp-header-icon-link" aria-label="Account">
+          <svg class="chp-header-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+        <a href="/cart" class="chp-header-icon-link" aria-label="Cart">
+          <span class="chp-header-icon-svg-wrapper">
+            <svg class="chp-header-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span class="chp-cart-bubble-count">
+              {{ cart.item_count }}
+            </span>
+          </span>
+        </a>
+      </div>
+
       {%- if section.settings.commission_button_text != blank and section.settings.commission_button_link != blank -%}
         <div class="menu-drawer__commission-btn-wrapper menu-drawer__animated-element" style="--menu-drawer-animation-index: {{ linklist.links.size }}; padding: 15px 30px 5px 30px;">
           <a href="{{ section.settings.commission_button_link }}" class="chp-btn-solid chp-header-btn-mobile chp-sans" style="display: block; text-align: center; width: 100%;">
