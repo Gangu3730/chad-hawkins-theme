@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "main": {
       "type": "main-404",
@@ -273,10 +274,184 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "ch_premium_home_b6bxdW": {
+      "type": "ch-premium-home",
+      "blocks": {
+        "category_bVpz7f": {
+          "type": "category",
+          "settings": {
+            "title": "Memorial Tributes",
+            "subtitle": "HONORING LOVED ONES",
+            "link": ""
+          }
+        },
+        "category_QE3RFK": {
+          "type": "category",
+          "settings": {
+            "title": "Anniversary Tributes",
+            "subtitle": "CELEBRATING MILESTONES",
+            "link": ""
+          }
+        },
+        "category_ykA6XB": {
+          "type": "category",
+          "settings": {
+            "title": "Retirement Tributes",
+            "subtitle": "MARKING CAREERS",
+            "link": ""
+          }
+        },
+        "category_tfpDdA": {
+          "type": "category",
+          "settings": {
+            "title": "Achievement Tributes",
+            "subtitle": "RECOGNIZING SUCCESS",
+            "link": ""
+          }
+        },
+        "step_fEgHQW": {
+          "type": "step",
+          "settings": {
+            "title": "Choose Your Tribute",
+            "description": "Select the theme, dimensions, and medium that best fit your custom tribute vision."
+          }
+        },
+        "step_kPbBQ8": {
+          "type": "step",
+          "settings": {
+            "title": "Upload Your Photos",
+            "description": "Provide reference photographs and documents of your subject, scene, or details."
+          }
+        },
+        "step_rxRiCA": {
+          "type": "step",
+          "settings": {
+            "title": "Share the Story",
+            "description": "Tell us about the details, milestones, and emotions you want woven into the artwork."
+          }
+        },
+        "step_jGR9Rw": {
+          "type": "step",
+          "settings": {
+            "title": "Receive Your Artwork",
+            "description": "Unveil a hand-drawn legacy portrait carefully shipped, ready for framing."
+          }
+        },
+        "gallery_jyxcY6": {
+          "type": "gallery",
+          "settings": {
+            "title": "Family Legacy Portrait",
+            "subtitle": "CHARCOAL & INK ON COTTON PAPER"
+          }
+        },
+        "gallery_6XKyiq": {
+          "type": "gallery",
+          "settings": {
+            "title": "Officer Retirement Tribute",
+            "subtitle": "PEN & INK DETAILED DRAWING"
+          }
+        },
+        "gallery_XDxhhJ": {
+          "type": "gallery",
+          "settings": {
+            "title": "Memorial Landscape",
+            "subtitle": "PENCIL SKETCH TRIBUTE"
+          }
+        },
+        "package_W6FDX4": {
+          "type": "package",
+          "settings": {
+            "title": "Classic Portrait",
+            "price": "$450",
+            "price_sub": "11x14 single subject",
+            "features": "Hand-drawn in pencil or ink\nPremium cotton archive paper\nDigital scan included\n1 revision round",
+            "button_text": "Commission Artwork",
+            "button_link": "",
+            "featured": false,
+            "badge_text": "Most Popular"
+          }
+        },
+        "package_Bxq4cc": {
+          "type": "package",
+          "settings": {
+            "title": "Detailed Legacy",
+            "price": "$750",
+            "price_sub": "16x20 multiple subjects",
+            "features": "Detailed pencil and charcoal\nStory elements woven in\nHigh-resolution archive files\n2 revision rounds\nPremium shipping",
+            "button_text": "Commission Artwork",
+            "button_link": "",
+            "featured": true,
+            "badge_text": "Most Requested"
+          }
+        },
+        "package_Xf8pkD": {
+          "type": "package",
+          "settings": {
+            "title": "Grand Tribute Suite",
+            "price": "$1,200",
+            "price_sub": "18x24 custom scene",
+            "features": "Full detail ink and charcoal scene\nCustom tribute montage video\nSignature certificate of authenticity\nPriority execution",
+            "button_text": "Commission Artwork",
+            "button_link": "",
+            "featured": false,
+            "badge_text": "Most Popular"
+          }
+        }
+      },
+      "block_order": [
+        "category_bVpz7f",
+        "category_QE3RFK",
+        "category_ykA6XB",
+        "category_tfpDdA",
+        "step_fEgHQW",
+        "step_kPbBQ8",
+        "step_rxRiCA",
+        "step_jGR9Rw",
+        "gallery_jyxcY6",
+        "gallery_6XKyiq",
+        "gallery_XDxhhJ",
+        "package_W6FDX4",
+        "package_Bxq4cc",
+        "package_Xf8pkD"
+      ],
+      "name": "Premium Home Layout",
+      "settings": {
+        "hero_bg_image": "shopify://shop_images/pexels-eric-quinones-2149843819-35725745.jpg",
+        "hero_art_image": "shopify://shop_images/pexels-2dreamersphoto-2716895.jpg",
+        "hero_subheading": "COMMISSION A HAND-DRAWN PORTRAIT",
+        "hero_heading": "Hand Drawn Tributes That Preserve Life’s Most Meaningful Moments",
+        "hero_text": "Custom hand-drawn portraits and tribute videos created with care, emotion, and timeless attention to detail.",
+        "hero_btn_1_text": "Book Your Tribute",
+        "hero_btn_1_link": "",
+        "hero_btn_2_text": "View Portfolio",
+        "hero_btn_2_link": "",
+        "badge_title": "Hand-Drawn Tributes",
+        "badge_text": "Timeless pencil & ink commissions by Chad Hawkins.",
+        "about_subtitle": "THE ARTIST & VISION",
+        "about_title": "Crafting Memories that Live Forever",
+        "about_text": "For over 30 years, Chad Hawkins has captured the stories of individuals, families, and organizations through his hand-drawn tribute art. Every portrait tells a profound story of legacy, achievement, and love.",
+        "about_btn_text": "Read Full Story",
+        "about_btn_link": "",
+        "categories_subtitle": "HONORING MEMORIES",
+        "categories_title": "Tribute Art Portfolios",
+        "categories_desc": "Explore custom commissions crafted to commemorate life's most defining occasions.",
+        "steps_subtitle": "THE COMMISSION PROCESS",
+        "steps_title": "How It Works",
+        "gallery_subtitle": "COMMISSION HIGHLIGHTS",
+        "gallery_title": "Featured Tribute Art",
+        "pricing_subtitle": "INVESTMENT & SIZES",
+        "pricing_title": "Tribute Packages",
+        "cta_heading": "Create a tribute that feels personal, timeless, and unforgettable.",
+        "cta_text": "Get in touch today to discuss your custom project.",
+        "cta_btn_text": "Get Started",
+        "cta_btn_link": ""
+      }
     }
   },
   "order": [
     "main",
-    "product_list_iA96Tq"
+    "product_list_iA96Tq",
+    "ch_premium_home_b6bxdW"
   ]
 }
