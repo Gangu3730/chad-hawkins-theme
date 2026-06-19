@@ -70,7 +70,7 @@
       {%- form 'contact', id: 'ChpContactForm' -%}
         {%- if form.posted_successfully? -%}
           <div class="chp-form-success chp-sans" tabindex="-1">
-            {{ 'templates.contact.form.post_success' | t | default: 'Thanks for contacting us. We will get back to you as soon as possible.' }}
+            {{ 'blocks.contact_form.post_success' | t | default: 'Thanks for contacting us. We will get back to you as soon as possible.' }}
           </div>
         {%- elsif form.errors -%}
           <ul class="chp-form-errors chp-sans" role="list">

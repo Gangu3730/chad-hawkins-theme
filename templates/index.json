@@ -3,85 +3,130 @@
     "premium_home": {
       "type": "ch-premium-home",
       "blocks": {
-        "hero_block": {
-          "type": "hero",
+        "cat_1": {
+          "type": "category",
           "settings": {
-            "subheading": "HAND-DRAWN PORTRAIT TRIBUTES",
-            "title": "HONORING THE LIVES THAT MATTER MOST",
-            "text": "A custom pencil portrait and video tribute capturing the essence, warmth, and character of your loved ones.",
-            "btn_label": "COMMISSION A PORTRAIT",
-            "btn_link": "/pages/contact-chad"
+            "title": "Memorial Tributes",
+            "subtitle": "HONORING LOVED ONES"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "title": "Anniversary Tributes",
+            "subtitle": "CELEBRATING MILESTONES"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "title": "Retirement Tributes",
+            "subtitle": "MARKING CAREERS"
+          }
+        },
+        "cat_4": {
+          "type": "category",
+          "settings": {
+            "title": "Achievement Tributes",
+            "subtitle": "RECOGNIZING SUCCESS"
           }
         },
         "step_1": {
-          "type": "process_step",
+          "type": "step",
           "settings": {
-            "title": "SUBMIT PHOTOS",
-            "description": "Provide clear photographs and share details about the personality, accomplishments, and legacy of your subject."
+            "title": "Choose Your Tribute",
+            "description": "Select the theme, dimensions, and medium that best fit your custom tribute vision."
           }
         },
         "step_2": {
-          "type": "process_step",
+          "type": "step",
           "settings": {
-            "title": "PENCIL PORTRAIT",
-            "description": "Chad Hawkins hand-draws the custom graphite portrait tribute, capturing details, expressions, and characteristics."
+            "title": "Upload Your Photos",
+            "description": "Provide reference photographs and documents of your subject, scene, or details."
           }
         },
         "step_3": {
-          "type": "process_step",
+          "type": "step",
           "settings": {
-            "title": "TRIBUTE VIDEO",
-            "description": "A touching digital slideshow video showing the drawing steps, historical memories, and stories, set to music."
+            "title": "Share the Story",
+            "description": "Tell us about the details, milestones, and emotions you want woven into the artwork."
           }
         },
         "step_4": {
-          "type": "process_step",
+          "type": "step",
           "settings": {
-            "title": "FRAMING & DELIVERY",
-            "description": "The drawing is professionally double-matted, framed behind conservation glass, and shipped securely to your home."
+            "title": "Receive Your Artwork",
+            "description": "Unveil a hand-drawn legacy portrait carefully shipped, ready for framing."
           }
         },
-        "portfolio_1": {
-          "type": "portfolio_item",
+        "gal_1": {
+          "type": "gallery",
           "settings": {
-            "title": "Anniversary Portrait",
-            "category": "Anniversary Tribute"
+            "title": "Family Legacy Portrait",
+            "subtitle": "CHARCOAL & INK ON COTTON PAPER"
           }
         },
-        "portfolio_2": {
-          "type": "portfolio_item",
+        "gal_2": {
+          "type": "gallery",
           "settings": {
-            "title": "Military Retiree Portrait",
-            "category": "Achievement Tribute"
+            "title": "Officer Retirement Tribute",
+            "subtitle": "PEN & INK DETAILED DRAWING"
           }
         },
-        "portfolio_3": {
-          "type": "portfolio_item",
+        "gal_3": {
+          "type": "gallery",
           "settings": {
-            "title": "Loved One Memorial Portrait",
-            "category": "Memorial Tribute"
+            "title": "Memorial Landscape",
+            "subtitle": "PENCIL SKETCH TRIBUTE"
           }
         },
-        "cta_banner_block": {
-          "type": "cta_banner",
+        "pkg_1": {
+          "type": "package",
           "settings": {
-            "title": "LET'S CREATE A TRIBUTE THAT WILL BE REMEMBERED.",
-            "text": "Whether honoring a spouse, parent, grandparent, friend, or loved one, a hand-drawn tribute portrait becomes a lasting reminder of a life that mattered.",
-            "btn_label": "START YOUR TRIBUTE PORTRAIT",
-            "btn_link": "/pages/contact-chad"
+            "title": "Classic Portrait",
+            "price": "$450",
+            "price_sub": "11x14 single subject",
+            "features": "Hand-drawn in pencil or ink\nPremium cotton archive paper\nDigital scan included\n1 revision round",
+            "featured": false
+          }
+        },
+        "pkg_2": {
+          "type": "package",
+          "settings": {
+            "title": "Detailed Legacy",
+            "price": "$750",
+            "price_sub": "16x20 multiple subjects",
+            "features": "Detailed pencil and charcoal\nStory elements woven in\nHigh-resolution archive files\n2 revision rounds\nPremium shipping",
+            "featured": true,
+            "badge_text": "Most Requested"
+          }
+        },
+        "pkg_3": {
+          "type": "package",
+          "settings": {
+            "title": "Grand Tribute Suite",
+            "price": "$1,200",
+            "price_sub": "18x24 custom scene",
+            "features": "Full detail ink and charcoal scene\nCustom tribute montage video\nSignature certificate of authenticity\nPriority execution",
+            "featured": false
           }
         }
       },
       "block_order": [
-        "hero_block",
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4",
         "step_1",
         "step_2",
         "step_3",
         "step_4",
-        "portfolio_1",
-        "portfolio_2",
-        "portfolio_3",
-        "cta_banner_block"
+        "gal_1",
+        "gal_2",
+        "gal_3",
+        "pkg_1",
+        "pkg_2",
+        "pkg_3"
       ],
       "settings": {}
     }

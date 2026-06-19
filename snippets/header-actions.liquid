@@ -7,10 +7,17 @@
   @param {block} [block] - The block object, used for Shopify editor attributes.
   @param {string} [display_style] - Controls display mode for header actions: 'icon' or 'text'.
   @param {string} [customer_account_menu] - The menu handle passed to the shopify-account component.
+  @param {string} [commission_button_text] - Text for the custom commission CTA button.
+  @param {string} [commission_button_link] - URL link for the custom commission CTA button.
 
   @example
   {% render 'header-actions', section: section %}
 {% enddoc %}
+
+{% liquid
+  assign commission_button_text = commission_button_text | default: section.settings.commission_button_text
+  assign commission_button_link = commission_button_link | default: section.settings.commission_button_link
+%}
 
 <script
   type="module"

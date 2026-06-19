@@ -35,7 +35,7 @@
         <div class="chp-hero-media-wrapper" style="position: relative; display: flex; justify-content: flex-end;">
           <div class="chp-hero-image-frame" style="position: relative; border: 1px solid rgba(255,255,255,0.2); padding: 12px; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); max-width: 500px; width: 100%;">
             {%- if section.settings.hero_art_image != blank -%}
-              <img src="{{ section.settings.hero_art_image | image_url: width: 800 }}" alt="{{ section.settings.hero_art_image.alt | escape }}" style="width: 100%; height: auto; display: block;" loading="eager" />
+              <img src="{{ section.settings.hero_art_image | image_url: width: 800 }}" alt="{{ section.settings.hero_art_image.alt | escape }}" width="{{ section.settings.hero_art_image.width }}" height="{{ section.settings.hero_art_image.height }}" style="width: 100%; height: auto; display: block;" loading="eager" />
             {%- else -%}
               {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
@@ -87,7 +87,7 @@
         <div class="chp-editorial-media">
           <div class="chp-editorial-img-wrapper">
             {%- if section.settings.about_image != blank -%}
-              <img src="{{ section.settings.about_image | image_url: width: 1000 }}" alt="{{ section.settings.about_image.alt | escape }}" class="chp-editorial-img" loading="lazy" />
+              <img src="{{ section.settings.about_image | image_url: width: 1000 }}" alt="{{ section.settings.about_image.alt | escape }}" width="{{ section.settings.about_image.width }}" height="{{ section.settings.about_image.height }}" class="chp-editorial-img" loading="lazy" />
             {%- else -%}
               {{ 'image' | placeholder_svg_tag: 'placeholder-svg chp-editorial-img' }}
             {%- endif -%}
@@ -145,7 +145,7 @@
             <a href="{{ block.settings.link | default: '#' }}" class="chp-category-card" {{ block.shopify_attributes }}>
               <div class="chp-category-image-wrap">
                 {%- if block.settings.image != blank -%}
-                  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.image.alt | escape }}" class="chp-category-image" loading="lazy" />
+                  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" class="chp-category-image" loading="lazy" />
                 {%- else -%}
                   {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg chp-category-image' }}
                 {%- endif -%}
@@ -219,7 +219,7 @@
             <div class="chp-gallery-item" {{ block.shopify_attributes }}>
               <div class="chp-gallery-img-wrap">
                 {%- if block.settings.image != blank -%}
-                  <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.image.alt | escape }}" class="chp-gallery-img" loading="lazy" />
+                  <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" class="chp-gallery-img" loading="lazy" />
                 {%- else -%}
                   {{ 'image' | placeholder_svg_tag: 'placeholder-svg chp-gallery-img' }}
                 {%- endif -%}

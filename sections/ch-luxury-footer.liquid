@@ -49,10 +49,10 @@
             <a href="{{ link.url }}" class="chp-footer-link chp-sans">{{ link.title }}</a>
           {%- else -%}
             <!-- Placeholder links if none selected -->
-            <a href="/" class="chp-footer-link chp-sans">HOME</a>
+            <a href="{{ routes.root_url }}" class="chp-footer-link chp-sans">HOME</a>
             <a href="/pages/about" class="chp-footer-link chp-sans">ABOUT</a>
             <a href="/pages/contact" class="chp-footer-link chp-sans">CONTACT</a>
-            <a href="/collections/all" class="chp-footer-link chp-sans">PORTRAITS</a>
+            <a href="{{ routes.all_products_collection_url }}" class="chp-footer-link chp-sans">PORTRAITS</a>
           {%- endfor -%}
         </div>
       </div>
