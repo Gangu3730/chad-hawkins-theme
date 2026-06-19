@@ -1,0 +1,22 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "luxury_footer": {
+      "type": "ch-luxury-footer",
+      "settings": {
+        "brand_title": "CHAD HAWKINS TRIBUTES",
+        "description": "Honoring a life and legacy with premium hand-drawn portrait tributes and memorial art.",
+        "signature_text": "Chad Hawkins",
+        "links_title": "NAVIGATION",
+        "menu": "footer",
+        "btn_label": "COMMISSION A PORTRAIT",
+        "btn_link": "/pages/contact-chad",
+        "copyright_text": "© [year] Chad Hawkins Tributes. All rights reserved."
+      }
+    }
+  },
+  "order": [
+    "luxury_footer"
+  ]
+}

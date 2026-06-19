@@ -1,0 +1,260 @@
+<div class="chp-container section-{{ section.id }}-padding">
+  <!-- Page Header -->
+  <div class="chp-section-header">
+    <span class="chp-section-sub">{{ section.settings.subheading }}</span>
+    <h1 class="chp-section-title chp-serif">{{ section.settings.title }}</h1>
+    
+    <!-- Custom Separator Flourish -->
+    <div class="chp-divider">
+      <div class="chp-divider-line"></div>
+      <div class="chp-divider-flourish">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 3v18M3 12h18M5.636 5.636l12.728 12.728M5.636 19.364L18.364 5.636" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="3" fill="none"/>
+        </svg>
+      </div>
+      <div class="chp-divider-line"></div>
+    </div>
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="chp-section-desc chp-sans">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="chp-contact-grid">
+    <!-- Left Column: Info & Socials -->
+    <div class="chp-contact-info-col">
+      {%- if section.settings.intro_text != blank -%}
+        <p class="chp-contact-intro chp-sans">{{ section.settings.intro_text }}</p>
+      {%- endif -%}
+
+      <!-- Location Block -->
+      <div class="chp-contact-detail-row">
+        <div class="chp-contact-detail-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div>
+          <span class="chp-contact-detail-label chp-sans">{{ section.settings.location_label }}</span>
+          <p class="chp-contact-detail-value chp-sans">{{ section.settings.location_value }}</p>
+        </div>
+      </div>
+
+      <div class="chp-contact-divider"></div>
+
+      <!-- Follow Social Block -->
+      <span class="chp-follow-label chp-sans">{{ section.settings.follow_label }}</span>
+      <div class="chp-social-row">
+        {%- if section.settings.facebook_url != blank -%}
+          <a href="{{ section.settings.facebook_url }}" class="chp-social-circle" target="_blank" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.instagram_url != blank -%}
+          <a href="{{ section.settings.instagram_url }}" class="chp-social-circle" target="_blank" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.pinterest_url != blank -%}
+          <a href="{{ section.settings.pinterest_url }}" class="chp-social-circle" target="_blank" aria-label="Pinterest">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.091.377-.294 1.197-.333 1.36-.053.218-.173.264-.4.158-1.493-.695-2.427-2.874-2.427-4.625 0-3.766 2.737-7.224 7.887-7.224 4.14 0 7.358 2.95 7.358 6.894 0 4.113-2.593 7.422-6.193 7.422-1.209 0-2.345-.628-2.735-1.37l-.745 2.837c-.27 1.029-1 2.317-1.49 3.116 1.12.346 2.309.533 3.54.533 6.627 0 12-5.372 12-12s-5.373-12-12-12z"/></svg>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Right Column: Contact Form -->
+    <div class="chp-contact-form-col">
+      {%- form 'contact', id: 'ChpContactForm' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="chp-form-success chp-sans" tabindex="-1">
+            {{ 'templates.contact.form.post_success' | t | default: 'Thanks for contacting us. We will get back to you as soon as possible.' }}
+          </div>
+        {%- elsif form.errors -%}
+          <ul class="chp-form-errors chp-sans" role="list">
+            {%- for field in form.errors -%}
+              <li>
+                {%- if field == 'form' -%}
+                  {{ form.errors.messages[field] }}
+                {%- else -%}
+                  {{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <!-- Name Field -->
+        <div class="chp-form-group">
+          <label class="chp-form-label chp-sans" for="ChpContactForm-name">NAME</label>
+          <input
+            type="text"
+            name="contact[name]"
+            id="ChpContactForm-name"
+            class="chp-input"
+            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+            placeholder="Your Name"
+            required
+            autocomplete="name"
+          >
+        </div>
+
+        <!-- Email Field -->
+        <div class="chp-form-group">
+          <label class="chp-form-label chp-sans" for="ChpContactForm-email">EMAIL ADDRESS</label>
+          <input
+            type="email"
+            name="contact[email]"
+            id="ChpContactForm-email"
+            class="chp-input"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            placeholder="Your Email"
+            required
+            autocomplete="email"
+            spellcheck="false"
+            autocapitalize="off"
+            aria-required="true"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true"
+              aria-describedby="ChpContactForm-email-error"
+            {% endif %}
+          >
+        </div>
+
+        <!-- Subject Field (Mapped to Custom Attribute) -->
+        <div class="chp-form-group">
+          <label class="chp-form-label chp-sans" for="ChpContactForm-subject">SUBJECT</label>
+          <input
+            type="text"
+            name="contact[subject]"
+            id="ChpContactForm-subject"
+            class="chp-input"
+            placeholder="Subject of Inquiry"
+            required
+          >
+        </div>
+
+        <!-- Message Field -->
+        <div class="chp-form-group">
+          <label class="chp-form-label chp-sans" for="ChpContactForm-message">MESSAGE</label>
+          <textarea
+            name="contact[body]"
+            id="ChpContactForm-message"
+            class="chp-textarea"
+            placeholder="Tell us about your portrait tribute needs..."
+            required
+          >{%- if form.body -%}{{ form.body }}{%- endif -%}</textarea>
+        </div>
+
+        <!-- Submit Row -->
+        <div class="chp-form-submit-row">
+          <button type="submit" class="chp-btn-solid chp-form-btn chp-sans">
+            {{ section.settings.btn_text }}
+          </button>
+        </div>
+
+        <!-- Privacy lock row -->
+        {%- if section.settings.show_privacy_banner -%}
+          <div class="chp-privacy-banner chp-sans">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+            </svg>
+            <span>{{ section.settings.privacy_text }}</span>
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact Page Section",
+  "tag": "section",
+  "class": "ch-contact-page-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "CONTACT"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "GET IN TOUCH"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "We'd love to hear from you."
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Introductory Copy",
+      "default": "Questions about portraits? Ideas for a tribute video? Or simply want to say hello? Get in touch with us using the form or the info below."
+    },
+    {
+      "type": "text",
+      "id": "location_label",
+      "label": "Location Label",
+      "default": "LOCATION"
+    },
+    {
+      "type": "text",
+      "id": "location_value",
+      "label": "Location Value",
+      "default": "Salt Lake City, Utah"
+    },
+    {
+      "type": "text",
+      "id": "follow_label",
+      "label": "Follow Socials Label",
+      "default": "FOLLOW"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook Page URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram Profile URL"
+    },
+    {
+      "type": "url",
+      "id": "pinterest_url",
+      "label": "Pinterest Profile URL"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Submit Button Label",
+      "default": "SEND MESSAGE"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_privacy_banner",
+      "label": "Show Privacy Lock Banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "privacy_text",
+      "label": "Privacy text",
+      "default": "Your information is safe with us. We respect your privacy."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Page Section"
+    }
+  ]
+}
+{% endschema %}

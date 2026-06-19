@@ -1,0 +1,1099 @@
+/*
+ * Chad Hawkins Tributes - Scoped Premium Design System
+ * 
+ * Rules:
+ * - Scoped to classes starting with .chp- to prevent global style contamination.
+ * - No styling on global HTML tags directly.
+ * - Customizer-ready, fully responsive, and optimized for high-end editorial look.
+ */
+
+.chp {
+  --ch-navy: #062b55;
+  --ch-navy-dark: #001f3f;
+  --ch-blue: #0b3d73;
+  --ch-soft: #f8f6f1;
+  --ch-cream: #fbfaf7;
+  --ch-border: #d8dee8;
+  --ch-text: #1f2933;
+  --ch-muted: #667085;
+  --ch-white: #ffffff;
+
+  /* Theme Fonts Fallback */
+  --ch-font-serif: var(--font-heading--family, 'Playfair Display', Georgia, serif);
+  --ch-font-sans: var(--font-body--family, 'Inter', system-ui, sans-serif);
+}
+
+/* -----------------------------------------------------------------
+ * 1. Base Utility Scoped Classes
+ * ----------------------------------------------------------------- */
+.chp-wrapper {
+  color: var(--ch-text);
+  font-family: var(--ch-font-sans);
+  background-color: var(--ch-white);
+  line-height: 1.6;
+}
+
+.chp-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+.chp-section-spacing {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+@media (max-width: 768px) {
+  .chp-section-spacing {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
+
+/* Typography Presets */
+.chp-serif {
+  font-family: var(--ch-font-serif);
+  font-weight: 400;
+}
+
+.chp-sans {
+  font-family: var(--ch-font-sans);
+}
+
+.chp-section-header {
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chp-section-subtitle {
+  font-family: var(--ch-font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ch-blue);
+  margin-bottom: 12px;
+  font-weight: 600;
+  display: block;
+}
+
+.chp-section-title {
+  font-family: var(--ch-font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: var(--ch-navy);
+  margin: 0 0 20px 0;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.chp-section-desc {
+  font-family: var(--ch-font-sans);
+  font-size: 1rem;
+  color: var(--ch-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Elegant Flourish Separator */
+.chp-flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 280px;
+}
+
+.chp-flourish-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--ch-border);
+}
+
+.chp-flourish-icon {
+  margin: 0 15px;
+  color: var(--ch-navy);
+  display: flex;
+  align-items: center;
+}
+
+.chp-flourish-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Buttons */
+.chp-btn {
+  display: inline-block;
+  font-family: var(--ch-font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 0;
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.chp-btn-navy {
+  background-color: var(--ch-navy);
+  color: var(--ch-white) !important;
+  border: 1px solid var(--ch-navy);
+}
+
+.chp-btn-navy:hover {
+  background-color: var(--ch-white);
+  color: var(--ch-navy) !important;
+  border-color: var(--ch-navy);
+}
+
+.chp-btn-outline-white {
+  background-color: transparent;
+  color: var(--ch-white) !important;
+  border: 1px solid var(--ch-white);
+}
+
+.chp-btn-outline-white:hover {
+  background-color: var(--ch-white);
+  color: var(--ch-navy) !important;
+}
+
+.chp-btn-outline-navy {
+  background-color: transparent;
+  color: var(--ch-navy) !important;
+  border: 1px solid var(--ch-navy);
+}
+
+.chp-btn-outline-navy:hover {
+  background-color: var(--ch-navy);
+  color: var(--ch-white) !important;
+}
+
+.chp-btn-solid-white {
+  background-color: var(--ch-white);
+  color: var(--ch-navy) !important;
+  border: 1px solid var(--ch-white);
+}
+
+.chp-btn-solid-white:hover {
+  background-color: transparent;
+  color: var(--ch-white) !important;
+}
+
+/* -----------------------------------------------------------------
+ * 2. Homepage Hero Section
+ * ----------------------------------------------------------------- */
+.chp-hero {
+  position: relative;
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.chp-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(6, 43, 85, 0.45) 0%, rgba(0, 31, 63, 0.7) 100%);
+  z-index: 1;
+}
+
+.chp-hero-content {
+  position: relative;
+  z-index: 2;
+  color: var(--ch-white);
+  max-width: 680px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.chp-hero-sub {
+  font-family: var(--ch-font-sans);
+  font-size: 0.875rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 600;
+  display: block;
+}
+
+.chp-hero-title {
+  font-family: var(--ch-font-serif);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0 0 24px 0;
+}
+
+.chp-hero-text {
+  font-family: var(--ch-font-sans);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  opacity: 0.9;
+  margin: 0 0 40px 0;
+}
+
+/* -----------------------------------------------------------------
+ * 3. Editorial Image & Content Blocks
+ * ----------------------------------------------------------------- */
+.chp-editorial-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 769px) {
+  .chp-editorial-block {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  
+  .chp-editorial-reverse {
+    direction: rtl;
+  }
+  
+  .chp-editorial-reverse > * {
+    direction: ltr;
+  }
+}
+
+.chp-editorial-media {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--ch-border);
+  padding: 12px;
+  background-color: var(--ch-cream);
+}
+
+.chp-editorial-img-wrapper {
+  position: relative;
+  padding-top: 110%; /* Artistic vertical frame */
+  overflow: hidden;
+}
+
+.chp-editorial-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.chp-editorial-media:hover .chp-editorial-img {
+  transform: scale(1.03);
+}
+
+.chp-editorial-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.chp-editorial-quote {
+  font-family: var(--ch-font-serif);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.4;
+  color: var(--ch-blue);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+/* -----------------------------------------------------------------
+ * 4. About Section
+ * ----------------------------------------------------------------- */
+.chp-about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+  align-items: flex-start;
+}
+
+@media (min-width: 990px) {
+  .chp-about-grid {
+    grid-template-columns: 4fr 6fr;
+    gap: 80px;
+  }
+}
+
+.chp-about-media-panel {
+  position: relative;
+}
+
+.chp-about-portrait {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--ch-border);
+  padding: 12px;
+  background-color: var(--ch-white);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  box-sizing: border-box;
+}
+
+.chp-about-intro {
+  font-family: var(--ch-font-serif);
+  font-size: 1.5rem;
+  color: var(--ch-navy);
+  margin-bottom: 28px;
+  line-height: 1.4;
+  font-style: italic;
+  border-left: 2px solid var(--ch-blue);
+  padding-left: 20px;
+}
+
+.chp-about-body {
+  font-family: var(--ch-font-sans);
+  font-size: 0.9375rem;
+  color: var(--ch-text);
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.chp-about-body p {
+  margin: 0 0 20px 0;
+}
+
+.chp-about-signature {
+  margin-top: 30px;
+}
+
+.chp-about-sig-img {
+  max-width: 160px;
+  height: auto;
+}
+
+.chp-about-sig-fallback {
+  font-family: 'Brush Script MT', 'Dancing Script', cursive, serif;
+  font-size: 2.25rem;
+  color: var(--ch-navy);
+}
+
+/* -----------------------------------------------------------------
+ * 5. Category Cards
+ * ----------------------------------------------------------------- */
+.chp-category-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 600px) {
+  .chp-category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 990px) {
+  .chp-category-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.chp-category-card {
+  background-color: var(--ch-white);
+  border: 1px solid var(--ch-border);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.chp-category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(6, 43, 85, 0.06);
+  border-color: var(--ch-blue);
+}
+
+.chp-category-image-wrap {
+  position: relative;
+  padding-top: 120%; /* Portrait aspect ratio */
+  overflow: hidden;
+  background-color: var(--ch-soft);
+}
+
+.chp-category-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.chp-category-card:hover .chp-category-image {
+  transform: scale(1.04);
+}
+
+.chp-category-info {
+  padding: 24px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.chp-category-title {
+  font-family: var(--ch-font-serif);
+  font-size: 1.25rem;
+  color: var(--ch-navy);
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.chp-category-meta {
+  font-family: var(--ch-font-sans);
+  font-size: 0.75rem;
+  color: var(--ch-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* -----------------------------------------------------------------
+ * 6. How It Works Steps
+ * ----------------------------------------------------------------- */
+.chp-steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 600px) {
+  .chp-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 990px) {
+  .chp-steps-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.chp-step-card {
+  position: relative;
+  background-color: var(--ch-cream);
+  border: 1px solid var(--ch-border);
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.35s ease;
+}
+
+.chp-step-card:hover {
+  background-color: var(--ch-white);
+  border-color: var(--ch-blue);
+  box-shadow: 0 10px 25px rgba(6, 43, 85, 0.05);
+}
+
+.chp-step-num {
+  font-family: var(--ch-font-serif);
+  font-size: 3rem;
+  color: rgba(6, 43, 85, 0.1);
+  line-height: 1;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.chp-step-title {
+  font-family: var(--ch-font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ch-navy);
+  margin: 0 0 12px 0;
+}
+
+.chp-step-desc {
+  font-family: var(--ch-font-sans);
+  font-size: 0.875rem;
+  color: var(--ch-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* -----------------------------------------------------------------
+ * 7. Gallery Grid
+ * ----------------------------------------------------------------- */
+.chp-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 600px) {
+  .chp-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 990px) {
+  .chp-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.chp-gallery-item {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ch-soft);
+  border: 1px solid var(--ch-border);
+}
+
+.chp-gallery-img-wrap {
+  position: relative;
+  padding-top: 125%; /* Traditional drawing paper scale */
+  overflow: hidden;
+}
+
+.chp-gallery-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.chp-gallery-item:hover .chp-gallery-img {
+  transform: scale(1.05);
+}
+
+.chp-gallery-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(360deg, rgba(0, 31, 63, 0.95) 0%, rgba(0, 31, 63, 0.4) 70%, transparent 100%);
+  padding: 30px 24px 24px 24px;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  color: var(--ch-white);
+  z-index: 2;
+}
+
+.chp-gallery-item:hover .chp-gallery-overlay {
+  transform: translateY(0);
+}
+
+.chp-gallery-title {
+  font-family: var(--ch-font-serif);
+  font-size: 1.125rem;
+  margin: 0 0 6px 0;
+  color: var(--ch-white);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.chp-gallery-meta {
+  font-family: var(--ch-font-sans);
+  font-size: 0.75rem;
+  opacity: 0.8;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* -----------------------------------------------------------------
+ * 8. Pricing Preview Section
+ * ----------------------------------------------------------------- */
+.chp-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 769px) {
+  .chp-pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.chp-pricing-card {
+  background-color: var(--ch-white);
+  border: 1px solid var(--ch-border);
+  padding: 50px 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.35s ease;
+}
+
+.chp-pricing-card:hover {
+  border-color: var(--ch-blue);
+  box-shadow: 0 15px 35px rgba(6, 43, 85, 0.07);
+}
+
+.chp-pricing-featured {
+  border: 2px solid var(--ch-navy);
+}
+
+.chp-pricing-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--ch-navy);
+  color: var(--ch-white);
+  font-family: var(--ch-font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  padding: 6px 16px;
+  text-transform: uppercase;
+}
+
+.chp-pricing-title {
+  font-family: var(--ch-font-serif);
+  font-size: 1.35rem;
+  color: var(--ch-navy);
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.chp-pricing-price {
+  font-family: var(--ch-font-serif);
+  font-size: 2.75rem;
+  color: var(--ch-navy-dark);
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.chp-pricing-price-sub {
+  font-size: 0.875rem;
+  font-family: var(--ch-font-sans);
+  color: var(--ch-muted);
+  font-weight: 400;
+  display: block;
+}
+
+.chp-pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  flex-grow: 1;
+  border-top: 1px solid var(--ch-border);
+  padding-top: 25px;
+}
+
+.chp-pricing-feature-item {
+  font-family: var(--ch-font-sans);
+  font-size: 0.875rem;
+  color: var(--ch-text);
+  margin-bottom: 12px;
+}
+
+/* -----------------------------------------------------------------
+ * 9. Contact Page & Form
+ * ----------------------------------------------------------------- */
+.chp-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+}
+
+@media (min-width: 769px) {
+  .chp-contact-grid {
+    grid-template-columns: 4.5fr 7.5fr;
+    gap: 80px;
+  }
+}
+
+.chp-contact-sidebar {
+  border-bottom: 1px solid var(--ch-border);
+  padding-bottom: 40px;
+}
+
+@media (min-width: 769px) {
+  .chp-contact-sidebar {
+    border-bottom: none;
+    border-right: 1px solid var(--ch-border);
+    padding-bottom: 0;
+    padding-right: 40px;
+  }
+}
+
+.chp-contact-paragraph {
+  font-family: var(--ch-font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ch-muted);
+  margin-bottom: 40px;
+}
+
+.chp-contact-info-block {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.chp-contact-info-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--ch-navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ch-navy);
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.chp-contact-info-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.chp-contact-info-title {
+  font-family: var(--ch-font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ch-navy);
+  margin: 0 0 4px 0;
+}
+
+.chp-contact-info-detail {
+  font-family: var(--ch-font-sans);
+  font-size: 0.9375rem;
+  color: var(--ch-text);
+  margin: 0;
+}
+
+.chp-contact-social {
+  margin-top: 40px;
+}
+
+.chp-contact-social-label {
+  font-family: var(--ch-font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ch-navy);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.chp-contact-social-list {
+  display: flex;
+  gap: 12px;
+}
+
+.chp-contact-social-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--ch-navy);
+  border: 1px solid var(--ch-navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ch-white) !important;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.chp-contact-social-icon:hover {
+  background-color: transparent;
+  color: var(--ch-navy) !important;
+  transform: translateY(-2px);
+}
+
+.chp-contact-social-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Form Styles */
+.chp-form-group {
+  margin-bottom: 24px;
+}
+
+.chp-form-label {
+  font-family: var(--ch-font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ch-navy);
+  margin-bottom: 8px;
+  display: block;
+  text-align: left;
+}
+
+.chp-form-input,
+.chp-form-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid var(--ch-border);
+  border-radius: 0;
+  background-color: var(--ch-cream);
+  font-family: var(--ch-font-sans);
+  font-size: 0.9375rem;
+  color: var(--ch-text);
+  transition: all 0.3s ease;
+}
+
+.chp-form-input:focus,
+.chp-form-textarea:focus {
+  outline: none;
+  border-color: var(--ch-navy);
+  background-color: var(--ch-white);
+  box-shadow: 0 4px 12px rgba(6, 43, 85, 0.03);
+}
+
+.chp-form-textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.chp-form-footer {
+  margin-top: 35px;
+}
+
+.chp-form-submit {
+  width: 100%;
+}
+
+.chp-form-privacy-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: var(--ch-font-sans);
+  font-size: 0.75rem;
+  color: var(--ch-muted);
+  gap: 8px;
+}
+
+.chp-form-privacy-note svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* Success & Error Form States */
+.chp-form-success-banner {
+  background-color: #f6fdf9;
+  border: 1px solid #cceadd;
+  color: #1a6b47;
+  padding: 18px;
+  margin-bottom: 30px;
+  font-family: var(--ch-font-sans);
+  font-size: 0.9375rem;
+}
+
+.chp-form-error-banner {
+  background-color: #fffbfa;
+  border: 1px solid #f6dedc;
+  color: #b33930;
+  padding: 18px;
+  margin-bottom: 30px;
+  font-family: var(--ch-font-sans);
+  font-size: 0.9375rem;
+  list-style: none;
+  padding-left: 0;
+}
+
+/* -----------------------------------------------------------------
+ * 10. Luxury Footer
+ * ----------------------------------------------------------------- */
+.chp-footer {
+  background-color: var(--ch-navy-dark);
+  color: var(--ch-white);
+  padding: 80px 0 40px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.chp-footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+@media (min-width: 600px) {
+  .chp-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 990px) {
+  .chp-footer-grid {
+    grid-template-columns: 3.5fr 3fr 3fr 2.5fr;
+    gap: 50px;
+  }
+}
+
+.chp-footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.chp-footer-brand {
+  font-family: var(--ch-font-serif);
+  font-size: 1.35rem;
+  color: var(--ch-white);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 20px 0;
+}
+
+.chp-footer-desc {
+  font-family: var(--ch-font-sans);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin: 0 0 20px 0;
+}
+
+.chp-footer-signature-wrap {
+  margin-top: auto;
+}
+
+.chp-footer-sig-img {
+  max-width: 140px;
+  height: auto;
+}
+
+.chp-footer-title {
+  font-family: var(--ch-font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ch-white);
+  margin: 0 0 24px 0;
+}
+
+.chp-footer-nav-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.chp-footer-nav-link {
+  font-family: var(--ch-font-sans);
+  font-size: 0.875rem;
+  color: var(--ch-white) !important;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.chp-footer-nav-link:hover {
+  opacity: 1;
+}
+
+.chp-footer-action-wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+.chp-footer-btn {
+  width: 100%;
+}
+
+.chp-footer-divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  margin-bottom: 30px;
+}
+
+.chp-footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ch-font-sans);
+  font-size: 0.75rem;
+  opacity: 0.5;
+  text-align: center;
+}
+
+/* -----------------------------------------------------------------
+ * 11. CTA Strip Section
+ * ----------------------------------------------------------------- */
+.chp-cta-strip {
+  background-color: var(--ch-navy);
+  color: var(--ch-white);
+  padding: 70px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.chp-cta-strip-title {
+  font-family: var(--ch-font-serif);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 20px 0;
+}
+
+.chp-cta-strip-text {
+  font-family: var(--ch-font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  max-width: 720px;
+  margin: 0 auto 35px auto;
+  opacity: 0.9;
+}
+
+/* -----------------------------------------------------------------
+ * 12. Scoped Header Buttons Helper
+ * ----------------------------------------------------------------- */
+.chp-header-btn-desktop {
+  font-family: var(--ch-font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 0;
+  margin-left: 15px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 989px) {
+  .chp-header-btn-desktop {
+    display: none !important;
+  }
+}
