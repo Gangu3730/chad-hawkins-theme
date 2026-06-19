@@ -1,0 +1,168 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  <section class="chp-section-spacing" style="background-color: var(--ch-cream);">
+    <div class="chp-container">
+      <div class="chp-section-header">
+        <span class="chp-section-subtitle">{{ section.settings.pricing_subtitle | escape }}</span>
+        <h2 class="chp-section-title">{{ section.settings.pricing_title | escape }}</h2>
+        <div class="chp-flourish">
+          <div class="chp-flourish-line"></div>
+          <div class="chp-flourish-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="chp-flourish-line"></div>
+        </div>
+      </div>
+
+      <div class="chp-pricing-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'package' -%}
+            <div class="chp-pricing-card {% if block.settings.featured %}chp-pricing-featured{% endif %}" {{ block.shopify_attributes }}>
+              {%- if block.settings.featured -%}
+                <div class="chp-pricing-badge">{{ block.settings.badge_text | default: 'Most Popular' | escape }}</div>
+              {%- endif -%}
+              <h3 class="chp-pricing-title">{{ block.settings.title | escape }}</h3>
+              <div class="chp-pricing-price">
+                {{ block.settings.price | escape }}
+                {%- if block.settings.price_sub != blank -%}
+                  <span class="chp-pricing-price-sub">{{ block.settings.price_sub | escape }}</span>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.features != blank -%}
+                <ul class="chp-pricing-features">
+                  {%- assign feature_lines = block.settings.features | newline_to_br | split: '<br />' -%}
+                  {%- for line in feature_lines -%}
+                    {%- assign trimmed_line = line | strip -%}
+                    {%- if trimmed_line != blank -%}
+                      <li class="chp-pricing-feature-item">{{ trimmed_line }}</li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+
+              <div>
+                <a href="{{ block.settings.button_link | default: '#' }}" class="chp-btn {% if block.settings.featured %}chp-btn-navy{% else %}chp-btn-outline-navy{% endif %}" style="width: 100%;">
+                  {{ block.settings.button_text | default: 'Commission Artwork' | escape }}
+                </a>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Premium Pricing Tables",
+  "settings": [
+    {
+      "type": "text",
+      "id": "pricing_subtitle",
+      "label": "Pricing Subtitle",
+      "default": "INVESTMENT & SIZES"
+    },
+    {
+      "type": "text",
+      "id": "pricing_title",
+      "label": "Pricing Title",
+      "default": "Tribute Packages"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "package",
+      "name": "Pricing Package",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Package Title"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price Display"
+        },
+        {
+          "type": "text",
+          "id": "price_sub",
+          "label": "Price Detail (e.g. Starting price / size)"
+        },
+        {
+          "type": "textarea",
+          "id": "features",
+          "label": "Included Features (one per line)",
+          "info": "List items separated by newlines."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Label",
+          "default": "Commission Artwork"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Feature this package",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Featured Badge Text",
+          "default": "Most Popular"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium Pricing Tables",
+      "blocks": [
+        {
+          "type": "package",
+          "settings": {
+            "title": "Classic Portrait",
+            "price": "$450",
+            "price_sub": "11x14 single subject",
+            "features": "Hand-drawn in pencil or ink\nPremium cotton archive paper\nDigital scan included\n1 revision round",
+            "featured": false
+          }
+        },
+        {
+          "type": "package",
+          "settings": {
+            "title": "Detailed Legacy",
+            "price": "$750",
+            "price_sub": "16x20 multiple subjects",
+            "features": "Detailed pencil and charcoal\nStory elements woven in\nHigh-resolution archive files\n2 revision rounds\nPremium shipping",
+            "featured": true,
+            "badge_text": "Most Requested"
+          }
+        },
+        {
+          "type": "package",
+          "settings": {
+            "title": "Grand Tribute Suite",
+            "price": "$1,200",
+            "price_sub": "18x24 custom scene",
+            "features": "Full detail ink and charcoal scene\nCustom tribute montage video\nSignature certificate of authenticity\nPriority execution",
+            "featured": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

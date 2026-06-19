@@ -1,0 +1,133 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  <section class="chp-section-spacing">
+    <div class="chp-container">
+      <div class="chp-section-header">
+        <span class="chp-section-subtitle">{{ section.settings.categories_subtitle | escape }}</span>
+        <h2 class="chp-section-title">{{ section.settings.categories_title | escape }}</h2>
+        <div class="chp-flourish">
+          <div class="chp-flourish-line"></div>
+          <div class="chp-flourish-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 3l8 8-8 8-8-8z"/>
+            </svg>
+          </div>
+          <div class="chp-flourish-line"></div>
+        </div>
+        <p class="chp-section-desc">{{ section.settings.categories_desc | escape }}</p>
+      </div>
+
+      <div class="chp-category-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category' -%}
+            <a href="{{ block.settings.link | default: '#' }}" class="chp-category-card" {{ block.shopify_attributes }}>
+              <div class="chp-category-image-wrap">
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.image.alt | escape }}" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" class="chp-category-image" loading="lazy" />
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg chp-category-image' }}
+                {%- endif -%}
+              </div>
+              <div class="chp-category-info">
+                <h3 class="chp-category-title">{{ block.settings.title | escape }}</h3>
+                {%- if block.settings.subtitle != blank -%}
+                  <p class="chp-category-meta">{{ block.settings.subtitle | escape }}</p>
+                {%- endif -%}
+              </div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Premium Categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "categories_subtitle",
+      "label": "Categories Subtitle",
+      "default": "HONORING MEMORIES"
+    },
+    {
+      "type": "text",
+      "id": "categories_title",
+      "label": "Categories Title",
+      "default": "Tribute Art Portfolios"
+    },
+    {
+      "type": "textarea",
+      "id": "categories_desc",
+      "label": "Categories Description",
+      "default": "Explore custom commissions crafted to commemorate life's most defining occasions."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Tribute Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Category Subtitle"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Category Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium Categories",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Memorial Tributes",
+            "subtitle": "HONORING LOVED ONES"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Anniversary Tributes",
+            "subtitle": "CELEBRATING MILESTONES"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Retirement Tributes",
+            "subtitle": "MARKING CAREERS"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Achievement Tributes",
+            "subtitle": "RECOGNIZING SUCCESS"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

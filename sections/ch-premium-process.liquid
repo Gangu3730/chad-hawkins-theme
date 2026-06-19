@@ -1,0 +1,108 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  <section class="chp-section-spacing" style="background-color: var(--ch-soft);">
+    <div class="chp-container">
+      <div class="chp-section-header">
+        <span class="chp-section-subtitle">{{ section.settings.steps_subtitle | escape }}</span>
+        <h2 class="chp-section-title">{{ section.settings.steps_title | escape }}</h2>
+        <div class="chp-flourish">
+          <div class="chp-flourish-line"></div>
+          <div class="chp-flourish-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+          </div>
+          <div class="chp-flourish-line"></div>
+        </div>
+      </div>
+
+      <div class="chp-steps-grid">
+        {%- assign step_index = 1 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            <div class="chp-step-card" {{ block.shopify_attributes }}>
+              <div class="chp-step-num">0{{ step_index }}</div>
+              <h3 class="chp-step-title">{{ block.settings.title | escape }}</h3>
+              <p class="chp-step-desc">{{ block.settings.description | escape }}</p>
+            </div>
+            {%- assign step_index = step_index | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Premium Process steps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "steps_subtitle",
+      "label": "Steps Subtitle",
+      "default": "THE COMMISSION PROCESS"
+    },
+    {
+      "type": "text",
+      "id": "steps_title",
+      "label": "Steps Title",
+      "default": "How It Works"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Process Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium Process steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Choose Your Tribute",
+            "description": "Select the theme, dimensions, and medium that best fit your custom tribute vision."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Upload Your Photos",
+            "description": "Provide reference photographs and documents of your subject, scene, or details."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Share the Story",
+            "description": "Tell us about the details, milestones, and emotions you want woven into the artwork."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Receive Your Artwork",
+            "description": "Unveil a hand-drawn legacy portrait carefully shipped, ready for framing."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

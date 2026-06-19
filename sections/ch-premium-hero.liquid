@@ -1,0 +1,155 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  <header class="chp-hero" style="background-image: url({% if section.settings.hero_bg_image != blank %}{{ section.settings.hero_bg_image | image_url: width: 1800 }}{% else %}''{% endif %});">
+    <div class="chp-hero-overlay"></div>
+    <div class="chp-container" style="position: relative; z-index: 2; width: 100%;">
+      <div style="display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;" class="chp-hero-grid-wrapper">
+        <div class="chp-hero-content">
+          {%- if section.settings.hero_subheading != blank -%}
+            <span class="chp-hero-sub">{{ section.settings.hero_subheading | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.hero_heading != blank -%}
+            <h1 class="chp-hero-title">{{ section.settings.hero_heading | escape }}</h1>
+          {%- endif -%}
+          {%- if section.settings.hero_text != blank -%}
+            <p class="chp-hero-text">{{ section.settings.hero_text | escape }}</p>
+          {%- endif -%}
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+            {%- if section.settings.hero_btn_1_text != blank -%}
+              <a href="{{ section.settings.hero_btn_1_link | default: '#' }}" class="chp-btn chp-btn-solid-white">
+                {{ section.settings.hero_btn_1_text | escape }}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.hero_btn_2_text != blank -%}
+              <a href="{{ section.settings.hero_btn_2_link | default: '#' }}" class="chp-btn chp-btn-outline-white">
+                {{ section.settings.hero_btn_2_text | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Overlap Image Area -->
+        <div class="chp-hero-media-wrapper" style="position: relative; display: flex; justify-content: flex-end;">
+          <div class="chp-hero-image-frame" style="position: relative; border: 1px solid rgba(255,255,255,0.2); padding: 12px; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); max-width: 500px; width: 100%;">
+            {%- if section.settings.hero_art_image != blank -%}
+              <img src="{{ section.settings.hero_art_image | image_url: width: 800 }}" alt="{{ section.settings.hero_art_image.alt | escape }}" width="{{ section.settings.hero_art_image.width }}" height="{{ section.settings.hero_art_image.height }}" style="width: 100%; height: auto; display: block;" loading="eager" />
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+
+            <!-- Navy Overlapping Badge -->
+            {%- if section.settings.badge_title != blank or section.settings.badge_text != blank -%}
+              <div class="chp-hero-badge" style="position: absolute; bottom: -20px; left: -20px; background-color: var(--ch-navy); color: var(--ch-white); padding: 24px; border: 1px solid var(--ch-border); max-width: 240px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                <h4 class="chp-serif" style="font-size: 1.1rem; text-transform: uppercase; margin: 0 0 8px 0; letter-spacing: 0.05em; color: var(--ch-white);">
+                  {{ section.settings.badge_title | escape }}
+                </h4>
+                <p class="chp-sans" style="font-size: 0.8125rem; margin: 0; opacity: 0.8; line-height: 1.4;">
+                  {{ section.settings.badge_text | escape }}
+                </p>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<style>
+  @media (min-width: 990px) {
+    .chp-hero-grid-wrapper {
+      grid-template-columns: 6fr 6fr !important;
+      gap: 80px !important;
+    }
+  }
+  @media (max-width: 989px) {
+    .chp-hero-media-wrapper {
+      justify-content: center !important;
+      margin-top: 30px;
+    }
+    .chp-hero-badge {
+      position: relative !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      margin-top: 20px;
+      max-width: 100% !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Premium Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_bg_image",
+      "label": "Hero Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_art_image",
+      "label": "Hero Showcase Artwork"
+    },
+    {
+      "type": "text",
+      "id": "hero_subheading",
+      "label": "Hero Subheading",
+      "default": "COMMISSION A HAND-DRAWN PORTRAIT"
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero Heading",
+      "default": "Hand Drawn Tributes That Preserve Life’s Most Meaningful Moments"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_text",
+      "label": "Hero Subtext",
+      "default": "Custom hand-drawn portraits and tribute videos created with care, emotion, and timeless attention to detail."
+    },
+    {
+      "type": "text",
+      "id": "hero_btn_1_text",
+      "label": "Primary Button Text",
+      "default": "Book Your Tribute"
+    },
+    {
+      "type": "url",
+      "id": "hero_btn_1_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "hero_btn_2_text",
+      "label": "Secondary Button Text",
+      "default": "View Portfolio"
+    },
+    {
+      "type": "url",
+      "id": "hero_btn_2_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Overlap Badge Title",
+      "default": "Hand-Drawn Tributes"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Overlap Badge Text",
+      "default": "Timeless pencil & ink commissions by Chad Hawkins."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium Hero Banner"
+    }
+  ]
+}
+{% endschema %}

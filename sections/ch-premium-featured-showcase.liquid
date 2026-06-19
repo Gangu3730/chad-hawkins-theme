@@ -1,0 +1,163 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  <section class="chp-section-spacing" style="background-color: var(--ch-white);">
+    <div class="chp-container">
+      <div class="chp-showcase-grid" style="display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;">
+        
+        <!-- Left: Image Frame -->
+        <div class="chp-showcase-media" style="position: relative;">
+          <div style="border: 1px solid var(--ch-border); padding: 16px; background-color: var(--ch-cream); position: relative;">
+            {%- if section.settings.image != blank -%}
+              <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.image.alt | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" style="width: 100%; height: auto; display: block; filter: grayscale(10%) contrast(105%); transition: transform 0.5s ease;" class="chp-showcase-image" loading="lazy" />
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            
+            {%- if section.settings.badge_text != blank -%}
+              <div style="position: absolute; top: -10px; left: -10px; background-color: var(--ch-navy); color: var(--ch-white); padding: 8px 16px; font-family: var(--ch-font-sans); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;">
+                {{ section.settings.badge_text | escape }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Right: Content -->
+        <div class="chp-showcase-content" style="text-align: left;">
+          <span class="chp-section-subtitle" style="text-align: left; margin-bottom: 8px;">{{ section.settings.subtitle | escape }}</span>
+          <h2 class="chp-section-title" style="text-align: left; font-size: clamp(2rem, 3.5vw, 2.75rem); margin-bottom: 20px;">
+            {{ section.settings.title | escape }}
+          </h2>
+          <div class="chp-flourish" style="margin: 15px 0 25px 0;">
+            <div class="chp-flourish-line"></div>
+            <div class="chp-flourish-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 21l-8.268-6.2c-.932-.7-1.482-1.8-1.482-2.96V6.16C2.25 5 3.2 4.05 4.36 4.05H19.6c1.16 0 2.11.95 2.11 2.11v5.68c0 1.16-.55 2.26-1.48 2.96L12 21z"/>
+              </svg>
+            </div>
+            <div class="chp-flourish-line"></div>
+          </div>
+          <p class="chp-section-desc" style="font-size: 1.0625rem; color: var(--ch-text); margin-bottom: 25px; line-height: 1.7;">
+            {{ section.settings.description | escape }}
+          </p>
+
+          <!-- Key Inclusions -->
+          {%- if section.settings.features != blank -%}
+            <div style="margin-bottom: 30px;">
+              <h4 class="chp-sans" style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ch-navy); margin: 0 0 15px 0;">
+                Artwork Inclusions:
+              </h4>
+              <ul style="list-style: none; padding: 0; margin: 0;">
+                {%- assign showcase_features = section.settings.features | newline_to_br | split: '<br />' -%}
+                {%- for line in showcase_features -%}
+                  {%- assign clean_line = line | strip -%}
+                  {%- if clean_line != blank -%}
+                    <li style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; font-family: var(--ch-font-sans); font-size: 0.875rem; color: var(--ch-muted);">
+                      <svg style="width: 16px; height: 16px; color: var(--ch-blue); flex-shrink: 0; margin-top: 3px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{{ clean_line }}</span>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 24px;">
+            {%- if section.settings.price != blank -%}
+              <div style="display: flex; flex-direction: column;">
+                <span class="chp-sans" style="font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ch-muted);">Commission Price</span>
+                <span class="chp-serif" style="font-size: 1.75rem; font-weight: 700; color: var(--ch-navy);">{{ section.settings.price | escape }}</span>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.button_text != blank -%}
+              <a href="{{ section.settings.button_link | default: '#' }}" class="chp-btn chp-btn-navy">
+                {{ section.settings.button_text | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  @media (min-width: 990px) {
+    .chp-showcase-grid {
+      grid-template-columns: 5.5fr 6.5fr !important;
+      gap: 60px !important;
+    }
+    .chp-showcase-media:hover .chp-showcase-image {
+      transform: scale(1.03);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured Spotlight Art",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Featured Artwork Image"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Showcase Badge",
+      "default": "Signature Tribute Suite"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Showcase Subtitle",
+      "default": "LIMITED AVAILABILITY"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Showcase Title",
+      "default": "The Hand-Drawn Memorial Tribute Montage"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Detailed Story",
+      "default": "Our signature tribute montage weaves multiple photographs, landscapes, and emotional highlights into a single, cohesive hand-drawn work of art. Designed to tell a rich, multi-layered story of a loved one's legacy, careers, and milestones."
+    },
+    {
+      "type": "textarea",
+      "id": "features",
+      "label": "Artwork Inclusions (one per line)",
+      "default": "Up to 5 photo references combined seamlessly\nPremium 16x20 acid-free archive paper\nHandcrafted pencil & ink detail style\nCustom wooden framing included\nSecure archive digital files"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Starting Price",
+      "default": "From $850"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Label",
+      "default": "Commission This Tribute"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Spotlight Art"
+    }
+  ]
+}
+{% endschema %}

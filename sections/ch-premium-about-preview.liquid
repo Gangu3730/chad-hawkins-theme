@@ -1,0 +1,90 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  <section class="chp-section-spacing" style="background-color: var(--ch-cream);">
+    <div class="chp-container">
+      <div class="chp-editorial-block">
+        <div class="chp-editorial-media">
+          <div class="chp-editorial-img-wrapper">
+            {%- if section.settings.about_image != blank -%}
+              <img src="{{ section.settings.about_image | image_url: width: 1000 }}" alt="{{ section.settings.about_image.alt | escape }}" width="{{ section.settings.about_image.width }}" height="{{ section.settings.about_image.height }}" class="chp-editorial-img" loading="lazy" />
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg chp-editorial-img' }}
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="chp-editorial-info">
+          <span class="chp-section-subtitle">{{ section.settings.about_subtitle | escape }}</span>
+          <h2 class="chp-section-title" style="text-align: left;">{{ section.settings.about_title | escape }}</h2>
+          <div class="chp-flourish" style="margin: 15px 0 25px 0;">
+            <div class="chp-flourish-line"></div>
+            <div class="chp-flourish-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 3v18M3 12h18M5 5l14 14M19 5L5 19"/>
+              </svg>
+            </div>
+            <div class="chp-flourish-line"></div>
+          </div>
+          <p class="chp-section-desc" style="margin-bottom: 30px;">
+            {{ section.settings.about_text | escape }}
+          </p>
+          {%- if section.settings.about_btn_text != blank -%}
+            <div>
+              <a href="{{ section.settings.about_btn_link | default: '#' }}" class="chp-btn chp-btn-outline-navy">
+                {{ section.settings.about_btn_text | escape }}
+              </a>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Premium About Preview",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "about_image",
+      "label": "About Image"
+    },
+    {
+      "type": "text",
+      "id": "about_subtitle",
+      "label": "About Subtitle",
+      "default": "THE ARTIST & VISION"
+    },
+    {
+      "type": "text",
+      "id": "about_title",
+      "label": "About Title",
+      "default": "Crafting Memories that Live Forever"
+    },
+    {
+      "type": "textarea",
+      "id": "about_text",
+      "label": "About Description",
+      "default": "For over 30 years, Chad Hawkins has captured the stories of individuals, families, and organizations through his hand-drawn tribute art. Every portrait tells a profound story of legacy, achievement, and love."
+    },
+    {
+      "type": "text",
+      "id": "about_btn_text",
+      "label": "About Button Text",
+      "default": "Read Full Story"
+    },
+    {
+      "type": "url",
+      "id": "about_btn_link",
+      "label": "About Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium About Preview"
+    }
+  ]
+}
+{% endschema %}

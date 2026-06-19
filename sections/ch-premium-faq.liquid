@@ -1,0 +1,152 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  <section class="chp-section-spacing" style="background-color: var(--ch-white);">
+    <div class="chp-container" style="max-width: 800px;">
+      <div class="chp-section-header">
+        <span class="chp-section-subtitle">{{ section.settings.subtitle | escape }}</span>
+        <h2 class="chp-section-title">{{ section.settings.title | escape }}</h2>
+        <div class="chp-flourish">
+          <div class="chp-flourish-line"></div>
+          <div class="chp-flourish-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9.87 18h4.26a1 1 0 001-1v-.5a3.5 3.5 0 00-3.5-3.5h-.26a3.5 3.5 0 00-3.5 3.5v.5a1 1 0 001 1zm2.13-10a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/>
+            </svg>
+          </div>
+          <div class="chp-flourish-line"></div>
+        </div>
+      </div>
+
+      <!-- Accordion Grid -->
+      <div class="chp-faq-accordion-wrapper" style="margin-top: 40px;">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq' -%}
+            <div class="chp-faq-item" style="border-bottom: 1px solid var(--ch-border); padding: 20px 0;" {{ block.shopify_attributes }}>
+              
+              <button type="button" class="chp-faq-trigger" style="width: 100%; display: flex; justify-content: space-between; align-items: center; background: none; border: none; padding: 0; cursor: pointer; text-align: left; outline: none;">
+                <h3 class="chp-serif" style="font-size: 1.125rem; color: var(--ch-navy); margin: 0; font-weight: 600; line-height: 1.4;">
+                  {{ block.settings.question | escape }}
+                </h3>
+                <span class="chp-faq-icon" style="font-size: 1.25rem; color: var(--ch-blue); font-weight: 300; transition: transform 0.3s ease; margin-left: 15px;">
+                  +
+                </span>
+              </button>
+
+              <div class="chp-faq-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;">
+                <p class="chp-sans" style="font-size: 0.9375rem; line-height: 1.6; color: var(--ch-muted); margin: 15px 0 5px 0;">
+                  {{ block.settings.answer | escape }}
+                </p>
+              </div>
+
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.chp-faq-item');
+    
+    faqItems.forEach(item => {
+      const trigger = item.querySelector('.chp-faq-trigger');
+      const content = item.querySelector('.chp-faq-content');
+      const icon = item.querySelector('.chp-faq-icon');
+      
+      trigger.addEventListener('click', function() {
+        const isOpen = item.classList.contains('is-open');
+        
+        // Close all items
+        faqItems.forEach(i => {
+          i.classList.remove('is-open');
+          i.querySelector('.chp-faq-content').style.maxHeight = null;
+          i.querySelector('.chp-faq-icon').textContent = '+';
+          i.querySelector('.chp-faq-icon').style.transform = 'rotate(0deg)';
+        });
+        
+        // Open current item if it was closed
+        if (!isOpen) {
+          item.classList.add('is-open');
+          content.style.maxHeight = content.scrollHeight + 'px';
+          icon.textContent = '−';
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "FAQ Subtitle",
+      "default": "COMMON QUESTIONS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Tribute Art FAQs",
+      "default": "Frequently Asked Questions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What reference photos do I need to provide?",
+            "answer": "You can upload separate, individual photos of your subjects. Chad will combine them into a single, cohesive composition. High-resolution, clear lighting photos are preferred, but Chad has 30 years of experience working with old family archives."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long does a custom tribute commission take?",
+            "answer": "Typically, a hand-drawn commission takes 3 to 4 weeks from photo approval to shipping. If you need priority delivery for a memorial service or anniversary deadline, please select the Priority package or contact us directly."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What is included in the Tribute Montage Video?",
+            "answer": "The tribute video is a high-definition montage showing the step-by-step progress of the hand-drawn portrait, accompanied by background music and storytelling titles about the subject's career, accomplishments, or legacy. It is perfect to play at retirement parties or celebration of life services."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship framed artwork safely?",
+            "answer": "Yes, we ship custom framed prints and original art worldwide using double-fortified boxes and shatterproof acrylic glass. Every package is fully insured and tracked."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

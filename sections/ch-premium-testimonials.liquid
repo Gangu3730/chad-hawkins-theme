@@ -1,0 +1,134 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  <section class="chp-section-spacing" style="background-color: var(--ch-cream);">
+    <div class="chp-container">
+      <div class="chp-section-header">
+        <span class="chp-section-subtitle">{{ section.settings.subtitle | escape }}</span>
+        <h2 class="chp-section-title">{{ section.settings.title | escape }}</h2>
+        <div class="chp-flourish">
+          <div class="chp-flourish-line"></div>
+          <div class="chp-flourish-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 21l-8-4V7l8-4 8 4v10l-8 4z"/>
+            </svg>
+          </div>
+          <div class="chp-flourish-line"></div>
+        </div>
+      </div>
+
+      <div class="chp-testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'testimonial' -%}
+            <div class="chp-testimonial-card" style="background: var(--ch-white); border: 1px solid var(--ch-border); padding: 40px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s ease;" {{ block.shopify_attributes }}>
+              
+              <div>
+                <!-- Quotes Icon -->
+                <div style="font-family: var(--ch-font-serif); font-size: 4rem; line-height: 1; color: var(--ch-blue); opacity: 0.15; height: 30px; margin-top: -15px; margin-bottom: 10px;">
+                  “
+                </div>
+                
+                <p class="chp-serif" style="font-size: 1.0625rem; font-style: italic; line-height: 1.7; color: var(--ch-text); margin: 0 0 20px 0;">
+                  {{ block.settings.quote | escape }}
+                </p>
+              </div>
+
+              <div style="border-top: 1px solid var(--ch-border); padding-top: 20px; margin-top: 10px;">
+                <h4 class="chp-sans" style="font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ch-navy); margin: 0 0 4px 0;">
+                  {{ block.settings.author | escape }}
+                </h4>
+                {%- if block.settings.location != blank -%}
+                  <span class="chp-sans" style="font-size: 0.75rem; color: var(--ch-muted);">
+                    {{ block.settings.location | escape }}
+                  </span>
+                {%- endif -%}
+              </div>
+
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .chp-testimonial-card:hover {
+    box-shadow: 0 10px 30px rgba(6, 43, 85, 0.05);
+    border-color: var(--ch-navy);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Customer Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Testimonials Subtitle",
+      "default": "HEARTFELT STORIES"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "What Families Say",
+      "default": "Letters of Legacy & Memory"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote Content"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Author Location / Context"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "When we opened the memorial portrait of my husband, there wasn't a dry eye in the room. Chad combined three separate photos into a beautiful, seamless ink drawing that truly captures his spirit. It will be passed down for generations.",
+            "author": "Eleanor Vance",
+            "location": "Boston, MA"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The tribute video and drawing Chad created for my father's retirement from the fire service was spectacular. It highlighted every station, badge, and major achievement of his 35-year career. Absolutely stunning craftsmanship.",
+            "author": "Captain David Miller",
+            "location": "Chicago, IL"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I commissioned an anniversary portrait of our family estate. The attention to detail in the foliage and stonework was breathtaking. Chad communicated with us throughout the sketching phase and the delivery was flawless.",
+            "author": "Sarah & Thomas Sterling",
+            "location": "Richmond, VA"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

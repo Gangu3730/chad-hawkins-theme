@@ -1,0 +1,55 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  <section class="chp-cta-strip">
+    <div class="chp-container">
+      {%- if section.settings.cta_heading != blank -%}
+        <h2 class="chp-cta-strip-title">{{ section.settings.cta_heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.cta_text != blank -%}
+        <p class="chp-cta-strip-text">{{ section.settings.cta_text | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_btn_text != blank -%}
+        <a href="{{ section.settings.cta_btn_link | default: '#' }}" class="chp-btn chp-btn-solid-white">
+          {{ section.settings.cta_btn_text | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Premium CTA Strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA Heading",
+      "default": "Create a tribute that feels personal, timeless, and unforgettable."
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "CTA Subtext",
+      "default": "Get in touch today to discuss your custom project."
+    },
+    {
+      "type": "text",
+      "id": "cta_btn_text",
+      "label": "CTA Button Text",
+      "default": "Get Started"
+    },
+    {
+      "type": "url",
+      "id": "cta_btn_link",
+      "label": "CTA Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium CTA Strip"
+    }
+  ]
+}
+{% endschema %}
