@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "ch-gallery-page",
+      "settings": {
+        "subheading": "PORTFOLIO",
+        "title": "Tribute Art Gallery",
+        "description": "Browse through a curation of custom commissioned portraits and legacy tributes."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

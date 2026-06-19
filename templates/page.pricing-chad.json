@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "ch-pricing-page",
+      "settings": {
+        "subheading": "PRICING & PACKAGES",
+        "title": "Commission Pricing",
+        "description": "All pricing includes hand-drawn pencil/ink craftsmanship and lifetime legacy protection."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

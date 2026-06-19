@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "ch-commission-page",
+      "settings": {
+        "subheading": "COMMISSION A PORTRAIT",
+        "title": "Preserve Legacy Through Exquisite Hand-Drawn Art",
+        "description": "Turn snapshots into timeless pencil & ink heirlooms commissioned by professional artist Chad Hawkins."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,268 @@
+{{ 'ch-premium.css' | asset_url | stylesheet_tag }}
+
+<div class="chp chp-wrapper">
+  
+  <!-- Hero banner -->
+  <section class="chp-section-spacing chp-commission-hero">
+    <div class="chp-container">
+      <div class="chp-commission-grid">
+        <div class="chp-reveal-group">
+          <span class="chp-section-sub chp-stagger-item">{{ section.settings.subheading | escape }}</span>
+          <h1 class="chp-section-title chp-serif chp-stagger-item" style="text-align: left; font-size: clamp(2.25rem, 5vw, 3.5rem);">
+            {{ section.settings.title | escape }}
+          </h1>
+          <p class="chp-stagger-item" style="color: var(--ch-muted); font-size: 1.125rem; line-height: 1.7; margin: 0 0 30px 0;">
+            {{ section.settings.description | escape }}
+          </p>
+          <div class="chp-stagger-item">
+            <a href="{{ section.settings.cta_link | default: '#' }}" class="chp-btn chp-btn-navy">
+              {{ section.settings.cta_label | escape }}
+            </a>
+          </div>
+        </div>
+
+        <div class="chp-reveal">
+          <div class="chp-hero-art-frame" style="border-radius: 12px; aspect-ratio: 16/11; max-width: 100%;">
+            {%- if section.settings.hero_image != blank -%}
+              <img
+                src="{{ section.settings.hero_image | image_url: width: 900 }}"
+                alt="Commission custom artwork portrait"
+                class="chp-hero-art-img"
+                loading="eager"
+                width="{{ section.settings.hero_image.width | default: 900 }}"
+                height="{{ section.settings.hero_image.height | default: 600 }}"
+              />
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'chp-hero-art-img placeholder-svg' }}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Commission section -->
+  <section class="chp-section-spacing">
+    <div class="chp-container">
+      <div class="chp-section-header chp-reveal">
+        <span class="chp-section-sub">{{ section.settings.why_subtitle | escape }}</span>
+        <h2 class="chp-section-title chp-serif">{{ section.settings.why_title | escape }}</h2>
+        <div class="chp-divider">
+          <div class="chp-divider-line"></div>
+          <div class="chp-divider-flourish">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 3v18M3 12h18" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="3" fill="none"/>
+            </svg>
+          </div>
+          <div class="chp-divider-line"></div>
+        </div>
+      </div>
+
+      <div class="chp-steps-row chp-stagger">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'benefit' -%}
+            <div class="chp-step-card chp-stagger-item" {{ block.shopify_attributes }}>
+              <div class="chp-step-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <h3 class="chp-step-title">{{ block.settings.title | escape }}</h3>
+              <p class="chp-step-desc">{{ block.settings.description | escape }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo guidance section -->
+  <section class="chp-section-spacing" style="background-color: var(--ch-cream); border-top: 1px solid var(--ch-border); border-bottom: 1px solid var(--ch-border);">
+    <div class="chp-container">
+      <div class="chp-about-preview-grid">
+        <div class="chp-reveal">
+          {%- if section.settings.guidance_image != blank -%}
+            <div class="chp-about-preview-img-wrap" style="aspect-ratio: 4/3; border-radius: 8px;">
+              <img
+                src="{{ section.settings.guidance_image | image_url: width: 800 }}"
+                alt="Guidance for choosing tribute photos"
+                class="chp-about-preview-img"
+                loading="lazy"
+                width="{{ section.settings.guidance_image.width | default: 800 }}"
+                height="{{ section.settings.guidance_image.height | default: 600 }}"
+              />
+            </div>
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'chp-about-preview-img placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        <div class="chp-guidance-box chp-reveal-group">
+          <span class="chp-section-sub chp-stagger-item">PHOTO GUIDANCE</span>
+          <h2 class="chp-serif chp-stagger-item" style="color: var(--ch-navy); font-size: 1.75rem; margin: 0 0 20px 0;">
+            {{ section.settings.guidance_title | escape }}
+          </h2>
+          <div class="chp-stagger-item" style="font-size: 0.9375rem; color: var(--ch-text); line-height: 1.7;">
+            {{ section.settings.guidance_richtext }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navy CTA section -->
+  {%- if section.settings.show_cta -%}
+    <section class="chp-section-spacing chp-navy-cta">
+      <div class="chp-container">
+        <div class="chp-navy-cta-inner chp-reveal">
+          <h2>{{ section.settings.cta_title | escape }}</h2>
+          <p>{{ section.settings.cta_text | escape }}</p>
+          {%- if section.settings.cta_btn_label != blank and section.settings.cta_btn_link != blank -%}
+            <a href="{{ section.settings.cta_btn_link }}" class="chp-btn chp-btn-solid-white">
+              {{ section.settings.cta_btn_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Commission Landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "COMMISSION A PORTRAIT"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Preserve Legacy Through Exquisite Hand-Drawn Art"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Turn snapshots into timeless pencil & ink heirlooms commissioned by professional artist Chad Hawkins."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Showcase Image"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Primary Button Label",
+      "default": "Select a Tribute Package"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Why Commission Section"
+    },
+    {
+      "type": "text",
+      "id": "why_subtitle",
+      "label": "Why Subtitle",
+      "default": "THE ARTISTIC VALUE"
+    },
+    {
+      "type": "text",
+      "id": "why_title",
+      "label": "Why Heading",
+      "default": "Why Choose a Hand-Drawn Tribute"
+    },
+    {
+      "type": "header",
+      "content": "Photo Guidance Section"
+    },
+    {
+      "type": "text",
+      "id": "guidance_title",
+      "label": "Guidance Heading",
+      "default": "Selecting the Right Photo"
+    },
+    {
+      "type": "richtext",
+      "id": "guidance_richtext",
+      "label": "Guidance Description",
+      "default": "<p>A high-quality photo with good lighting ensures the highest level of drawing detail. We can combine elements from multiple photos if necessary.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "guidance_image",
+      "label": "Guidance Photo Illustration"
+    },
+    {
+      "type": "header",
+      "content": "CTA Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show CTA Strip",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA Heading",
+      "default": "Start your commissioned portrait legacy piece"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Our custom commission slots are limited each month. Claim yours today."
+    },
+    {
+      "type": "text",
+      "id": "cta_btn_label",
+      "label": "CTA Button Label",
+      "default": "START MY ORDER"
+    },
+    {
+      "type": "url",
+      "id": "cta_btn_link",
+      "label": "CTA Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Why Benefit Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Benefit Title",
+          "default": "100% Hand-Drawn"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Benefit Description",
+          "default": "Every line is drawn using traditional pencil, ink, and wash techniques."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Commission Landing Page"
+    }
+  ]
+}
+{% endschema %}
