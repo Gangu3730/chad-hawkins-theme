@@ -65,160 +65,214 @@
 {% endcapture %}
 
 <header-actions
-  class="chp-header-actions"
+  {% if display_style == 'text' %}
+    class="header-actions--text"
+  {% endif %}
   {{- block.shopify_attributes -}}
 >
-  <div class="chp-header-icons-wrapper">
-    <!-- Wishlist -->
-    <a href="/pages/wishlist" class="chp-header-icon-link" aria-label="Wishlist">
-      <svg class="chp-header-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-    </a>
+  <!-- Wishlist Link -->
+  <a href="/pages/wishlist" class="chp-header-wishlist-action" aria-label="Wishlist">
+    <svg class="chp-header-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+  </a>
 
-    <!-- Account / User -->
-    <a href="/account" class="chp-header-icon-link" aria-label="Account">
-      <svg class="chp-header-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
-      </svg>
-    </a>
-
-    <!-- Cart (using native trigger for drawer opening if enabled) -->
-    {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
-      <script
-        src="{{ 'cart-drawer.js' | asset_url }}"
-        type="module"
-        fetchpriority="low"
-      ></script>
-
-      {% capture empty_cart_drawer_content %}
-        <div class="cart-drawer__header">
-          <button
-            ref="closeButton"
-            on:click="cart-drawer-component/close"
-            class="button close-button cart-drawer__close-button button-unstyled"
-            aria-label="{{ 'actions.close_dialog' | t }}"
-          >
-            <span class="svg-wrapper">
-              {{- 'icon-close.svg' | inline_asset_content -}}
-            </span>
-          </button>
-        </div>
-
-        <div
-          class="cart-drawer__content"
-          aria-label="{{ 'accessibility.cart' | t }}"
-        >
-          <h2
-            class="cart-drawer__heading h4 cart-drawer__heading--empty"
-            id="cart-drawer-heading-empty"
-          >
-            {{ 'content.your_cart_is_empty' | t }}
-          </h2>
-
-          <div class="cart-drawer__items">
-            {% render 'cart-products', force_empty: true %}
-          </div>
-        </div>
-      {% endcapture %}
-
-      <cart-drawer-component
-        class="cart-drawer"
-        {{ block.shopify_attributes }}
-        {% if settings.auto_open_cart_drawer %}
-          auto-open
+  {% if shop.customer_accounts_enabled %}
+    {% liquid
+      assign account_actions_style = ''
+      if display_style == 'text' and section
+        assign actions_font = section.settings.actions_font | default: 'body'
+        assign font_obj = settings.type_heading_font
+        case actions_font
+          when 'body'
+            assign font_obj = settings.type_body_font
+          when 'subheading'
+            assign font_obj = settings.type_subheading_font
+          when 'accent'
+            assign font_obj = settings.type_accent_font
+        endcase
+        assign font_family = font_obj.family | append: ', ' | append: font_obj.fallback_families
+        assign font_family_safe = font_family | replace: '"', "'"
+        assign account_actions_style = '--header-actions-font-family: ' | append: font_family_safe | append: '; --header-actions-font-weight: ' | append: font_obj.weight | append: ';'
+      endif
+    %}
+    <div
+      class="account-button header-actions__action{% if display_style == 'text' %} account-button--text{% endif %} color-{{ settings.popover_color_scheme }}"
+    >
+      <shopify-account
+        menu="{{ customer_account_menu }}"
+        {% if account_actions_style != blank %}
+          style="{{ account_actions_style }}"
         {% endif %}
       >
-        <template id="empty-cart-template">
-          {{ empty_cart_drawer_content }}
-        </template>
+        {% if customer %}
+          <div class="account-button__fallback"></div>
+        {% else %}
+          <span
+            slot="signed-out-avatar"
+            class="account-button__text header-actions__text-style {% if display_style == 'icon' %}hidden{% else %}mobile:hidden{% endif %}"
+          >
+            {{ 'content.account_title' | t }}
+          </span>
+
+          <span
+            slot="signed-out-avatar"
+            class="{% if display_style != 'icon' %}desktop:hidden{% endif %}"
+            aria-hidden="true"
+          >
+            {{ account_icon }}
+          </span>
+        {% endif %}
+      </shopify-account>
+    </div>
+  {% endif %}
+
+  {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
+    <script
+      src="{{ 'cart-drawer.js' | asset_url }}"
+      type="module"
+      fetchpriority="low"
+    ></script>
+
+    {% capture empty_cart_drawer_content %}
+      <div class="cart-drawer__header">
         <button
-          class="chp-header-icon-link chp-header-cart-btn button-unstyled"
-          on:click="/open"
-          aria-haspopup="dialog"
-          aria-label="{{ 'accessibility.cart' | t }}"
-          aria-describedby="cart-bubble-text"
-          data-testid="cart-drawer-trigger"
+          ref="closeButton"
+          on:click="cart-drawer-component/close"
+          class="button close-button cart-drawer__close-button button-unstyled"
+          aria-label="{{ 'actions.close_dialog' | t }}"
         >
-          <span class="chp-header-icon-svg-wrapper">
-            <svg class="chp-header-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 0 1-8 0"/>
-            </svg>
-            <span class="chp-cart-bubble-count" id="cart-bubble-text">
-              {{ cart.item_count }}
-            </span>
+          <span class="svg-wrapper">
+            {{- 'icon-close.svg' | inline_asset_content -}}
           </span>
         </button>
+      </div>
 
-        <dialog
-          ref="dialog"
-          class="cart-drawer__dialog dialog-modal dialog-drawer color-{{ settings.drawer_color_scheme }}{% if cart.empty? %} cart-drawer--empty{%endif%}"
-          data-testid="cart-drawer-dialog"
-          aria-labelledby="{% if cart.empty? %}cart-drawer-heading-empty{% else %}cart-drawer-heading{% endif %}"
-          scroll-lock
-          cart-summary-sticky="true"
+      <div
+        class="cart-drawer__content"
+        aria-label="{{ 'accessibility.cart' | t }}"
+      >
+        <h2
+          class="cart-drawer__heading h4 cart-drawer__heading--empty"
+          id="cart-drawer-heading-empty"
         >
-          <span ref="liveRegion" class="visually-hidden" role="status" data-testid="cart-count-live-region"></span>
-          <div class="cart-drawer__inner" data-hydration-key="cart-drawer-inner">
-            {% capture cart_items_children %}
-              {%- if cart.empty? -%}
-                {{ empty_cart_drawer_content }}
-              {%- else -%}
-                <div class="cart-drawer__header" id="cart-drawer-header">
-                  <h2 class="cart-drawer__heading h4" id="cart-drawer-heading">
-                    {{ 'content.cart_title' | t }}
-                  </h2>
-                  <button
-                    ref="closeButton"
-                    on:click="cart-drawer-component/close"
-                    class="button close-button cart-drawer__close-button button-unstyled"
-                    aria-label="{{ 'actions.close_dialog' | t }}"
-                  >
-                    <span class="svg-wrapper">
-                      {{- 'icon-close.svg' | inline_asset_content -}}
-                    </span>
-                  </button>
-                </div>
-                <div class="cart-drawer__content" aria-label="{{ 'accessibility.cart' | t }}">
-                  <scroll-hint class="cart-drawer__scroll-hint">
-                    <div class="cart-drawer__items" ref="scrollContainer">
-                      {% render 'cart-products', section_id: section.id %}
-                    </div>
-                    <div
-                      class="cart-drawer__footer color-{{ settings.drawer_color_scheme }} spacing-style size-style"
-                      style="--padding-block-start: 15px; --padding-block-end: 15px;"
-                    >
-                      {% render 'cart-summary', section_id: section.id %}
-                    </div>
-                  </scroll-hint>
-                </div>
-              {%- endif -%}
-            {% endcapture %}
-            {% render 'cart-items-component', children: cart_items_children, is_drawer: true, section_id: section.id %}
-          </div>
-        </dialog>
-      </cart-drawer-component>
-    {% else %}
-      <a href="{{ routes.cart_url }}" class="chp-header-icon-link" aria-label="Cart">
-        <span class="chp-header-icon-svg-wrapper">
-          <svg class="chp-header-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z"/>
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <path d="M16 10a4 4 0 0 1-8 0"/>
-          </svg>
-          <span class="chp-cart-bubble-count">
-            {{ cart.item_count }}
-          </span>
-        </span>
-      </a>
-    {% endif %}
-  </div>
+          {{ 'content.your_cart_is_empty' | t }}
+        </h2>
 
+        <div class="cart-drawer__items">
+          {% render 'cart-products', force_empty: true %}
+        </div>
+      </div>
+    {% endcapture %}
+
+    <cart-drawer-component
+      class="cart-drawer{% if display_style == 'text' %} cart-drawer--text{% endif %}"
+      {{ block.shopify_attributes }}
+      {% if settings.auto_open_cart_drawer %}
+        auto-open
+      {% endif %}
+    >
+      <template id="empty-cart-template">
+        {{ empty_cart_drawer_content }}
+      </template>
+      <button
+        class="header-actions__action button-unstyled{% if display_style == 'text' %} header-actions__text-style{% endif %}"
+        on:click="/open"
+        aria-haspopup="dialog"
+        aria-label="{{ 'accessibility.cart' | t }}"
+        aria-describedby="cart-bubble-text"
+        data-testid="cart-drawer-trigger"
+      >
+        {{ cart_icon }}
+      </button>
+
+      <dialog
+        ref="dialog"
+        class="cart-drawer__dialog dialog-modal dialog-drawer color-{{ settings.drawer_color_scheme }}{% if cart.empty? %} cart-drawer--empty{%endif%}"
+        data-testid="cart-drawer-dialog"
+        aria-labelledby="{% if cart.empty? %}cart-drawer-heading-empty{% else %}cart-drawer-heading{% endif %}"
+        scroll-lock
+        cart-summary-sticky="true"
+      >
+        <span
+          ref="liveRegion"
+          class="visually-hidden"
+          role="status"
+        ></span>
+        <div
+          class="cart-drawer__inner"
+          data-hydration-key="cart-drawer-inner"
+        >
+          {% capture cart_items_children %}
+            {%- if cart.empty? -%}
+              {{ empty_cart_drawer_content }}
+            {%- else -%}
+              <div
+                class="cart-drawer__header"
+                id="cart-drawer-header"
+              >
+                <h2
+                  class="cart-drawer__heading h4"
+                  id="cart-drawer-heading"
+                >
+                  {{ 'content.cart_title' | t }}
+                  {% render 'cart-bubble' %}
+                </h2>
+
+                <button
+                  ref="closeButton"
+                  on:click="cart-drawer-component/close"
+                  class="button close-button cart-drawer__close-button button-unstyled"
+                  aria-label="{{ 'actions.close_dialog' | t }}"
+                >
+                  <span class="svg-wrapper">
+                    {{- 'icon-close.svg' | inline_asset_content -}}
+                  </span>
+                </button>
+              </div>
+
+              <scroll-hint
+                class="cart-drawer__content"
+                aria-label="{{ 'accessibility.cart' | t }}"
+                style="--header-height: 60px;"
+              >
+                <scroll-hint
+                  class="cart-drawer__items"
+                >
+                  {% render 'cart-products' %}
+                </scroll-hint>
+
+                <div
+                  class="cart-drawer__summary"
+                >
+                  {% render 'cart-summary', section_id: section.id %}
+                </div>
+              </scroll-hint>
+            {%- endif -%}
+          {% endcapture %}
+          {% render 'cart-items-component', children: cart_items_children, is_drawer: true, section_id: section.id %}
+        </div>
+      </dialog>
+    </cart-drawer-component>
+  {% else %}
+    <a
+      href="{{ routes.cart_url }}"
+      class="header-actions__action action__cart{% if display_style == 'text' %} header-actions__text-style{% endif %}"
+      aria-label="{{ 'accessibility.cart' | t }}"
+      aria-describedby="cart-bubble-text"
+    >
+      {{ cart_icon }}
+    </a>
+  {% endif %}
+
+  <span
+    ref="liveRegion"
+    class="visually-hidden"
+    role="status"
+    data-testid="cart-count-live-region"
+  ></span>
   {%- if commission_button_text != blank and commission_button_link != blank -%}
-    <a href="{{ commission_button_link }}" class="chp-btn-solid chp-header-btn-desktop chp-sans">
+    <a href="{{ commission_button_link }}" class="chp-btn-outline chp-header-btn-desktop chp-sans">
       {{ commission_button_text }}
     </a>
   {%- endif -%}
