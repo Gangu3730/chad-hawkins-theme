@@ -86,7 +86,7 @@ function initIntersectionObserver() {
   }, options);
 
   const elementsToObserve = document.querySelectorAll(
-    '.ch-reveal, .ch-reveal-group, .ch-mask-reveal, .ch-text-reveal-kinetic'
+    '.ch-reveal, .ch-reveal-group, .ch-mask-reveal, .ch-mask-reveal-center, .ch-mask-reveal-up, .ch-text-reveal-kinetic'
   );
   
   elementsToObserve.forEach(el => observer.observe(el));
