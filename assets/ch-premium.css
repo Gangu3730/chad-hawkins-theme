@@ -2155,7 +2155,125 @@ main[data-template="cart"] button[name="checkout"]:hover {
   border: 1px solid var(--ch-border, #d8dee8) !important;
   border-radius: 0 !important;
   padding: 8px 16px !important;
-  font-family: var(--ch-font-sans), sans-serif !important;
+  font-family: var(--ch-font-sans, sans-serif) !important;
   font-size: 0.8125rem !important;
 }
 
+/* -----------------------------------------------------------------
+   WISHLIST STYLES
+   ----------------------------------------------------------------- */
+.chp-wishlist-toggle-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: 100% !important;
+  margin-top: 15px !important;
+  padding: 16px 24px !important;
+  font-family: var(--ch-font-sans, sans-serif) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  background-color: transparent !important;
+  color: var(--ch-navy, #062b55) !important;
+  border: 1px solid var(--ch-navy, #062b55) !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.chp-wishlist-toggle-btn:hover {
+  background-color: var(--ch-soft, #f8f6f1) !important;
+}
+
+.chp-wishlist-toggle-btn.is-active {
+  background-color: var(--ch-navy, #062b55) !important;
+  color: var(--ch-white, #ffffff) !important;
+}
+
+.chp-wishlist-toggle-btn.is-active svg {
+  fill: var(--ch-white, #ffffff) !important;
+}
+
+.chp-wishlist-btn-icon {
+  width: 18px !important;
+  height: 18px !important;
+  stroke: currentColor !important;
+  stroke-width: 1.5px !important;
+  fill: none !important;
+  transition: fill 0.3s ease !important;
+}
+
+/* Card Wishlist Overlay Button */
+.chp-card-wishlist-btn {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  background: var(--ch-white, #ffffff) !important;
+  border: 1px solid var(--ch-border, #d8dee8) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: var(--ch-navy, #062b55) !important;
+  cursor: pointer !important;
+  z-index: 5 !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06) !important;
+  transition: all 0.3s ease !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.chp-card-wishlist-btn:hover {
+  transform: scale(1.08) !important;
+  border-color: var(--ch-navy, #062b55) !important;
+}
+
+.chp-card-wishlist-btn.is-active svg {
+  fill: var(--ch-navy, #062b55) !important;
+}
+
+.chp-card-wishlist-icon {
+  width: 16px !important;
+  height: 16px !important;
+  stroke: currentColor !important;
+  stroke-width: 1.5px !important;
+  fill: none !important;
+}
+
+/* Header Badge Count Wrapper styling */
+.chp-header-icon-svg-wrapper {
+  position: relative !important;
+  display: inline-flex !important;
+}
+
+.chp-wishlist-count {
+  position: absolute !important;
+  top: -6px !important;
+  right: -9px !important;
+  background-color: var(--ch-navy, #062b55) !important;
+  color: var(--ch-white, #ffffff) !important;
+  font-size: 8px !important;
+  font-weight: 700 !important;
+  min-width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  padding: 1px !important;
+  box-sizing: border-box !important;
+  line-height: 1 !important;
+}
+
+/* FAQ Accordion hover effects */
+.chp-faq-trigger:hover .chp-serif {
+  color: var(--ch-blue, #0b3d73) !important;
+}
+
+.chp-faq-item.is-open {
+  border-bottom-color: var(--ch-navy, #062b55) !important;
+}
