@@ -1,84 +1,90 @@
 {{ 'ch-premium.css' | asset_url | stylesheet_tag }}
 
-<div class="chp chp-wrapper" id="chp-hero" style="position: relative; overflow: hidden; background-color: var(--ch-navy-dark, #001f3f);">
-  <!-- Absolute Animated Background -->
-  <div class="ch-hero-bg-reveal ch-mask-reveal-center" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url({% if section.settings.hero_bg_image != blank %}{{ section.settings.hero_bg_image | image_url: width: 1800 }}{% else %}''{% endif %}); background-size: cover; background-position: center; z-index: 1;">
-    <div class="chp-hero-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(6, 43, 85, 0.5) 0%, rgba(0, 31, 63, 0.85) 100%);"></div>
-  </div>
+<div class="chp chp-wrapper" id="chp-hero">
+  <section class="ch-hero-2026">
+    <!-- Full-bleed background image with ken-burns zoom -->
+    <div class="ch-hero-bg">
+      {%- if section.settings.hero_bg_image != blank -%}
+        <img
+          src="{{ section.settings.hero_bg_image | image_url: width: 1920 }}"
+          alt="{{ section.settings.hero_bg_image.alt | escape }}"
+          width="{{ section.settings.hero_bg_image.width }}"
+          height="{{ section.settings.hero_bg_image.height }}"
+          class="ch-hero-bg-img"
+          loading="eager"
+          fetchpriority="high"
+        />
+      {%- endif -%}
+      <div class="ch-hero-bg-overlay"></div>
+    </div>
 
-  <div class="chp-container" style="position: relative; z-index: 2; width: 100%; min-height: 85vh; display: flex; align-items: center; padding-top: 80px; padding-bottom: 80px;">
-    <div style="display: grid; grid-template-columns: 1fr; gap: 60px; align-items: center; width: 100%;" class="chp-hero-grid-wrapper">
-      <div class="chp-hero-content ch-reveal-group" style="padding: 0; max-width: 620px;">
+    <div class="ch-hero-inner">
+      <!-- Left: Text content -->
+      <div class="ch-hero-text-col ch-reveal-group">
         {%- if section.settings.hero_subheading != blank -%}
-          <span class="chp-hero-sub ch-reveal ch-reveal-item" style="display: inline-block; color: var(--ch-border, #d8dee8); letter-spacing: 0.3em; margin-bottom: 20px;">
-            {{ section.settings.hero_subheading | escape }}
-          </span>
+          <div class="ch-hero-eyebrow ch-reveal-item">
+            <span class="ch-hero-eyebrow-line"></span>
+            <span class="ch-hero-eyebrow-text">{{ section.settings.hero_subheading | escape }}</span>
+          </div>
         {%- endif -%}
+
         {%- if section.settings.hero_heading != blank -%}
-          <h1 class="chp-hero-title ch-text-reveal-kinetic" style="color: var(--ch-white, #ffffff); margin-bottom: 30px; font-weight: 500;">
-            {{ section.settings.hero_heading | escape }}
-          </h1>
+          <h1 class="ch-hero-headline ch-text-reveal-kinetic">{{ section.settings.hero_heading | escape }}</h1>
         {%- endif -%}
+
         {%- if section.settings.hero_text != blank -%}
-          <p class="chp-hero-text ch-reveal ch-reveal-item" style="color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 40px;">
-            {{ section.settings.hero_text | escape }}
-          </p>
+          <p class="ch-hero-body ch-reveal-item">{{ section.settings.hero_text | escape }}</p>
         {%- endif -%}
-        
-        <div style="display: flex; flex-wrap: wrap; gap: 20px;" class="ch-reveal ch-reveal-item">
+
+        <div class="ch-hero-actions ch-reveal-item">
           {%- if section.settings.hero_btn_1_text != blank -%}
-            <a href="{{ section.settings.hero_btn_1_link | default: '#' }}" class="chp-btn chp-btn-solid-white" style="box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-              {{ section.settings.hero_btn_1_text | escape }}
+            <a href="{{ section.settings.hero_btn_1_link | default: '#' }}" class="ch-hero-btn ch-hero-btn--primary">
+              <span>{{ section.settings.hero_btn_1_text | escape }}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           {%- endif -%}
           {%- if section.settings.hero_btn_2_text != blank -%}
-            <a href="{{ section.settings.hero_btn_2_link | default: '#' }}" class="chp-btn chp-btn-outline-white">
+            <a href="{{ section.settings.hero_btn_2_link | default: '#' }}" class="ch-hero-btn ch-hero-btn--ghost">
               {{ section.settings.hero_btn_2_text | escape }}
             </a>
           {%- endif -%}
         </div>
       </div>
 
-      <!-- Overlap Image Area with Arch Clip-Path & Zoom -->
-      <div class="chp-hero-media-wrapper" style="position: relative; display: flex; justify-content: flex-end;">
-        <div class="ch-hero-arch-wrap ch-mask-reveal-up" style="position: relative; overflow: hidden; width: 100%; max-width: 480px; aspect-ratio: 3/4; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 30px 60px rgba(0,0,0,0.3); border-radius: 240px 240px 0 0;">
+      <!-- Right: Showcase artwork with frame -->
+      <div class="ch-hero-art-col">
+        <div class="ch-hero-art-frame ch-mask-reveal-up">
           {%- if section.settings.hero_art_image != blank -%}
-            <img src="{{ section.settings.hero_art_image | image_url: width: 800 }}" alt="{{ section.settings.hero_art_image.alt | escape }}" width="{{ section.settings.hero_art_image.width }}" height="{{ section.settings.hero_art_image.height }}" class="ch-parallax-img" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="eager" />
+            <img
+              src="{{ section.settings.hero_art_image | image_url: width: 900 }}"
+              alt="{{ section.settings.hero_art_image.alt | escape }}"
+              width="{{ section.settings.hero_art_image.width }}"
+              height="{{ section.settings.hero_art_image.height }}"
+              class="ch-hero-art-img"
+              loading="eager"
+            />
           {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg ch-hero-art-img' }}
           {%- endif -%}
 
-          <!-- Navy Overlapping Badge -->
+          <!-- Badge floats inside art -->
           {%- if section.settings.badge_title != blank or section.settings.badge_text != blank -%}
-            <div class="chp-hero-badge ch-reveal" style="position: absolute; bottom: 20px; left: 20px; right: 20px; background-color: rgba(6, 43, 85, 0.95); backdrop-filter: blur(10px); color: var(--ch-white, #ffffff); padding: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition-delay: 0.8s; border-radius: 4px;">
-              <h4 class="chp-serif" style="font-size: 1rem; text-transform: uppercase; margin: 0 0 6px 0; letter-spacing: 0.05em; color: var(--ch-white, #ffffff);">
-                {{ section.settings.badge_title | escape }}
-              </h4>
-              <p class="chp-sans" style="font-size: 0.75rem; margin: 0; opacity: 0.8; line-height: 1.4;">
-                {{ section.settings.badge_text | escape }}
-              </p>
+            <div class="ch-hero-art-badge ch-reveal" style="transition-delay: 1s;">
+              <h4>{{ section.settings.badge_title | escape }}</h4>
+              <p>{{ section.settings.badge_text | escape }}</p>
             </div>
           {%- endif -%}
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<style>
-  @media (min-width: 990px) {
-    .chp-hero-grid-wrapper {
-      grid-template-columns: 7fr 5fr !important;
-      gap: 60px !important;
-    }
-  }
-  @media (max-width: 989px) {
-    .chp-hero-media-wrapper {
-      justify-content: center !important;
-      margin-top: 30px;
-    }
-  }
-</style>
+    <!-- Scroll indicator -->
+    <div class="ch-hero-scroll-hint ch-reveal" style="transition-delay: 1.6s;">
+      <span class="ch-scroll-line"></span>
+      <span class="ch-scroll-label">Scroll</span>
+    </div>
+  </section>
+</div>
 
 {% schema %}
 {
@@ -104,7 +110,7 @@
       "type": "text",
       "id": "hero_heading",
       "label": "Hero Heading",
-      "default": "Hand Drawn Tributes That Preserve Life’s Most Meaningful Moments"
+      "default": "Hand Drawn Tributes That Preserve Life's Most Meaningful Moments"
     },
     {
       "type": "textarea",

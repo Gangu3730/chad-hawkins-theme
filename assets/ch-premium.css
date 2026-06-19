@@ -2373,14 +2373,300 @@ main[data-template="cart"] button[name="checkout"]:hover {
 }
 
 /* =================================================================
-   SHOPIFY 2026 PREMIUM INTERACTION & ANIMATION STYLES
+   SHOPIFY 2026 PREMIUM HERO & ANIMATION SYSTEM
    ================================================================= */
 
-/* 1. Viewport Scroll-Triggered Reveals */
+/* -----------------------------------------------------------------
+   HERO SECTION — Full-bleed cinematic layout
+   ----------------------------------------------------------------- */
+.ch-hero-2026 {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: var(--ch-navy-dark, #001f3f);
+}
+
+/* Background layer */
+.ch-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.ch-hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.08);
+  transition: none;
+}
+
+.ch-hero-bg-img.is-loaded {
+  animation: chHeroKenBurns 25s ease-in-out infinite alternate;
+}
+
+@keyframes chHeroKenBurns {
+  0%   { transform: scale(1.0); }
+  100% { transform: scale(1.12); }
+}
+
+.ch-hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    165deg,
+    rgba(0, 18, 40, 0.75) 0%,
+    rgba(6, 43, 85, 0.55) 40%,
+    rgba(0, 20, 45, 0.8) 100%
+  );
+  z-index: 2;
+}
+
+/* Inner layout */
+.ch-hero-inner {
+  position: relative;
+  z-index: 3;
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 140px 32px 100px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+@media (min-width: 990px) {
+  .ch-hero-inner {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 80px;
+    padding-top: 160px;
+    padding-bottom: 120px;
+  }
+}
+
+/* Eyebrow */
+.ch-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.ch-hero-eyebrow-line {
+  display: block;
+  width: 40px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.ch-hero-eyebrow-text {
+  font-family: var(--ch-font-sans, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Headline */
+.ch-hero-headline {
+  font-family: var(--ch-font-serif, serif);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0 0 28px 0;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+/* Body copy */
+.ch-hero-body {
+  font-family: var(--ch-font-sans, sans-serif);
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 36px 0;
+  max-width: 520px;
+}
+
+/* Buttons */
+.ch-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ch-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--ch-font-sans, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 34px;
+  border-radius: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.ch-hero-btn--primary {
+  background: #ffffff;
+  color: var(--ch-navy, #062b55);
+  border: 1px solid #ffffff;
+}
+
+.ch-hero-btn--primary:hover {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.ch-hero-btn--primary svg {
+  transition: transform 0.3s ease;
+}
+
+.ch-hero-btn--primary:hover svg {
+  transform: translateX(4px);
+}
+
+.ch-hero-btn--ghost {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.ch-hero-btn--ghost:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Artwork frame */
+.ch-hero-art-frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 3 / 4;
+  margin: 0 auto;
+}
+
+@media (min-width: 990px) {
+  .ch-hero-art-frame {
+    margin: 0 0 0 auto;
+    max-width: 100%;
+  }
+}
+
+.ch-hero-art-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ch-hero-art-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 22px 24px;
+  background: rgba(6, 43, 85, 0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ch-hero-art-badge h4 {
+  font-family: var(--ch-font-serif, serif);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.ch-hero-art-badge p {
+  font-family: var(--ch-font-sans, sans-serif);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Scroll indicator */
+.ch-hero-scroll-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 4;
+}
+
+.ch-scroll-line {
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.ch-scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  animation: chScrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes chScrollPulse {
+  0%   { top: -100%; }
+  50%  { top: 100%; }
+  100% { top: 100%; }
+}
+
+.ch-scroll-label {
+  font-family: var(--ch-font-sans, sans-serif);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 989px) {
+  .ch-hero-scroll-hint {
+    display: none;
+  }
+}
+
+/* -----------------------------------------------------------------
+   ANIMATION UTILITIES
+   ----------------------------------------------------------------- */
+
+/* 1. Slide-up fade reveal */
 .ch-reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ch-reveal.is-visible {
@@ -2388,11 +2674,12 @@ main[data-template="cart"] button[name="checkout"]:hover {
   transform: translateY(0);
 }
 
-/* 2. Staggered reveals group */
+/* 2. Staggered group */
 .ch-reveal-group .ch-reveal-item {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(22px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ch-reveal-group .ch-reveal-item.is-visible {
@@ -2400,35 +2687,26 @@ main[data-template="cart"] button[name="checkout"]:hover {
   transform: translateY(0);
 }
 
-/* 3. Mask Clip-Path Reveal */
+/* 3. Clip-path masks */
 .ch-mask-reveal {
   clip-path: inset(0 100% 0 0);
   transition: clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.ch-mask-reveal.is-visible {
-  clip-path: inset(0 0 0 0);
-}
+.ch-mask-reveal.is-visible { clip-path: inset(0); }
 
 .ch-mask-reveal-center {
   clip-path: inset(0 50% 0 50%);
-  transition: clip-path 2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: clip-path 1.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.ch-mask-reveal-center.is-visible {
-  clip-path: inset(0 0 0 0);
-}
+.ch-mask-reveal-center.is-visible { clip-path: inset(0); }
 
 .ch-mask-reveal-up {
   clip-path: inset(100% 0 0 0);
-  transition: clip-path 2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: clip-path 1.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.ch-mask-reveal-up.is-visible { clip-path: inset(0); }
 
-.ch-mask-reveal-up.is-visible {
-  clip-path: inset(0 0 0 0);
-}
-
-/* 4. Parallax Wrapper & Image */
+/* 4. Parallax */
 .ch-parallax-wrap {
   overflow: hidden;
   position: relative;
@@ -2436,17 +2714,37 @@ main[data-template="cart"] button[name="checkout"]:hover {
 
 .ch-parallax-img {
   will-change: transform;
-  transform: scale(1.15);
-  transition: transform 0.1s linear;
+  transform: scale(1.12);
+  transition: transform 0.08s linear;
 }
 
-/* 5. Sticky Section Navigation */
+/* 5. Kinetic typography */
+.ch-word-outer {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  margin-right: 0.22em;
+  line-height: 1.15;
+}
+
+.ch-word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.ch-word-inner.is-visible {
+  transform: translateY(0);
+}
+
+/* 6. Sticky section navigation */
 .ch-sticky-section-nav {
   position: sticky;
-  top: 79px; /* Floating below main site header */
+  top: 79px;
   left: 0;
   width: 100%;
-  background-color: var(--ch-cream, #fbfaf7);
+  background: var(--ch-cream, #fbfaf7);
   border-bottom: 1px solid var(--ch-border, #d8dee8);
   z-index: 99;
   padding: 10px 0;
@@ -2454,9 +2752,9 @@ main[data-template="cart"] button[name="checkout"]:hover {
 }
 
 .ch-sticky-section-nav.is-sticky {
-  box-shadow: 0 10px 30px rgba(6, 43, 85, 0.05);
-  background-color: rgba(251, 250, 247, 0.95);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(6, 43, 85, 0.06);
+  background: rgba(251, 250, 247, 0.96);
+  backdrop-filter: blur(10px);
 }
 
 .ch-sticky-section-nav .nav-container {
@@ -2465,8 +2763,8 @@ main[data-template="cart"] button[name="checkout"]:hover {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 0 15px;
+  gap: 24px;
+  padding: 0 16px;
 }
 
 .ch-sticky-section-nav a {
@@ -2475,7 +2773,7 @@ main[data-template="cart"] button[name="checkout"]:hover {
   font-size: 0.625rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.16em;
   text-decoration: none;
   padding: 5px 0;
   position: relative;
@@ -2490,13 +2788,13 @@ main[data-template="cart"] button[name="checkout"]:hover {
 .ch-sticky-section-nav a::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: var(--ch-navy, #062b55);
+  background: var(--ch-navy, #062b55);
   transform: translateX(-50%);
-  transition: width 0.3s ease;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ch-sticky-section-nav a.is-active::after {
@@ -2505,23 +2803,18 @@ main[data-template="cart"] button[name="checkout"]:hover {
 
 @media (max-width: 767px) {
   .ch-sticky-section-nav {
-    display: none !important; /* Hide on mobile devices to preserve real estate */
+    display: none !important;
   }
 }
 
-/* 6. Kinetic typography */
-.ch-word-inner {
-  will-change: transform;
-}
-
-/* 7. Process Timeline progress line indicator */
+/* 7. Timeline progress line */
 .ch-process-progress-line-container {
   position: absolute;
   left: 50%;
   top: 0;
   bottom: 0;
   width: 2px;
-  background-color: var(--ch-border, #d8dee8);
+  background: var(--ch-border, #d8dee8);
   transform: translateX(-50%);
   z-index: 1;
 }
@@ -2531,9 +2824,9 @@ main[data-template="cart"] button[name="checkout"]:hover {
   top: 0;
   left: 0;
   width: 100%;
-  height: 0%;
-  background-color: var(--ch-navy, #062b55);
-  transition: height 0.1s linear;
+  height: 0;
+  background: var(--ch-navy, #062b55);
+  transition: height 0.08s linear;
 }
 
 @media (max-width: 768px) {
@@ -2543,4 +2836,20 @@ main[data-template="cart"] button[name="checkout"]:hover {
   }
 }
 
-
+/* 8. Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ch-reveal,
+  .ch-reveal-group .ch-reveal-item,
+  .ch-mask-reveal,
+  .ch-mask-reveal-center,
+  .ch-mask-reveal-up,
+  .ch-word-inner,
+  .ch-parallax-img,
+  .ch-hero-bg-img {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+  }
+}
