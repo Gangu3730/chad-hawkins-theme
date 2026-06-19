@@ -165,8 +165,8 @@
                 <span class="chp-scrolly-card-num">0{{ card_index | plus: 1 }}</span>
                 <h3 class="chp-scrolly-card-title">{{ block.settings.title | escape }}</h3>
                 <p class="chp-scrolly-card-desc">{{ block.settings.description | escape }}</p>
-                {%- if block.settings.image != blank -%}
-                  <div class="chp-scrolly-card-img-wrap">
+                <div class="chp-scrolly-card-img-wrap">
+                  {%- if block.settings.image != blank -%}
                     <img
                       src="{{ block.settings.image | image_url: width: 600 }}"
                       alt="{{ block.settings.title | escape }}"
@@ -175,8 +175,10 @@
                       width="{{ block.settings.image.width | default: 600 }}"
                       height="{{ block.settings.image.height | default: 400 }}"
                     />
-                  </div>
-                {%- endif -%}
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'chp-scrolly-card-img placeholder-svg' }}
+                  {%- endif -%}
+                </div>
               </div>
               {%- assign card_index = card_index | plus: 1 -%}
             {%- endif -%}

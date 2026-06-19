@@ -23,8 +23,8 @@
     <!-- Main narrative -->
     <div class="chp-about-story-grid">
       <div class="chp-reveal">
-        {%- if section.settings.artist_image != blank -%}
-          <div class="chp-about-preview-img-wrap" style="aspect-ratio: 3/4;">
+        <div class="chp-about-preview-img-wrap" style="aspect-ratio: 3/4;">
+          {%- if section.settings.artist_image != blank -%}
             <img 
               src="{{ section.settings.artist_image | image_url: width: 800 }}" 
               alt="{{ section.settings.artist_image.alt | escape }}" 
@@ -33,10 +33,10 @@
               width="800"
               height="1066"
             >
-          </div>
-        {%- else -%}
-          {{ 'image' | placeholder_svg_tag: 'chp-about-preview-img placeholder-svg' }}
-        {%- endif -%}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'chp-about-preview-img placeholder-svg' }}
+          {%- endif -%}
+        </div>
       </div>
       
       <div class="chp-reveal-group">

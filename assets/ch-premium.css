@@ -1434,18 +1434,19 @@
 .shopify-design-mode .chp-mask,
 .shopify-design-mode .chp-mask-center,
 .shopify-design-mode .chp-mask-up,
-.shopify-design-mode .chp-word-inner,
-.shopify-design-mode .chp-scrolly-card,
-.shopify-design-mode .chp-word-outer {
+.shopify-design-mode .chp-scrolly-card {
   opacity: 1 !important;
   transform: none !important;
   clip-path: none !important;
   transition: none !important;
-  display: inline !important;
 }
 
+.shopify-design-mode .chp-word-outer,
 .shopify-design-mode .chp-word-inner {
+  opacity: 1 !important;
   transform: none !important;
-  display: inline !important;
+  display: inline-block !important;
+  transition: none !important;
 }
+
 

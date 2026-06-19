@@ -17,7 +17,11 @@
     initGalleryFilter();
   }
 
-  document.addEventListener('DOMContentLoaded', initAll);
+  if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    initAll();
+  } else {
+    document.addEventListener('DOMContentLoaded', initAll);
+  }
 
   // Re-initialize when sections load in Shopify Theme Customizer
   document.addEventListener('shopify:section:load', (event) => {
