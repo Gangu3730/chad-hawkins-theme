@@ -1,8 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "ch-portfolio-page",
-      "settings": {}
+      "blocks": {
+        "artwork_87XkmW": {
+          "type": "artwork",
+          "settings": {
+            "image": "shopify://shop_images/pexels-alex-dos-santos-305643819-30465644.jpg",
+            "title": "",
+            "medium": "Charcoal and ink on cotton paper",
+            "category": "memorial"
+          }
+        }
+      },
+      "block_order": [
+        "artwork_87XkmW"
+      ],
+      "settings": {
+        "subtitle": "SELECTED COMMISSIONS",
+        "title": "Portrait Portfolio Gallery",
+        "description": "Browse completed hand-drawn tribute artwork across our primary portrait disciplines."
+      }
     }
   },
   "order": [
