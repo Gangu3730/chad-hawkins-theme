@@ -74,7 +74,8 @@
     <!-- Bottom Copyright -->
     <div class="chp-footer-divider-line"></div>
     <div class="chp-footer-copyright-row chp-sans">
-      <span>{{ section.settings.copyright_text | replace: '[year]', 'now' | date: '%Y' }}</span>
+      {%- assign current_year = 'now' | date: '%Y' -%}
+      <span>{{ section.settings.copyright_text | replace: '[year]', current_year }}</span>
     </div>
   </div>
 </footer>
@@ -145,7 +146,7 @@
       "type": "text",
       "id": "copyright_text",
       "label": "Copyright Text",
-      "default": "© [year] Chad Hawkins Tributes. All rights reserved."
+      "default": "Copyright [year] Chad Hawkins Tributes. All rights reserved."
     }
   ],
   "presets": [

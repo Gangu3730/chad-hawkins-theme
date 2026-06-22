@@ -8,14 +8,16 @@
  */
 
 .chp {
-  --ch-navy: #062b55;
-  --ch-navy-dark: #001f3f;
-  --ch-blue: #0b3d73;
-  --ch-soft: #f8f6f1;
+  --ch-navy: #12324d;
+  --ch-navy-dark: #091d2d;
+  --ch-blue: #765f3c;
+  --ch-soft: #f6f2ea;
   --ch-cream: #fbfaf7;
-  --ch-border: #d8dee8;
-  --ch-text: #1f2933;
-  --ch-muted: #667085;
+  --ch-border: #ded7c9;
+  --ch-text: #242526;
+  --ch-muted: #6d6a63;
+  --ch-graphite: #343331;
+  --ch-accent: #9a7a45;
   --ch-white: #ffffff;
 
   /* Theme Fonts Fallback */
@@ -2451,7 +2453,7 @@ main[data-template="cart"] button[name="checkout"]:hover {
   transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Shopify section wrapper override — prevents overflow:hidden from breaking sticky */
+/* Shopify section wrapper override - prevents overflow:hidden from breaking sticky */
 .shopify-section:has(.ch-sticky-section-nav) {
   overflow: visible !important;
 }
@@ -2561,5 +2563,435 @@ main[data-template="cart"] button[name="checkout"]:hover {
   }
 }
 
+/* =================================================================
+   LIVE-SITE RESPONSIVE POLISH AND ART-COMMERCE TRUST CUES
+   ================================================================= */
 
+.chp,
+.chp *,
+.chp *::before,
+.chp *::after {
+  box-sizing: border-box;
+}
 
+.chp img,
+.chp svg,
+.chp video {
+  max-width: 100%;
+}
+
+.chp a,
+.chp button,
+.chp input,
+.chp textarea,
+.chp select {
+  min-width: 0;
+}
+
+.chp input,
+.chp textarea,
+.chp select {
+  font-size: 1rem;
+}
+
+.chp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  line-height: 1.25;
+}
+
+.chp-hero {
+  min-height: min(820px, calc(100svh - var(--header-group-height, 0px)));
+  padding-block: clamp(48px, 8vw, 96px);
+}
+
+.chp-hero-proof-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 640px;
+}
+
+.chp-hero-proof-list li {
+  position: relative;
+  padding-left: 18px;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--ch-font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.chp-hero-proof-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.64em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--ch-accent);
+  transform: translateY(-50%);
+}
+
+.chp-category-card,
+.chp-gallery-item,
+.chp-pricing-card,
+.chp-portfolio-card,
+.chp-booking-card,
+.product-card {
+  min-width: 0;
+}
+
+.chp-gallery-overlay {
+  min-height: 35%;
+}
+
+.chp-form-group,
+.chp-contact-detail-row,
+.chp-booking-step-panel,
+.chp-booking-options-grid,
+.chp-portfolio-details {
+  min-width: 0;
+}
+
+.chp-booking-step-panel h2,
+.chp-booking-card h3,
+.chp-timeline-card h3,
+.chp-portfolio-details h3 {
+  overflow-wrap: anywhere;
+}
+
+.chp-booking-step-panel input,
+.chp-booking-step-panel textarea,
+.chp-contact-form-col input,
+.chp-contact-form-col textarea {
+  border-radius: 0;
+  max-width: 100%;
+}
+
+.chp-booking-step-panel textarea {
+  min-height: 140px;
+}
+
+.chp-portfolio-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)) !important;
+}
+
+.chp-portfolio-tabs {
+  scrollbar-width: thin;
+}
+
+main[data-template="product"] img,
+main[data-template="collection"] img,
+main[data-template="cart"] img {
+  max-width: 100%;
+  height: auto;
+}
+
+main[data-template="product"] .product-information,
+main[data-template="product"] .product-information__grid,
+main[data-template="product"] product-information {
+  gap: clamp(24px, 4vw, 48px) !important;
+}
+
+main[data-template="collection"] .product-grid,
+main[data-template="search"] .product-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)) !important;
+}
+
+main[data-template="cart"] table {
+  min-width: 640px;
+}
+
+@media (hover: none) {
+  .chp-gallery-overlay {
+    transform: translateY(0);
+  }
+
+  .chp-category-card:hover,
+  .chp-gallery-item:hover,
+  .chp-pricing-card:hover,
+  .chp-portfolio-card:hover,
+  .chp-step-card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 989px) {
+  .chp-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .chp-hero {
+    min-height: auto;
+    align-items: flex-start;
+  }
+
+  .chp-hero-content {
+    max-width: 760px;
+    padding-top: 36px;
+    padding-bottom: 18px;
+  }
+
+  .chp-hero-media-wrapper {
+    width: 100%;
+  }
+
+  .chp-hero-image-frame {
+    max-width: min(560px, 100%) !important;
+  }
+
+  .chp-pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chp-pricing-card.chp-pricing-featured {
+    order: -1;
+  }
+
+  .chp-footer-grid {
+    gap: 34px;
+  }
+}
+
+@media (max-width: 749px) {
+  .chp-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .chp-section-spacing {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+
+  .chp-section-header {
+    margin-bottom: 36px;
+  }
+
+  .chp-section-subtitle,
+  .chp-section-sub,
+  .chp-hero-sub,
+  .chp-pricing-badge,
+  .chp-portfolio-tab-btn {
+    letter-spacing: 0.12em;
+  }
+
+  .chp-section-title,
+  .chp-hero-title,
+  .chp-cta-title,
+  .chp-cta-strip-title {
+    text-wrap: balance;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .chp-hero-title {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .chp-hero-text {
+    margin-bottom: 28px;
+  }
+
+  .chp-hero-content [style*="flex-wrap"] {
+    width: 100%;
+  }
+
+  .chp-hero-content .chp-btn,
+  .chp-cta-strip .chp-btn,
+  .chp-cta-banner .chp-btn-solid,
+  .chp-timeline-cta .chp-btn,
+  .chp-booking-step-panel .chp-btn,
+  .chp-form-btn {
+    width: 100%;
+  }
+
+  .chp-hero-proof-list {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .chp-hero-badge {
+    padding: 18px !important;
+  }
+
+  .chp-category-grid,
+  .chp-gallery-grid,
+  .chp-pricing-grid,
+  .chp-about-value-props,
+  .chp-about-photo-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .chp-category-image-wrap,
+  .chp-gallery-img-wrap {
+    padding-top: 105%;
+  }
+
+  .chp-gallery-overlay {
+    padding: 44px 18px 18px;
+  }
+
+  .chp-showcase-grid,
+  .chp-contact-grid,
+  .chp-about-main-grid {
+    gap: 32px !important;
+  }
+
+  .chp-contact-detail-row {
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .chp-contact-detail-icon {
+    width: 42px;
+    height: 42px;
+    margin-right: 0;
+  }
+
+  .chp-social-row,
+  .chp-contact-social-list {
+    flex-wrap: wrap;
+  }
+
+  .chp-portfolio-tabs {
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    overflow-x: auto;
+    padding-bottom: 14px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chp-portfolio-tab-btn {
+    flex: 0 0 auto;
+    padding: 11px 16px;
+    white-space: nowrap;
+  }
+
+  .chp-booking-container {
+    padding: 24px 16px !important;
+  }
+
+  .chp-booking-progress {
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 28px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chp-booking-progress > div:first-child {
+    display: none;
+  }
+
+  .chp-progress-step {
+    min-width: 72px;
+  }
+
+  .chp-progress-step span {
+    max-width: 72px;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  .chp-booking-card {
+    padding: 20px 16px !important;
+  }
+
+  .chp-booking-card > div {
+    gap: 14px;
+    align-items: flex-start !important;
+  }
+
+  .chp-booking-step-panel > div[style*="justify-content: space-between"],
+  .chp-booking-step-panel > div[style*="text-align: right"] {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    text-align: left !important;
+  }
+
+  .chp-timeline-item {
+    margin-bottom: 42px !important;
+    padding-left: 46px !important;
+  }
+
+  .chp-timeline-card,
+  .chp-timeline-cta {
+    padding: 24px 18px !important;
+  }
+
+  .chp-footer-wrapper,
+  .chp-footer {
+    padding-top: 52px;
+  }
+
+  .chp-footer-links-grid,
+  .chp-footer-nav-list {
+    grid-template-columns: 1fr;
+  }
+
+  .chp-logo-main {
+    font-size: 1rem;
+  }
+
+  .chp-logo-sub {
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+  }
+
+  main[data-template="product"] {
+    padding-top: 20px;
+  }
+
+  main[data-template="product"] h1,
+  main[data-template="product"] .product-title h1,
+  main[data-template="product"] [type="product-title"] h1,
+  main[data-template="collection"] .collection-title h1,
+  main[data-template="collection"] h1.collection-hero__title,
+  main[data-template="cart"] h1 {
+    letter-spacing: 0.03em !important;
+    text-align: left !important;
+  }
+
+  main[data-template="cart"] {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .chp-btn,
+  .chp-btn-solid,
+  .chp-btn-outline {
+    padding-left: 18px;
+    padding-right: 18px;
+    letter-spacing: 0.1em;
+  }
+
+  .chp-section-title {
+    font-size: clamp(1.75rem, 10vw, 2.25rem);
+  }
+
+  .chp-pricing-card {
+    padding: 38px 20px;
+  }
+
+  .chp-pricing-price {
+    font-size: 2.25rem;
+  }
+
+  .chp-flourish,
+  .chp-divider {
+    max-width: 220px;
+  }
+}
