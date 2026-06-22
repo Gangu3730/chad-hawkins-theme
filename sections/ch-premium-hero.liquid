@@ -32,7 +32,7 @@
 
         <!-- Overlap Image Area -->
         <div class="chp-hero-media-wrapper" style="position: relative; display: flex; justify-content: flex-end;">
-          <div class="chp-hero-image-frame ch-mask-reveal" style="position: relative; border: 1px solid rgba(255,255,255,0.2); padding: 12px; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); max-width: 500px; width: 100%;">
+          <div class="chp-hero-image-frame ch-reveal" style="position: relative; border: 1px solid rgba(255,255,255,0.2); padding: 12px; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); max-width: 500px; width: 100%;">
             {%- if section.settings.hero_art_image != blank -%}
               <img src="{{ section.settings.hero_art_image | image_url: width: 800 }}" alt="{{ section.settings.hero_art_image.alt | escape }}" width="{{ section.settings.hero_art_image.width }}" height="{{ section.settings.hero_art_image.height }}" style="width: 100%; height: auto; display: block;" loading="eager" />
             {%- else -%}

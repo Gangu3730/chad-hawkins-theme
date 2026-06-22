@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallaxEffects();
   initStickyNavigation();
   initProcessTimelineProgress();
+  initFallbackReveal();
 });
 
 /**
@@ -48,39 +49,42 @@ function initKineticTypography() {
 /**
  * 2. Viewport entrance reveals & Staggered reveals
  */
+function revealElement(target, obs) {
+  target.classList.add('is-visible');
+
+  // Handle kinetic text reveal
+  if (target.classList.contains('ch-text-reveal-kinetic')) {
+    const inners = target.querySelectorAll('.ch-word-inner');
+    inners.forEach((inner, idx) => {
+      setTimeout(() => {
+        inner.style.transform = 'translateY(0)';
+      }, idx * 40);
+    });
+  }
+
+  // Handle staggered groups
+  if (target.classList.contains('ch-reveal-group')) {
+    const items = target.querySelectorAll('.ch-reveal-item');
+    items.forEach((item, idx) => {
+      setTimeout(() => {
+        item.classList.add('is-visible');
+      }, idx * 100);
+    });
+  }
+
+  if (obs) obs.unobserve(target); // Animate once
+}
+
 function initIntersectionObserver() {
   const options = {
-    threshold: 0.05,
-    rootMargin: '0px 0px -60px 0px'
+    threshold: 0.01,
+    rootMargin: '0px 0px 0px 0px'
   };
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const target = entry.target;
-        target.classList.add('is-visible');
-        
-        // Handle kinetic text reveal
-        if (target.classList.contains('ch-text-reveal-kinetic')) {
-          const inners = target.querySelectorAll('.ch-word-inner');
-          inners.forEach((inner, idx) => {
-            setTimeout(() => {
-              inner.style.transform = 'translateY(0)';
-            }, idx * 40);
-          });
-        }
-        
-        // Handle staggered groups
-        if (target.classList.contains('ch-reveal-group')) {
-          const items = target.querySelectorAll('.ch-reveal-item');
-          items.forEach((item, idx) => {
-            setTimeout(() => {
-              item.classList.add('is-visible');
-            }, idx * 100);
-          });
-        }
-        
-        obs.unobserve(target); // Animate once
+        revealElement(entry.target, obs);
       }
     });
   }, options);
@@ -88,8 +92,16 @@ function initIntersectionObserver() {
   const elementsToObserve = document.querySelectorAll(
     '.ch-reveal, .ch-reveal-group, .ch-mask-reveal, .ch-text-reveal-kinetic'
   );
-  
-  elementsToObserve.forEach(el => observer.observe(el));
+
+  elementsToObserve.forEach(el => {
+    // Immediately reveal elements already in viewport on page load
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      revealElement(el, null);
+    } else {
+      observer.observe(el);
+    }
+  });
 }
 
 /**
@@ -142,21 +154,35 @@ function initStickyNavigation() {
   );
   const navLinks = stickyNav.querySelectorAll('a');
 
-  // Sticky stickiness toggle based on main header height
-  window.addEventListener('scroll', () => {
-    const stickyTop = stickyNav.getBoundingClientRect().top;
-    if (window.scrollY > 150) {
+  // Calculate the sticky offset based on actual header height
+  function getStickyOffset() {
+    const header = document.querySelector('.header, header, [data-header-sticky]');
+    return header ? header.offsetHeight : 0;
+  }
+
+  // Apply correct top offset dynamically
+  function updateStickyTop() {
+    const headerHeight = getStickyOffset();
+    stickyNav.style.top = headerHeight + 'px';
+  }
+
+  updateStickyTop();
+  window.addEventListener('resize', updateStickyTop, { passive: true });
+
+  // Sticky shadow effect based on scroll
+  function handleScroll() {
+    if (window.scrollY > 100) {
       stickyNav.classList.add('is-sticky');
     } else {
       stickyNav.classList.remove('is-sticky');
     }
 
     // Scrollspy active anchor update
+    const navHeight = stickyNav.offsetHeight + getStickyOffset() + 20;
     let currentActiveId = '';
     sections.forEach(section => {
       const rect = section.getBoundingClientRect();
-      // Section is active if it occupies the top third portion of viewport
-      if (rect.top <= 180 && rect.bottom >= 180) {
+      if (rect.top <= navHeight && rect.bottom >= navHeight) {
         currentActiveId = section.getAttribute('id');
       }
     });
@@ -169,7 +195,10 @@ function initStickyNavigation() {
         }
       });
     }
-  }, { passive: true });
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Run once on init
 
   // Smooth scroll helper
   navLinks.forEach(link => {
@@ -178,7 +207,7 @@ function initStickyNavigation() {
       const targetId = this.getAttribute('href');
       const targetEl = document.querySelector(targetId);
       if (targetEl) {
-        const offset = 140; // accounted for header + sticky nav height
+        const offset = stickyNav.offsetHeight + getStickyOffset() + 20;
         const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({
           top: targetPosition,
@@ -213,4 +242,19 @@ function initProcessTimelineProgress() {
       progressLine.style.height = `${percent}%`;
     }
   }, { passive: true });
+}
+
+/**
+ * 6. Fallback reveal - ensures all animation elements become visible
+ *    after a timeout in case IntersectionObserver doesn't fire
+ *    (e.g., Shopify theme editor, preview mode, slow JS)
+ */
+function initFallbackReveal() {
+  setTimeout(() => {
+    document.querySelectorAll('.ch-reveal, .ch-mask-reveal, .ch-text-reveal-kinetic, .ch-reveal-group').forEach(el => {
+      if (!el.classList.contains('is-visible')) {
+        revealElement(el, null);
+      }
+    });
+  }, 2000);
 }

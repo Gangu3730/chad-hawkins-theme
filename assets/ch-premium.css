@@ -2381,11 +2381,18 @@ main[data-template="cart"] button[name="checkout"]:hover {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  /* CSS-only fallback: auto-reveal after 2.5s if JS hasn't fired */
+  animation: ch-reveal-auto-show 0.01s 2.5s forwards;
+}
+
+@keyframes ch-reveal-auto-show {
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .ch-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+  animation: none; /* Cancel CSS fallback once JS takes over */
 }
 
 /* 2. Staggered reveals group */
@@ -2393,21 +2400,30 @@ main[data-template="cart"] button[name="checkout"]:hover {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: ch-reveal-auto-show 0.01s 3s forwards;
 }
 
 .ch-reveal-group .ch-reveal-item.is-visible {
   opacity: 1;
   transform: translateY(0);
+  animation: none;
 }
 
 /* 3. Mask Clip-Path Reveal */
 .ch-mask-reveal {
   clip-path: inset(0 100% 0 0);
   transition: clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* CSS-only fallback: auto-reveal after 2.5s if JS hasn't fired */
+  animation: ch-mask-auto-reveal 0.01s 2.5s forwards;
+}
+
+@keyframes ch-mask-auto-reveal {
+  to { clip-path: inset(0 0 0 0); }
 }
 
 .ch-mask-reveal.is-visible {
   clip-path: inset(0 0 0 0);
+  animation: none; /* Cancel CSS fallback once JS takes over */
 }
 
 /* 4. Parallax Wrapper & Image */
@@ -2425,14 +2441,19 @@ main[data-template="cart"] button[name="checkout"]:hover {
 /* 5. Sticky Section Navigation */
 .ch-sticky-section-nav {
   position: sticky;
-  top: 79px; /* Floating below main site header */
+  top: 0; /* JS dynamically sets the correct top offset based on header height */
   left: 0;
   width: 100%;
   background-color: var(--ch-cream, #fbfaf7);
   border-bottom: 1px solid var(--ch-border, #d8dee8);
   z-index: 99;
   padding: 10px 0;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Shopify section wrapper override — prevents overflow:hidden from breaking sticky */
+.shopify-section:has(.ch-sticky-section-nav) {
+  overflow: visible !important;
 }
 
 .ch-sticky-section-nav.is-sticky {
