@@ -2546,4 +2546,20 @@ main[data-template="cart"] button[name="checkout"]:hover {
   }
 }
 
+/* Header mobile responsiveness and alignment fixes */
+@media screen and (max-width: 749px) {
+  /* Hide wishlist action and account button in header bar on mobile since they are present inside the drawer */
+  .chp-header-wishlist-action,
+  header-actions .account-button {
+    display: none !important;
+  }
+
+  /* Center the logo text on mobile */
+  .chp-logo-text {
+    align-items: center !important;
+    text-align: center !important;
+  }
+}
+
+
 
