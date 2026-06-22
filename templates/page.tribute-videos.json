@@ -1,8 +1,46 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "ch-tribute-videos-page",
-      "settings": {}
+      "blocks": {
+        "video_item_N9GMwb": {
+          "type": "video_item",
+          "settings": {
+            "title": "",
+            "category": "Memorial Tribute",
+            "video_url": "",
+            "description": ""
+          }
+        },
+        "video_item_BLCja7": {
+          "type": "video_item",
+          "settings": {
+            "title": "",
+            "category": "Memorial Tribute",
+            "video_url": "",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_item_N9GMwb",
+        "video_item_BLCja7"
+      ],
+      "settings": {
+        "subtitle": "VIDEO PRODUCTIONS",
+        "title": "Tribute Video Library",
+        "description": "Our custom tribute videos combine the creation of the drawing, voiceovers, historical reference photos, and background orchestration into a powerful legacy story.",
+        "cta_link": ""
+      }
     }
   },
   "order": [
